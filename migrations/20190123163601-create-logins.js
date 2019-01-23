@@ -5,12 +5,12 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
+        unique:true,
         type: Sequelize.INTEGER
       },
       username: {
         type: Sequelize.STRING,
         primaryKey: true,
-        unique:true
       },
       password_salt: {
         type: Sequelize.STRING

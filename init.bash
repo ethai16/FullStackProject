@@ -1,6 +1,6 @@
 sequelize model:generate --name Session --attributes expire:date,data:string
 
-sequelize model:generate --name users --attributes fname:string,lname:string,gender:char,email:string,telephone:string,zipcode:integer,street:string,city:string,state:char,bio:text,image_url:string,active:boolean,role_id:smallint
+sequelize model:generate --name users --attributes fname:string,lname:string,gender:char,email:string,telephone:string,zipcode:string,street:string,city:string,state:char,bio:text,image_url:string,active:boolean,role_id:smallint
 
 sequelize model:generate --name logins --attributes username:string,password_salt:string,password_hash:string
 
