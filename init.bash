@@ -1,17 +1,17 @@
 sequelize model: generate --name Session \
     --attributes expire:date,data:string
 
-sequelize model: generate --name user \ 
+sequelize model: generate --name users \ 
     --attributes username:string,password:string
 
-sequelize model: generate --name mentor \
-    --attributes name:string,email:string,gender:string,backgroundCheck:boolean,\
+sequelize model: generate --name mentors \
+    --attributes name:string,email:string,gender:string,industry_id:integer,backgroundCheck:boolean,\
     active:boolean,memo:string
 
-sequelize model: generate --name teacher \
-    --attributes name:string,email:string,gender:string,telephone:string,memo:string
+sequelize model: generate --name teachers \
+    --attributes name:string,email:string,gender:string,school_id:integer,telephone:string,memo:string
 
-sequelize model: generate --name student \
+sequelize model: generate --name students \
     --attributes name:string,grade:integer,school_id:integer,industry_id1:integer,industry_id2:integer,industry_id3:integer,email:string,gender:string,memo:string
 
 sequelize model: generate --name matching \
@@ -20,5 +20,5 @@ sequelize model: generate --name matching \
 sequelize model:generate --name industries \
     --attributes industries:string
 
-sequelize model: generate --name school \
+sequelize model: generate --name schools \
     --attributes name:string,address:string,type:string

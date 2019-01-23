@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const body_parser = require('body-parser')
-const pbkdf2 = require('pbkdf2');
-const crypto = require('crypto');
+// const pbkdf2 = require('pbkdf2');
+// const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 router.get('/register', (req,res)=>{
