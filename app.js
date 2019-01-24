@@ -11,9 +11,9 @@ app.use(express.static('public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
 
-app.get('/', (req, res)=>{
+app.get('/chat', (req, res)=>{
     // res.sendFile(__dirname + '/views/index.ejs')
-    res.render('index')
+    res.render('chat')
 });
 
 
