@@ -17,3 +17,4 @@ sequelize model:generate --name students --attributes grade:integer,memo:text
 sequelize model:generate --name matching --attributes code:integer,active:boolean
 
 sequelize model:generate --name industries --attributes industries:string
+sequelize model:generate --name states --attributes state:string

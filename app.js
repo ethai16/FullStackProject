@@ -9,6 +9,7 @@ app.set("views", "views");
 app.use(express.static('public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
+app.use(require('./routes/signup'));
 
 // need this only when creating database.
 // db.sequelize.sync({force:true}).then(()=>{

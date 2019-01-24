@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Session = sequelize.define('Session', {
-    expire: DataTypes.DATE,
+    expires: DataTypes.DATE,
     data: DataTypes.STRING
   }, {});
   Session.associate = function(models) {
