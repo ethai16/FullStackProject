@@ -14,6 +14,7 @@ app.use(require('./routes/login'))
 app.use(require('./routes/logout'))
 
 
+
 // need this only when creating database.
 // db.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)

@@ -5,22 +5,22 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   industries.associate = function(models) {
     // associations can be defined here
-    industries.hasMany(models.students,{
+    industries.hasMany(models.users,{
       onDelete:'CASCADE',
       foreignKey:'industry_id1'
     });
-    industries.hasMany(models.students,{
+    industries.hasMany(models.users,{
       onDelete:'CASCADE',
       foreignKey:'industry_id2'
     });
-    industries.hasMany(models.students,{
+    industries.hasMany(models.users,{
       onDelete:'CASCADE',
       foreignKey:'industry_id3'
     });  
-    industries.hasMany(models.mentors,{
+    industries.hasMany(models.matching,{
       onDelete:'CASCADE',
       foreignKey:'industry_id'
-    });
+    });  
   };
   return industries;
 };

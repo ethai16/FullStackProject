@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       onDelete:'CASCADE',
       foreignKey:'role_id'
     });
-
   };
   return roles;
 };
