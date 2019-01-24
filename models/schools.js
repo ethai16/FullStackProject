@@ -5,19 +5,16 @@ module.exports = (sequelize, DataTypes) => {
     zipcode: DataTypes.STRING,
     street: DataTypes.STRING,
     city: DataTypes.STRING,
-    state: DataTypes.STRING,
     type: DataTypes.STRING
   }, {});
   schools.associate = function(models) {
     // associations can be defined here
-    schools.hasMany(models.students,{
+    schools.hasMany(models.users,{
       onDelete:'CASCADE',
       foreignKey:'school_id'
     });
-    schools.hasMany(models.teachers,{
-      onDelete:'CASCADE',
-      foreignKey:'school_id'
-    });
+    schools.belongsTo(models.states,{foreignKey:'state_code'})
+
   };
   return schools;
 };
