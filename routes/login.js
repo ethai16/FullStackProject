@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const SequelizeStore = require('connenct-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 router.use(bodyParser.urlencoded({extended:false}));
 
@@ -33,9 +33,17 @@ router.get('/login', (req,res)=>{
     res.render('login')
 })
 
-router.post('/login', (req,res)=>{
-
-    passport.authenticate('local', { sucessRedirect: '/dashboard', failureRedirect: '/login'})
+router.post('/login',passport.authenticate('local'), (req,res,next)=>{
+    // passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login'})
+    if(req.user){
+        if (req.user.role === "teacher"){
+            res.redirect('/users/teacher/' + req.user.username);
+        } else {
+            res.redirect('/users/student/' + req.user.username);
+        }
+    }else{
+            res.redirect('/login')
+    }
 
     //checking a password using pbkdf2 and crypto
     // var username = req.body.username;
@@ -49,32 +57,29 @@ router.post('/login', (req,res)=>{
 
 passport.use(new LocalStrategy((username, password, done)=>{
     console.log('Im in passport');
-    db.users.findAll({where: {username: username}})
+    db.logins.findAll({where: {username: username}})
     .then((results)=>{
         if(results != null) {
-            const data = result[0];
-            bcrypt.compare(password, data.password, (err, res)=>{
+            const data = results[0];
+            bcrypt.compare(password, data.password_hash, (err, res)=>{
                 if (res) {
-                    console.log(data)
-                    done(null, {id: data.id, username: data.username})
+                    done(null, {id: data.id, username: data.username, role: "teacher"})
                 }else{
-                    console.log('nothing')
                     done(null,false)
                 }
             })
         } else{
-            console.log('just out there')
             done(null, false)
         }
         })
 }))
 
 passport.serializeUser((user,done)=>{
-    done(null, user.id)
-})
+    done(null, user.username)
+});
 
-passport.deserializeUser((id, done)=>{
-    db.users.findById(parseInt(id,10)).then((data)=>{
+passport.deserializeUser((username, done)=>{
+    db.logins.findOne({username: username}).then((data)=>{
         done(null,data)
     })
 })
