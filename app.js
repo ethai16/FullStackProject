@@ -11,6 +11,8 @@ app.use(require('./routes/index'));
 app.use(require('./routes/register'));
 app.use(require('./routes/signup'));
 app.use(require('./routes/login'))
+app.use(require('./routes/logout'))
+
 
 // need this only when creating database.
 // db.sequelize.sync({force:true}).then(()=>{
