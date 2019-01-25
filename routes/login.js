@@ -63,7 +63,7 @@ router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (re
 
 passport.use(new LocalStrategy((username, password, done)=>{
     console.log('Im in passport');
-    db.logins.findAll({where: {username: username}})
+    db.users.findAll({where: {username: username}})
     .then((results)=>{
         console.log(results)
         //if err occurs fix this vvv(was results != null)
@@ -88,7 +88,7 @@ passport.serializeUser((user,done)=>{
 
 passport.deserializeUser((username, done)=>{
     //changed to find by username and not by id
-    db.logins.findOne({username: username}).then((data)=>{
+    db.users.findOne({username: username}).then((data)=>{
         done(null,data)
     })
 })

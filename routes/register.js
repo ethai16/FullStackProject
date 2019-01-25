@@ -17,7 +17,7 @@ router.post('/register', (req,res)=>{
     //utilizing bcrypt
     bcrypt.genSalt(10, (err,salt)=>{
         bcrypt.hash(pwd, salt, (err,hash)=>{
-            db.logins.create({username: username, password_hash: hash, password_salt: salt})
+            db.users.create({username: username, password_hash: hash, password_salt: salt})
             .then(()=>{
                 res.redirect('/login');
             })
