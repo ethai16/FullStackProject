@@ -33,18 +33,24 @@ router.get('/login', (req,res)=>{
     res.render('login')
 })
 
-router.post('/login',passport.authenticate('local'), (req,res,next)=>{
+// router.post('/login',
+//     passport.authenticate('local', {
+//         successRedirect: '/dashboard',
+//         failureRedirect: '/'
+//     })
+// );
+router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (req,res)=>{
     // passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login'})
+    //used to check role of login user
     if(req.user){
         if (req.user.role === "teacher"){
             res.redirect('/users/teacher/' + req.user.username);
-        } else {
+        } else if (req.user.role === "student") {
             res.redirect('/users/student/' + req.user.username);
+        }else{
+            res.redirect('/users/mentor/' + req.user.username);
         }
-    }else{
-            res.redirect('/login')
     }
-
     //checking a password using pbkdf2 and crypto
     // var username = req.body.username;
     // var pwd = req.body.password;
@@ -59,11 +65,13 @@ passport.use(new LocalStrategy((username, password, done)=>{
     console.log('Im in passport');
     db.logins.findAll({where: {username: username}})
     .then((results)=>{
-        if(results != null) {
+        console.log(results)
+        //if err occurs fix this vvv(was results != null)
+        if(results.length != 0) {
             const data = results[0];
             bcrypt.compare(password, data.password_hash, (err, res)=>{
                 if (res) {
-                    done(null, {id: data.id, username: data.username, role: "teacher"})
+                    done(null, {id: data.id, username: data.username, role: "mentor"})
                 }else{
                     done(null,false)
                 }
@@ -79,6 +87,7 @@ passport.serializeUser((user,done)=>{
 });
 
 passport.deserializeUser((username, done)=>{
+    //changed to find by username and not by id
     db.logins.findOne({username: username}).then((data)=>{
         done(null,data)
     })
