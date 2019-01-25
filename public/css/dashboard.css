@@ -1,0 +1,7 @@
+.border{
+    border: solid black 1px;
+}
+
+.border-thick{
+    border:solid black 3px;
+}
