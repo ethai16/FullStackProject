@@ -10,10 +10,11 @@ app.use(express.static('public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
 app.use(require('./routes/signup'));
+app.use(require('./routes/api'));
 
 
 // need this only when creating database.
-// db.sequelize.sync({force:true}).then(()=>{
+// db.users.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
 // })
 

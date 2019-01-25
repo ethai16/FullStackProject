@@ -1,3 +1,14 @@
 .detail{
     max-width: 600px;
 }
+label{
+    margin-top:10px;
+}
+.form-group{
+    margin:0;
+}
+.btn{
+    font-size: 14px;
+    padding:0;
+    width:140px
+}

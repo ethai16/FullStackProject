@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models/');
-const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');;
+const LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport');
+const bcrypt = require('bcryptjs');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 
-// router.get('/signup4',(req,res)=>{
-//     res.render('signup4')
-// })
+
 router.get('/signup',(req,res)=>{
     db.states.findAll({
         raw:true,
@@ -35,6 +40,6 @@ router.get('/signup',(req,res)=>{
         }) 
     })         
 })
-  
+
 
 module.exports = router;
