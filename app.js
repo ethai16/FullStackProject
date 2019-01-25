@@ -23,6 +23,8 @@ app.get('/chat', (req, res)=>{
     // res.sendFile(__dirname + '/views/index.ejs')
     res.render('chat')
 });
+app.use(require('./routes/signup'));
+app.use(require('./routes/api'));
 
 
 
@@ -40,7 +42,7 @@ io.on('connection', (socket)=> {
 // http.listen(3000, ()=>{
 
 // need this only when creating database.
-// db.sequelize.sync({force:true}).then(()=>{
+// db.users.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
 // })
 

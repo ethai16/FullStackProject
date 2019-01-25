@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */
@@ -98,4 +99,8 @@ a.forget:hover {
 
 ul {
     list-style-type: none;
+=======
+.hide{
+    display: none;
+>>>>>>> c9af6e6f9fe3050853621a287aa8dc831c839f92
 }
