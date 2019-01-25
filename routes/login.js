@@ -65,7 +65,6 @@ passport.use(new LocalStrategy((username, password, done)=>{
     console.log('Im in passport');
     db.users.findAll({where: {username: username}})
     .then((results)=>{
-        console.log(results)
         //if err occurs fix this vvv(was results != null)
         if(results.length != 0) {
             const data = results[0];
