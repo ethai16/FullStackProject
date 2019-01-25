@@ -208,10 +208,17 @@ margin-bottom: 15px !important;
         <link rel="stylesheet" href="../routes/chat.js">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/global.css" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="/scripts/chat.js" ></script>
+        
+
 	</head>
 	<body>
             <% include partials/navbar.ejs %>
+
                 <!-- FULL PAGE CONTAINER -->
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">
@@ -255,7 +262,7 @@ margin-bottom: 15px !important;
 								</div>
 								<div class="user_info">
 									<span>Chat with Users Name</span>
-									<p>Message count</p>
+									<p id="typing">Message count</p>
 								</div>
 							</div>
 						</div>
@@ -296,8 +303,7 @@ margin-bottom: 15px !important;
         </div>
         <!-- END RIGHT SIDE CHAT BOX -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>    
+        <% include partials/jsdefaults.ejs %>
         <script>
                 $(function () {
                     var socket = io();
@@ -327,8 +333,10 @@ margin-bottom: 15px !important;
                                                     <img src="https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Natural-Dog-Law-2-To-dogs%2C-energy-is-everything.jpg?itok=Z-ujUOUr" class="rounded-circle user_img_msg">
                                                 </div>
                                             </div>`
-                        $('#messages').append(usermessages,recmessages);
+                        $('#messages').append(usermessages);
                         $('#m').val('')
+
+
                     });
                 });
             </script> 

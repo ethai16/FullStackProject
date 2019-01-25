@@ -28,6 +28,10 @@ io.on('connection', (socket)=> {
     console.log('someone connected')
     socket.on('chat message', (msg)=> {
         io.sockets.emit('chat message', msg);
+        
+        socket.on('typing', data => {
+            socket.broadcast.emit('typing', data)
+        })
     });
 });
 
