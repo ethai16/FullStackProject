@@ -310,32 +310,36 @@ margin-bottom: 15px !important;
                     $('form').submit((e)=> {
                         e.preventDefault();
                         socket.emit('chat message', $('#m').val());
-                        $('#m').val()
                         return false;
                     });
                     socket.on('chat message', (msg)=> {
                         var input = $('#m').val()
+                        console.log(input)
                         var usermessages = `<div class="d-flex justify-content-start mb-4" >
                                                 <div class="img_cont_msg">
                                                     <img src="https://thenypost.files.wordpress.com/2018/05/180516-woman-mauled-by-angry-wiener-dogs-feature.jpg?quality=90&strip=all&w=618&h=410&crop=1" class="rounded-circle user_img_msg">
                                                 </div>
                                                 <div class="msg_cotainer">
-                                                    ${input}
+                                                    ${msg}
                                                     <span class="msg_time">8:40 AM, Today</span>
                                                 </div>
                                             </div>`
+                            console.log("usermessages", usermessages)
+
                         var recmessages = `<div class="d-flex justify-content-end mb-4">
                                                 <div class="msg_cotainer_send">
-                                                        ${input}
+                                                        ${msg}
                                                     <span class="msg_time_send">8:55 AM, Today</span>
                                                     </div>
                                                     <div class="img_cont_msg">
                                                     <img src="https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Natural-Dog-Law-2-To-dogs%2C-energy-is-everything.jpg?itok=Z-ujUOUr" class="rounded-circle user_img_msg">
                                                 </div>
                                             </div>`
-                        $('#messages').append(usermessages);
-                        $('#m').val('')
+                                            console.log("recmessages", recmessages)
 
+                        $('#messages').append(usermessages,recmessages);
+                        $('#m').val('')
+                                            
 
                     });
                 });
