@@ -10,6 +10,7 @@ app.set("views", "views");
 app.use(express.static('public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
+const fileUpload = require('express-fileupload');
 
 app.get('/chat', (req, res)=>{
     // res.sendFile(__dirname + '/views/index.ejs')
