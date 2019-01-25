@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const db = require('./models/')
 const session = require('express-session')
+const fileUpload = require('express-fileupload');
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -15,7 +16,6 @@ app.use(require('./routes/login'));
 app.use(require('./routes/logout'));
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
-const fileUpload = require('express-fileupload');
 
 app.get('/chat', (req, res)=>{
     // res.sendFile(__dirname + '/views/index.ejs')
@@ -38,6 +38,6 @@ io.on('connection', (socket)=> {
 //     app.listen(3500)
 // })
 
-app.listen(3000, ()=>{
+http.listen(3000, ()=>{
     console.log('listening on port 3000')
 })
