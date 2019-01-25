@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const db = require('./models/')
 const session = require('express-session')
+const fileUpload = require('express-fileupload');
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -16,7 +17,6 @@ app.use(require('./routes/logout'));
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
 app.use(require('./routes/dashboard'));
-const fileUpload = require('express-fileupload');
 
 
 app.get('/chat', (req, res)=>{
@@ -30,6 +30,10 @@ io.on('connection', (socket)=> {
     console.log('someone connected')
     socket.on('chat message', (msg)=> {
         io.sockets.emit('chat message', msg);
+        
+        socket.on('typing', data => {
+            socket.broadcast.emit('typing', data)
+        })
     });
 });
 
