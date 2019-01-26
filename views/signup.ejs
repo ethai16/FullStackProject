@@ -24,17 +24,21 @@
     <div class="container">
         <div class="row mt-3">
             <div class="col-sm-6">
-                <h1>User name</h1>
+                <h1></h1>
             </div>
+           
+
             <div class="col-sm-6"><a href="/users" class="float-right"><img title="profile image" class="img-circle img-fluid"
                     src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a>
             </div>
         </div>
+        <form class="form" action="/api" method="post">
+
         <div class="row">
             <div class="col-md-3 col-sm-12">
                 <div class="text-center">
                     <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"
-                        alt="avatar">
+                        alt="avatar" name="image_url">
                     <h6><small>Upload a different photo...</small></h6>
                     <input type="file" class="text-center mx-auto file-upload">
                 </div>
@@ -58,19 +62,21 @@
             </div>
             <!--/col-3-->
             <div class="col-12 col-lg-9">
-                <form class="form" action="/api" method="post">
+                <!-- <form class="form"> -->
+                <div class='private'>
+                    ## temp role id<input id='role' name='role_id'>
                     <div class="row form-group">
                         <div class="col-sm-6">
                             <label for="username">
                                 <h5>Username</h5>
                             </label>
-                            <input type="text" class="form-control" name="username" placeholder="username" id='username'>
+                            <input type="text" class="form-control" name="username" placeholder="username" id='username' required>
                         </div>
                         <div class="col-sm-6">
                             <label for="email">
                                 <h5>Email</h5>
                             </label>
-                            <input type="text" class="form-control" name="email" placeholder="you@email.com">
+                            <input type="text" class="form-control" name="email" placeholder="you@email.com" required>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -78,25 +84,26 @@
                             <label for="password">
                                 <h5>Password</h5>
                             </label>
-                            <input type="password" class="form-control" name="password" placeholder="password">
+                            <input type="password" class="form-control" name="password" placeholder="password" required>
                         </div>
                         <div class="col-sm-6">
                             <label for="password2">
                                 <h5>Verify</h5>
                             </label>
-                            <input type="password" class="form-control" name="password2" placeholder="verify password" title="enter your password2.">
+                            <input type="password" class="form-control" name="password2" placeholder="verify password" required>
                         </div>
                     </div>
                     <hr>
+                    <h4> Private Information</h4>
                     <div class="row form-group">
                         <div class="col-sm-6">
-                            <label for="username">
+                            <label for="fname">
                                 <h5>First name</h5>
                             </label>
                             <input type="text" class="form-control" name="fname" placeholder="first name">
                         </div>
                         <div class="col-sm-6">
-                            <label for="last_name">
+                            <label for="lname">
                                 <h5>Last name</h5>
                             </label>
                             <input type="text" class="form-control" name="lname" placeholder="last name">
@@ -104,10 +111,10 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <label for="address">
+                            <label for="street">
                                 <h5>Address</h5>
                             </label>
-                            <input type="text" class="form-control" name='address' placeholder="street address">
+                            <input type="text" class="form-control" name='street' placeholder="street address">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -118,10 +125,10 @@
                             <input type="text" class="form-control" name='city' placeholder="city">
                         </div>
                         <div class="col-sm-2">
-                            <label for='state'>
+                            <label for='state_code'>
                                 <h5>State</h5>
                             </label>
-                            <select class="form-control" name='state'>
+                            <select class="form-control" name='state_code'>
                                 <% states.forEach(ele=>{%>
                                 <option name='state' value='<%=ele.state%>'>
                                     <%=ele.state%>
@@ -130,16 +137,16 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <label for="zip">
+                            <label for="zipcode">
                                 <h5>Zipcode</h5>
                             </label>
-                            <input type="text" class="form-control" name='zip' placeholder="zipcode">
+                            <input type="text" class="form-control" name='zipcode' placeholder="zipcode">
                         </div>
                         <div class="col-sm-6">
-                            <label for="phone">
+                            <label for="telephone">
                                 <h5>Telephone</h5>
                             </label>
-                            <input type="text" class="form-control" name="phone" placeholder="phone number">
+                            <input type="text" class="form-control" name="telephone" placeholder="phone number">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -150,12 +157,55 @@
                             <textarea type="text" class="form-control" name='bio' placeholder="Share about yourself"></textarea>
                         </div>
                     </div>
-                <hr>
+                </div>
+                <div class='teacher'>
+                    <hr>
+                    <h4> School Information</h4>
+                    <div class="row form-group">
+                        <div class="col-sm-9">
+                            <label for='school'>
+                                <h5>School Name</h5>
+                            </label>
+                            <select class="form-control" name='teacher_school'>
+                                <% schools.forEach(ele=>{%>
+                                <option name='teacher_school' value='<%=ele.id%>'>
+                                    <%=ele.name%>
+                                </option>
+                                <%});%>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for='teacher_code'>
+                                <h5>Teacher Code:show only at edit </h5>
+                            </label>
+                            <input class="form-control" name='teacher_code' value='Code goeS HERE' readonly>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for='teacher_industry'>
+                                <h5> Industry </h5>
+                            </label>
+                            <select class="form-control" name='teacher_industry'>
+                                <% industries.forEach(ele=>{%>
+                                <option name='teacher_industry' value='<%=ele.id%>'>
+                                    <%=ele.industries%>
+                                </option>
+                                <%});%>
+                            </select>
+                        </div>
+                    </div>
+                </div>    
+                <!-- Teacher end  -->
+
+                <!-- Student info start  -->
                 <div class='student'>
+                    <hr>
+                    <h4> School Information</h4>
                     <div class="row form-group">
                         <div class="col-sm-9">
                             <label for='student_school'>
-                                <h5>School</h5>
+                                <h5>School Name</h5>
                             </label>
                             <select class="form-control" name='student_school'>
                                 <% schools.forEach(ele=>{%>
@@ -166,10 +216,10 @@
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <label for='student-grade'>
+                            <label for='student_grade'>
                                 <h5>Grades</h5>
                             </label>
-                            <select class="form-control" name='studentgrade'>
+                            <select class="form-control" name='student_grade'>
                                 <option name='student-grade' value="freshman">Freshman</option>
                                 <option name='student-grade' value="sophomore">Sophomore</option>
                                 <option name='student-grade' value="junior">Junior</option>
@@ -177,7 +227,7 @@
                             </select>
                         </div>
                     </div>
-                    <h4 class="ml-3 mt-5">Which industries are you interested in?</h4>
+                    <h4 class="mt-5">Which industries are you interested in?</h4>
                     <div class="row form-group">
                         <div class="col-sm-4">
                             <label for='student_industries1'>
@@ -217,50 +267,15 @@
                         </div>
                     </div>
                 </div>
-                <div class='teacher'>
-                    <hr>
-                    <input name='role_id' value='1'>
-                    <div class="row form-group">
-                        <div class="col-sm-9">
-                            <label for='school'>
-                                <h5>School</h5>
-                            </label>
-                            <select class="form-control" name='teacher_school'>
-                                <% schools.forEach(ele=>{%>
-                                <option name='teacher_school' value='<%=ele.id%>'>
-                                    <%=ele.name%>
-                                </option>
-                                <%});%>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <label for='teacher_code'>
-                                <h5>Teacher Code </h5>
-                            </label>
-                            <input class="form-control" name='teacher_code' value='Code goeS HERE' readonly>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-4">
-                            <label for='teacher_industry'>
-                                <h5> Industry </h5>
-                            </label>
-                            <select class="form-control" name='teacher_industry'>
-                                <% industries.forEach(ele=>{%>
-                                <option name='teacher_industry' value='<%=ele.id%>'>
-                                    <%=ele.industries%>
-                                </option>
-                                <%});%>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                <!-- Student end  -->
+                <!-- Mentor info start  -->
                 <div class="mentor">
-                        <hr>
+                    <hr>
+                    <h4> Company Information</h4>
                     <div class="row form-group">
                         <div class="col-sm-8">
                             <label for="company_name">
-                                <h5>Company Name</h5>
+                                <h5>Name</h5>
                             </label>
                             <input type="text" class="form-control" name="company_name" placeholder="Company Name">
                         </div>
@@ -274,10 +289,10 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <label for="address">
+                            <label for="company_street">
                                 <h5>Address</h5>
                             </label>
-                            <input type="text" class="form-control" name='company_address' placeholder="street address">
+                            <input type="text" class="form-control" name='company_street' placeholder="company address">
                         </div>
 
                     </div>
@@ -286,7 +301,7 @@
                             <label for="city">
                                 <h5>City</h5>
                             </label>
-                            <input type="text" name='company_city' class="form-control" placeholder="city">
+                            <input type="text" name='company_city' class="form-control" placeholder="company city">
                         </div>
                         <div class="col-sm-2">
                             <label for='state'>
@@ -301,21 +316,21 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <label for="company_zip">
+                            <label for="company_zipcode">
                                 <h5>Zipcode</h5>
                             </label>
-                            <input type="text" name='company_zip' class="form-control" placeholder="city">
+                            <input type="text" name='company_zipcode' class="form-control" placeholder="company zip code">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-6">
                             <label for="company_phone">
-                                <h5>Company Phone</h5>
+                                <h5>Phone</h5>
                             </label>
-                            <input type="text" class="form-control" name="company_phone" placeholder="Company phone number">
+                            <input type="text" class="form-control" name="company_phone" placeholder="company phone number">
                         </div>
                     </div>
-                    <h4 class="ml-3 mt-5">Which industries best describe your company / job?</h4>
+                    <h4 class="mt-5">Which industries best describe your company / job?</h4>
                     <div class="row form-group">
                         <div class="col-sm-4">
                             <label for='company_industries1'>
@@ -342,12 +357,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-sm-12 p-0 mt-3 d-flex justify-content-center">
-                            <button class="btn btn-success" type='submit' id="submit"><i class="fas fa-check"></i>
-                                Save</button>
-                            <button class="btn btn-light" type="reset"><i class="m-1 fas fa-undo"></i>Reset</button>
-                        </div>
+                </div>
+                <!-- Mentor end  -->
+                <hr>
+                <div class="row form-group">
+                    <div class="col-sm-12 p-0 mt-3 d-flex justify-content-center">
+                        <button class="btn btn-success" type='submit' id="submit"><i class="fas fa-check"></i>
+                            Save</button>
+                        <button class="btn btn-light" type="reset"><i class="m-1 fas fa-undo"></i>Reset</button>
                     </div>
                 </div>
                 </form>

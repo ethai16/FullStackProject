@@ -1,4 +1,22 @@
 $(document).ready(function () {
+
+    //==== temp role id .
+    //==== receiv temp info from local storage
+    // const role = $('#role').val();
+    role = 1;
+    //--- 
+    $('.student').hide();
+    $('.teacher').hide();
+    $('.mentor').hide();
+
+    if (role===1){
+        $('.teacher').show();
+    }else if (role===2){
+        $('.student').show();
+    }else{
+        $('.mentor').show();
+    }
+
     var readURL = function (input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -24,23 +42,21 @@ $(document).ready(function () {
         location.hash = this.getAttribute("href");
     });
 
-    $('#login_submit').on('click'), e=>{
-        e.preventDefault();
-        
-        
-    }
-    $('#private_submit').on('click'), e=>{
+    
+   
+    $('#submit').on('click'), e=>{
         e.preventDefault();
 
+        // if user name is null flash
+
+        // if password is not equal to verify password flash
         const username = (!$('#username').val()? null:$('#username').val());
         
         $.post('api/',{
-            type: "POST",
-            data: "data",
-            success: function (response) {
+            data},
+    
                 console.log(data)
-            }
-        });
+        );
     }
 });
 $(window).on("popstate", function() {

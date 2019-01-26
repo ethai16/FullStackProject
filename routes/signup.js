@@ -15,7 +15,8 @@ const session = require('express-session');
 router.get('/signup',(req,res)=>{
     db.states.findAll({
         raw:true,
-        attributes: ['state']
+        attributes: ['state'],
+        order: [['state']]
     })
     .then(results_states=>{
         db.schools.findAll({

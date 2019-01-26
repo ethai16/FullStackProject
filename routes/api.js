@@ -5,15 +5,22 @@ const bodyParser = require('body-parser');
 const db = require('../models/');
 const Sequelize = require('sequelize');
 
+// generate random code
 
-
-
+function generateCode(){
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let num;
+    for (let i = 0; i < 5; i++)
+        num += possible.charAt(Math.floor(Math.random() * possible.length));
+    console.log(num);
+    return num;
+}
 
 router.get('/api',(req, res)=>{
-    db.users.findOne({where:{username: {[Sequelize.Op.eq]: req.body.userename}}})
-    .then(results =>{    
-        res.render('/api')
-    });
+    // db.users.findOne({where:{username: {[Sequelize.Op.eq]: req.body.userename}}})
+    // .then(results =>{    
+    //     res.render('/api')
+    // });
     // attributes:['id','name','feedback','feeling.icon']
     //     ,order: [['id', 'DESC']]
     //     ,include: [{
@@ -28,24 +35,37 @@ router.get('/api',(req, res)=>{
 
 router.use(bodyParser.urlencoded({extended:false}));
 router.post('/api',(req, res)=>{
-    let icon = !(req.body.icon) ? null : parseInt(req.body.icon);
-    console.log(req.body)
-    let industry_id1, industry_id2, industry_id3, school_id;
+    console.log(req.body.role_id)
+    let industry_id1, industry_id2, industry_id3, school_id, company_state_code, grade, code;
 
-    if (req.body.role_id === '1'){
+    
+  
+
+    // ここから。
+    if (req.body.role_id === '1'){  //teacher
         industry_id1 = parseInt(req.body.teacher_industry)
-        , industry_id2 = null
-        , industry_id3 = null
+        , grade = null
+        , code = null
+        , company_state_code = null
         , school_id = parseInt(req.body.teacher_school)
-    } else if (req.body.role_id === '2'){
+    } else if (req.body.role_id === '2'){   //student
         industry_id1 = parseInt(req.body.student_industries1)
         , industry_id2 = parseInt(req.body.student_industries2)
         , industry_id3 = parseInt(req.body.student_industries3)
+        , company_state_code = null
+        , grade = req.body.grade
+        , code = generateCode()
         , school_id = parseInt(req.body.student_school)
-    }else{
+
+    }else{  //mentor
         industry_id1 = parseInt(req.body.company_industries1)
         , industry_id2 = parseInt(req.body.company_industries2)
-        , industry_id3 = 0
+        , grade=null
+        , company_state_code = req.body.company_state_code
+        , code =null
+        // , industry_id3 = null
+        // , school_id = null
+        // , 
     }
 
     db.users.create({
@@ -53,19 +73,19 @@ router.post('/api',(req, res)=>{
         fname:req.body.fname, 
         lname:req.body.lname, 
         email:req.body.email, 
-        telephone:req.body.phone,
-        zipcode:req.body.zip,
-        street:req.body.address,
+        telephone:req.body.telephone,
+        zipcode:req.body.zipcode,
+        street:req.body.street,
         city:req.body.city,
         bio:req.body.bio,
         image_url:req.body.image_url,
         active:true,
-        grade:req.body.studentgrade,
+        grade,
         position:req.body.position,
         background_check:false,
         company_name:req.body.company_name,
-        company_zipcode:req.body.company_zip,
-        company_street:req.body.company_address,
+        company_zipcode:req.body.company_zipcode,
+        company_street:req.body.company_street,
         company_city:req.body.company_city,
         company_telephone:req.body.company_phone,
         title:req.body.title,
@@ -75,8 +95,8 @@ router.post('/api',(req, res)=>{
         industry_id3,
         role_id:parseInt(req.body.role_id),
         school_id,
-        state_code:req.body.state,
-        company_state_code:req.body.company_state
+        state_code:req.body.state_code,
+        company_state_code
     })
     .then(results => {
         res.json(results)
