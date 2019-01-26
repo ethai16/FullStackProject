@@ -39,12 +39,12 @@ io.on('connection', (socket)=> {
     });
 });
 
-// http.listen(3000, ()=>{
 
 // need this only when creating database.
 // db.users.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
 // })
+
 
 http.listen(3000, ()=>{
     console.log('listening on port 3000')
