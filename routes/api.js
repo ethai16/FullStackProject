@@ -33,13 +33,13 @@ router.post('/api',(req, res)=>{
         industry_id1 = parseInt(req.body.teacher_industry)
         , grade = null
         , code = null
-        , company_state_code = null
+        , company_state= null
         , school_id = parseInt(req.body.teacher_school)
     } else if (role_id === 2){   //student
         industry_id1 = parseInt(req.body.student_industries1)
         , industry_id2 = parseInt(req.body.student_industries2)
         , industry_id3 = parseInt(req.body.student_industries3)
-        , company_state_code = null
+        , company_state= null
         , grade = req.body.grade
         , code = generateCode()
         , school_id = parseInt(req.body.student_school)
@@ -48,7 +48,7 @@ router.post('/api',(req, res)=>{
         industry_id1 = parseInt(req.body.company_industries1)
         , industry_id2 = parseInt(req.body.company_industries2)
         , grade=null
-        , company_state_code = req.body.company_state_code
+        , company_state_code = req.body.company_state
         , code =null
         // , industry_id3 = null
         // , school_id = null
@@ -61,7 +61,7 @@ router.post('/api',(req, res)=>{
         telephone, zipcode, street, city, bio,image_url,
         position, company_name, company_zipcode, 
         company_street, company_city, company_telephone,
-        title, state_code} = req.body;
+        state_code} = req.body;
 
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(pwd, salt, (err, hash) => {
