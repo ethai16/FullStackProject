@@ -10,12 +10,17 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 // const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-
-
 router.get('/signup',(req,res)=>{
+    res.redirect('/')
+})
+
+router.get('/signup/:roleID',(req,res)=>{
+    let roleID = req.params.roleID;
+    
     db.states.findAll({
         raw:true,
-        attributes: ['state']
+        attributes: ['state'],
+        order: [['state']]
     })
     .then(results_states=>{
         db.schools.findAll({
