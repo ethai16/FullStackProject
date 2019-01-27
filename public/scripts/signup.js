@@ -5,6 +5,7 @@ $(document).ready(function () {
     // retrieve role from url path
     const role = "."+location.pathname.slice(8).toLowerCase();
     console.log(role)
+    console.log(location.pathname.slice(8))
     $('.student, .teacher, .mentor').hide();
     $(role).show();
     
