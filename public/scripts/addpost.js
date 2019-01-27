@@ -6,9 +6,9 @@ $(function () {
         updateComments();
         console.log("Called updateFeedback");
         setTimeout(()=>{
-            $('#submitPost').reset()
+            $('#postfield').val("")
             console.log('settime')
-        },500)
+        },100)
         }
     })
 

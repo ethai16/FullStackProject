@@ -6,7 +6,7 @@ router.get('/logout', function(req, res, next){
         if(err) return next(err)
 
         req.logout();
-        res.sendStatus(200)
+        res.render('home')
     })
 })
 

@@ -45,11 +45,11 @@ router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (re
     console.log(req.user)
     if(req.user){
         if (req.user.role === 1){
-            res.redirect('/users/teacher/' + req.user.username);
+            res.redirect('/users/teacher/' + req.user.username + '/dashboard');
         } else if (req.user.role === 2) {
-            res.redirect('/users/student/' + req.user.username);
+            res.redirect('/users/student/' + req.user.username + '/dashboard');
         }else{
-            res.redirect('/users/mentor/' + req.user.username);
+            res.redirect('/users/mentor/' + req.user.username + '/dashboard');
         }
     }
 
@@ -90,7 +90,7 @@ passport.serializeUser((user,done)=>{
 
 passport.deserializeUser((username, done)=>{
     //changed to find by username and not by id
-    db.users.findOne({username: username}).then((data)=>{
+    db.users.findOne({where: {username: username}}).then((data)=>{
         done(null,data)
     })
 })
