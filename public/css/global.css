@@ -102,3 +102,7 @@ ul {
 .hide{
     display: none;
 }
+
+input {
+    outline:none;
+}

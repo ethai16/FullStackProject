@@ -17,12 +17,12 @@
                 <div class = "bg-maincolor font-white p-3">Enrolled Classes</div>
             </div>
         </div>
-        <div class = "col-6 d-flex flex-column" style = "height:92vh">
+        <div class = "col-6 d-flex flex-column">
                 <div class = "shadow border-custom m-1 mt-2 round-border overflow-hidden">
                         <div class = "bg-maincolor font-white p-3">Submit Post</div>
-                        <form  method = "POST"> 
+                        <form id="submitPost" method = "POST"> 
                             <div class = "d-flex justify-content-end m-3">
-                                <textarea type="text" placeholder="Enter your message and click submit" class="form-control col-10" name="post"
+                                <textarea id ="postfield" type="text" placeholder="Enter your message and click submit" class="form-control col-10" name="post"
                                 rows="3"></textarea>
                             </div>
                             <div class = "d-flex justify-content-end m-3">                         
@@ -30,6 +30,10 @@
                             </div> 
                         </form>
                 </div>
+                <div id = "post-box">
+
+                </div>
+
         </div>
         <div class = "col-3 d-flex flex-column" style = " min-width:200px">
                 <div class = "shadow d-flex flex-column border-custom m-1  order-2 round-border overflow-hidden " style = "height:35vh; width:30vh;min-width:300px; min-height:250px; position:relative">
@@ -71,5 +75,6 @@
     </main>
     <% include partials/footer.ejs %>
     <% include partials/jsdefaults.ejs %>
+    <script src= "../scripts/addpost.js"> </script>
 </body>
 </html>
