@@ -44,12 +44,19 @@ router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (re
     //used to check role of login user
     console.log(req.user)
     if(req.user){
+        var role = ""
+        console.log(req.user.role)
         if (req.user.role === 1){
-            res.redirect('/users/teacher/' + req.user.username + '/dashboard');
-        } else if (req.user.role === 2) {
-            res.redirect('/users/student/' + req.user.username + '/dashboard');
+            role = 'teacher'
+        }else if (req.user.role === 2){
+            role = 'student' 
         }else{
-            res.redirect('/users/mentor/' + req.user.username + '/dashboard');
+            role = 'mentor'
+        }
+        if (req.user.role){
+            res.redirect('/'+ role + '/'+ req.user.username);
+        }else{
+            res.redirect('/login')
         }
     }
 

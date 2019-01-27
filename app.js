@@ -16,7 +16,7 @@ app.use(require('./routes/login'));
 app.use(require('./routes/logout'));
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
-app.use(require('./routes/dashboard'));
+app.use(require('./routes/profile'));
 
 
 app.get('/chat', (req, res)=>{
