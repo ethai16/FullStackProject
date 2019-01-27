@@ -41,30 +41,6 @@ router.get('/signup',(req,res)=>{
     })         
 })
 
-router.use(bodyParser.urlencoded({ extended: false }));
-router.post('/signup', (req,res)=>{
-    var username = req.body.username;
-    var pwd = req.body.password;
-    //utilizing bcrypt
-    bcrypt.genSalt(10, (err,salt)=>{
-        bcrypt.hash(pwd, salt, (err,hash)=>{
-            db.users.create({username: username, password_hash: hash, password_salt: salt})
-            .then(()=>{
-                res.redirect('/login');
-            })
-            .catch(error =>{
-        
-            });
-        })
-    })
-    
-    //utilizing pbkdf2 and crypto packages
-    // var salt = crypto.randomBytes(256).toString('hex');
-    // var key = pbkdf2.pbkdf2Sync(
-    //     pwd, salt, 36000,256, 'sha256'
-    // );
-    // var hash = key.toString('hex')
-})
 
 
 module.exports = router;
