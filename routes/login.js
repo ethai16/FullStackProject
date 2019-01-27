@@ -42,15 +42,17 @@ router.get('/login', (req,res)=>{
 router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (req,res)=>{
     // passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login'})
     //used to check role of login user
+    console.log(req.user)
     if(req.user){
-        if (req.user.role === "teacher"){
+        if (req.user.role === 1){
             res.redirect('/users/teacher/' + req.user.username);
-        } else if (req.user.role === "student") {
+        } else if (req.user.role === 2) {
             res.redirect('/users/student/' + req.user.username);
         }else{
             res.redirect('/users/mentor/' + req.user.username);
         }
     }
+
     //checking a password using pbkdf2 and crypto
     // var username = req.body.username;
     // var pwd = req.body.password;
@@ -68,9 +70,10 @@ passport.use(new LocalStrategy((username, password, done)=>{
         //if err occurs fix this vvv(was results != null)
         if(results.length != 0) {
             const data = results[0];
+            console.log(data)
             bcrypt.compare(password, data.password_hash, (err, res)=>{
                 if (res) {
-                    done(null, {id: data.id, username: data.username, role: "mentor"})
+                    done(null, {id: data.id, username: data.username, role: data.role_id})
                 }else{
                     done(null,false)
                 }
