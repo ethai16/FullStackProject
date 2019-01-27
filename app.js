@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const db = require('./models/')
 const session = require('express-session')
-const flash = require('connect-flash')
+// const flash = require('connect-flash')
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -16,7 +16,7 @@ app.use(require('./routes/logout'));
 app.use(require('./routes/dashboard'));
 // app.use(require('./routes/chat'));
 app.use(require('./routes/api'));
-app.use(flash());
+// app.use(flash());
 
 
 // need this only when creating database.
