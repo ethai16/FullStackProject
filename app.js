@@ -41,11 +41,13 @@ io.on('connection', (socket)=> {
 
 
 // need this only when creating database.
-// db.users.sequelize.sync({force:true}).then(()=>{
+// db.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
 // })
 
 
+
+    
 
 
 http.listen(3000, ()=>{

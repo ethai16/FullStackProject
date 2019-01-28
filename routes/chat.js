@@ -16,10 +16,18 @@ router.get('/chat', (req, res)=>{
         res.redirect('/login')
     }
     res.render('chat', {
-        publicProfile: '/'+ role + '/'+ req.user.username
+        publicProfile: '/'+ role + '/'+ req.user.username,
+        fname: req.user.fname,
+        lname: req.user.lname,
+        profilepic: req.user.image_url,
+        username: req.user.username,
 
     })
 });
+
+
+
+
 
 
 module.exports = router
