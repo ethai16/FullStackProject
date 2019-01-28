@@ -1,13 +1,5 @@
 const express = require('express');
 const router = express.Router();
-<<<<<<< HEAD
-
-router.get('/dashboard', (req,res)=>{
-    res.render('dashboard')
-})
-
-module.exports = router
-=======
 const db = require('./../models');
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
@@ -39,7 +31,7 @@ router.get('/dashboard', (req,res)=>{
         masterRole = 'mentor'
     }
 
-    db.users.findAll({where:{code: req.user.code}})
+    db.users.findAll({where:{teacher_code: req.user.teacher_code}})
     .then((results)=>{
 
         res.render('dashboard', {
@@ -54,4 +46,3 @@ router.get('/dashboard', (req,res)=>{
 })
 
 module.exports = router;
->>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268
