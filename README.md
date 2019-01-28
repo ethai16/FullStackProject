@@ -1,6 +1,6 @@
 
 # Full-Stack-Project
-#Mentor: Bridging the Path of Students and their Future 
+# Mentor: Bridging the Path of Students and their Future 
 
 <h2>General</h2>
 
