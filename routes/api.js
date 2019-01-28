@@ -12,22 +12,21 @@ router.get('/api',(req,res)=>{
 })
 
 router.post('/api',(req, res)=>{
-    let industry_id1, industry_id2, industry_id3, school_id, company_state_code, grade, code;
     const role_id = parseInt(req.body.role_id);
-    const {username, fname, lname, email, 
+    let {username, fname, lname, email, 
         telephone, zipcode, street, city, bio, image_url,
-        position, company_name, company_zipcode, states,
+        position, company_name, company_zipcode, 
         company_street, company_city, company_telephone,
-        title, state_code} = req.body;
+        title, state_code, industry_id1, industry_id2, 
+        industry_id3, school_id, company_state_code, grade, teacher_code, mentor_code} = req.body;
         
     //teacher
     if (role_id === 1){  
         industry_id1 = parseInt(req.body.teacher_industry)
         , grade = null
-        , code = crypto.randomBytes(3).toString('hex')
         , company_state_code = null
         , school_id = parseInt(req.body.teacher_school)
-    
+        , mentor_code = null
         //student
     } else if (role_id === 2){   
         industry_id1 = parseInt(req.body.student_industries1)
@@ -35,15 +34,16 @@ router.post('/api',(req, res)=>{
         , industry_id3 = parseInt(req.body.student_industries3)
         , company_state_code = null
         , grade = req.body.grade
-        , code = null
         , school_id = parseInt(req.body.student_school)
+        , mentor_code = req.body.mentor_code_student
+        , teacher_code = req.body.teacher_code_student
     //mentor
     }else{  
         industry_id1 = parseInt(req.body.company_industries1)
         , industry_id2 = parseInt(req.body.company_industries2)
         , grade=null
         , company_state_code = req.body.company_state
-        , code =null
+        , teacher_code = null
     }
 
     const pwd = req.body.password;
@@ -62,12 +62,12 @@ router.post('/api',(req, res)=>{
                 active:true,
                 background_check:false,
                 company_name, company_zipcode,company_street,
-                company_city,company_telephone,title,code,
-                industry_id1,industry_id2,industry_id3,
+                company_city,company_telephone,title,
+                industry_id1,industry_id2,industry_id3, teacher_code, mentor_code,
                 role_id,school_id,state_code,company_state_code
             })
             .then(results => {
-                res.render('message',{
+                res.render('/dashboard',{
                     topMsg:`Welcome, ${results.username}!`,
                     secondMsg:``
                 })                      

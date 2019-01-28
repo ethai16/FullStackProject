@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="city">
                                     <h5>City</h5>
                                 </label>
@@ -131,13 +131,13 @@
                                     <%});%>
                                 </select>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label for="zipcode">
                                     <h5>Zipcode</h5>
                                 </label>
                                 <input type="text" class="form-control" name='zipcode' placeholder="zipcode">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label for="telephone">
                                     <h5>Telephone</h5>
                                 </label>
@@ -157,7 +157,16 @@
                     <!-- teacher info start  -->
                     <div class='teacher'>
                         <hr>
-                        <h4> School Information</h4>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label for="teacher_code">
+                                    <h5>Teacher code</h5>
+                                </label>
+                                <input type="text" class="form-control" name="teacher_code" value='<%=teacher_code%>' readonly>
+                            </div>    
+                        </div>
+
+                        <h4 class='mt-3'> School Information</h4>
                         <div class="row form-group">
                             <div class="col-sm-9">
                                 <label for='school'>
@@ -170,12 +179,6 @@
                                     </option>
                                     <%});%>
                                 </select>
-                            </div>
-                            <div class="col-sm-3 teacher_code hide">
-                                <label for='teacher_code'>
-                                    <h5>Teacher Code:show only at edit </h5>
-                                </label>
-                                <input class="form-control" name='teacher_code' value='Code goeS HERE' readonly>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -198,7 +201,22 @@
                     <!-- Student info start  -->
                     <div class='student'>
                         <hr>
-                        <h4> School Information</h4>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label for="teacher_code_student">
+                                    <h5>Teacher code</h5>
+                                </label>
+                                <input type="text" class="form-control" name="teacher_code_student">
+                            </div> 
+                            <div class="col-sm-3">
+                                <label for="mentor_code_student">
+                                    <h5>Mentor code</h5>
+                                </label>
+                                <input type="text" class="form-control" name="mentor_code_student">
+                            </div> 
+                        </div>
+                        <h4 class='mt-3'> School Information</h4>
+
                         <div class="row form-group">
                             <div class="col-sm-9">
                                 <label for='student_school'>
@@ -268,7 +286,15 @@
                     <!-- Mentor info start  -->
                     <div class="mentor">
                         <hr>
-                        <h4> Company Information</h4>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label for='mentor_code'>
+                                    <h5>Mentor Code:</h5>
+                                </label>
+                                <input class="form-control" name='mentor_code' id='mentor_code'  value='<%=mentor_code%>' readonly>
+                            </div>
+                        </div>
+                        <h4 class='mt-3'> Company Information</h4>
                         <div class="row form-group">
                             <div class="col-sm-8">
                                 <label for="company_name">
@@ -327,6 +353,7 @@
                                 <input type="text" class="form-control" name="company_telephone" placeholder="company phone number">
                             </div>
                         </div>
+
                         <h4 class="mt-5">Which industries best describe your company / job?</h4>
                         <div class="row form-group">
                             <div class="col-sm-4">

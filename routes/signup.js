@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/');
 const Sequelize = require('sequelize');;
-const LocalStrategy = require('passport-local').Strategy;
-const passport = require('passport');
-const bcrypt = require('bcryptjs');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const session = require('express-session');
+// const LocalStrategy = require('passport-local').Strategy;
+// const passport = require('passport');
+// const bcrypt = require('bcryptjs');
+// const cookieParser = require('cookie-parser');
+// const bodyParser = require('body-parser');
+// const session = require('express-session');
+const crypto = require('crypto');
+
 // const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 router.get('/signup',(req,res)=>{
@@ -35,6 +37,8 @@ router.get('/signup/:roleID',(req,res)=>{
                         states: results_states,
                         schools:results_schools,
                         industries:results_inds,
+                        teacher_code:crypto.randomBytes(3).toString('hex'),
+                        mentor_code:crypto.randomBytes(3).toString('hex'),
                         topMsg:"New Profile".toUpperCase()
                     });
                 } else{
@@ -48,35 +52,36 @@ router.get('/signup/:roleID/:userID',(req,res)=>{
     let roleID = req.params.roleID;
     let userID = req.params.userID;
 
-    db.users.findOne({
+
+    db.users.findAll({
         raw:true
+        ,attributes: {
+            include: [
+                [db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id1")'), 'ind1_name']
+                ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id2")'), 'ind2_name']
+                ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id3")'), 'ind3_name']  
+        ]}
         ,include:[
-            {model:db.schools,required:true}
-        //     {model:db.industries
-                // ,on: {
-                //     col1: db.sequelize.where(db.sequelize.col("users.industry_id1"), "=", db.sequelize.col("ind1.industries")),
-                //     col1: db.sequelize.where(db.sequelize.col("users.industry_id2"), "=", db.sequelize.col("ind2.industries")),
-                //     col1: db.sequelize.where(db.sequelize.col("users.industry_id3"), "=", db.sequelize.col("ind3.industries")),
-                // },
-            //}
+            {model:db.schools}
         ]
         ,where: {
             username: {[Sequelize.Op.eq]: userID}
         }
     }).then(results=>{
+        // console.log(results)
         if (results){
             res.render('profileEdit',{
-                data:results,
+                data:results[0],
                 topMsg:"Edit Profile".toUpperCase(),
                 secondMsg:''
             });
         } else{
-            res.send('error');        // if error, go back to all cards
+            res.render('message',{topMsg:`Error: ${error}`,secondMsg:''});        // if error, go back to all cards
         }   
     }).catch(error=>{
         res.render('message',{
             topMsg:`Error: ${error}`,
-            secondMsg:''});
+            secondMsg:'Please try again'});
     })
 })
 

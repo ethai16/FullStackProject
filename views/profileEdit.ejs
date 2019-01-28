@@ -46,7 +46,6 @@
                         <h6><small>Upload a different photo...</small></h6>
                         <input type="file" name="image_url" class="text-center mx-auto file-upload" accept="image/*">
                     </div>
-
                     <!-- Button trigger modal -->
                     <div class="card m-3" style="max-width: 18rem;">
                         <div class="card-header"></div>
@@ -188,7 +187,15 @@
                     <!-- teacher info start  -->
                     <div class='teacher'>
                         <hr>
-                        <h4> School Information</h4>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label for="teacher_code">
+                                    <h5>Teacher code</h5>
+                                </label>
+                                <input type="text" class="form-control" name="teacher_code" value='<%=data.teacher_code%>' readonly>
+                            </div> 
+                        </div>
+                        <h4 class='mt-3'> School Information</h4>
                         <div class="row form-group">
                             <div class="col-sm-9">
                                 <label for='school'>
@@ -213,7 +220,9 @@
                                     <h5> Industry </h5>
                                 </label>
                                 <select class="form-control" name='teacher_industry'>
-
+                                    <option name='teacher_industry'value='<%=data.industry_id1%>'>
+                                            <%=data.ind1_name%>
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -223,7 +232,21 @@
                     <!-- Student info start  -->
                     <div class='student'>
                         <hr>
-                        <h4> School Information</h4>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label for="teacher_code_student">
+                                    <h5>Teacher code</h5>
+                                </label>
+                                <input type="text" class="form-control" name="teacher_code_student" value='<%data.teacher_code%>'>
+                            </div> 
+                            <div class="col-sm-3">
+                                <label for="mentor_code_student">
+                                    <h5>Mentor code</h5>
+                                </label>
+                                <input type="text" class="form-control" name="mentor_code_student" value='<%=data.mentor_code%>'>
+                            </div> 
+                        </div>
+                        <h4 class='mt-3'> School Information</h4>
                         <div class="row form-group">
                             <div class="col-sm-9">
                                 <label for='student_school'>
@@ -256,7 +279,8 @@
                                     <h5> First Choice </h5>
                                 </label>
                                 <select class="form-control" name='student_industries1'>
-                                    <option name='student_industries1' value='<%=data.industry_id1%>'>
+                                    <option name='student_industries1'value='<%=data.industry_id1%>'>
+                                            <%=data.ind2_name%>
                                     </option>
                                 </select>
                             </div>
@@ -265,7 +289,8 @@
                                     <h5>Second Choice </h5>
                                 </label>
                                 <select class="form-control" name='student_industries2'>
-                                    <option name='student_industries2' value='<%=data.industry_id2%>'>
+                                    <option name='student_industries2'value='<%=data.industry_id2%>'>
+                                            <%=data.ind2_name%>
                                     </option>
                                 </select>
                             </div>
@@ -274,17 +299,27 @@
                                     <h5>Third Choice </h5>
                                 </label>
                                 <select class="form-control" name='student_industries3'>
-                                    <option name='student_industries3' value='<%=data.industry_id3%>'>
+                                    <option name='student_industries3'value='<%=data.industry_id3%>'>
+                                            <%=data.ind2_name%>
                                     </option>
                                 </select>
                             </div>
                         </div>
+    
                     </div>
                     <!-- Student end  -->
                     <!-- Mentor info start  -->
                     <div class="mentor">
                         <hr>
-                        <h4> Company Information</h4>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label for="mentor_code">
+                                    <h5>Mentor code</h5>
+                                </label>
+                                <input type="text" class="form-control" name="mentor_code" value='<%=data.mentor_code%>' readonly>
+                            </div> 
+                        </div>
+                        <h4 class='mt-3'> Company Information</h4>
                         <div class="row form-group">
                             <div class="col-sm-8">
                                 <label for="company_name">
@@ -347,13 +382,21 @@
                                 <label for='company_industries1'>
                                     <h5> First Choice </h5>
                                 </label>
-                                
+                                <select class="form-control" name='company_industries1'>
+                                    <option name='company_industries1'value='<%=data.industry_id1%>'>
+                                            <%=data.ind1_name%>
+                                    </option>
+                                </select>
                             </div>
                             <div class="col-sm-4">
                                 <label for='company_industries2'>
                                     <h5>Second Choice </h5>
                                 </label>
-                                
+                                <select class="form-control" name='company_industries2'>
+                                    <option name='company_industries2'value='<%=data.industry_id2%>'>
+                                            <%=data.ind2_name%>
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>

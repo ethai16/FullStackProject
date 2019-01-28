@@ -1,24 +1,23 @@
 $(function(){
 
     // retrieve role from url path
-    let role = $('#role_id').val();
+    let role = parseInt($('#role_id').val());
     $('.student, .teacher, .mentor').hide();
-    $(role).show();
     console.log(role)
     // set req.params.role_id
-    if (role === "1") {
+    if (role === 1) {
         $('.teacher').show()
-    }else if (role === "2"){
+    }else if (role === 2){
         $('.student').show()
     }else {
         $('.mentor').show()
     }
     
-    let gradeval = $('#grade').val()
-    console.log(gradeval)
-    $('.grade').find(`option:contains(${gradeval})`).attr("selected",true);
+    // let gradeval = $('#grade').val()
+    // console.log(gradeval)
+    // $('.grade').find(`option:contains(${gradeval})`).attr("selected",true);
 
-
+    // $.getJSON('api')
     // avator setup
     var readURL = function (input) {
         if (input.files && input.files[0]) {
