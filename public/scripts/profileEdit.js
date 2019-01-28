@@ -59,6 +59,37 @@ $(function(){
         //         console.log(data)
         // );
     }
+
+    // delete
+    $("#delete").on("click", e => {
+        let doit = false;
+        $( "#dialog-confirm" ).dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+              "Yes, please delete.": function() {
+                $( this ).dialog( "close" );
+                doit = true;
+              },
+              Cancel: function() {
+                $( this ).dialog( "close" );
+              }
+            }
+          });
+
+            if (doit) {
+            $.ajax({
+                url: '/api/delete/'+id,
+                type: 'DELETE',
+                success: ''
+            });
+        }
+        e.stopPropagation();
+    }); // end of feedback
+
+
 });
 $(window).on("popstate", function() {
     var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
