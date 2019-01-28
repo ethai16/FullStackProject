@@ -11,6 +11,10 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+<<<<<<< HEAD
+    "connect-flash": "^0.1.1",
+=======
+>>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268
     "connect-session-sequelize": "^6.0.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.6.1",

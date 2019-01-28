@@ -6,7 +6,11 @@ router.get('/logout', function(req, res, next){
         if(err) return next(err)
 
         req.logout();
+<<<<<<< HEAD
+        res.sendStatus(200)
+=======
         res.render('home')
+>>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268
     })
 })
 

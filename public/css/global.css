@@ -102,6 +102,108 @@ ul {
 .hide{
     display: none;
 }
+<<<<<<< HEAD
+* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  input.button3{
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:rgb(93, 93, 300);
+    text-align:center;
+    transition: all 0.2s;
+}
+    input.button3:hover{
+    background-color:rgb(93, 93, 189);
+    }
+    @media all and (max-width:30em){
+     input.button3{
+    display:block;
+    margin:0.2em auto;
+    }
+}
+
+a.forget:hover {
+    text-decoration: underline;
+}
+
+.bg-maincolor{
+    background-color:rgb(93, 93, 189);
+}
+
+.font-white{
+    color:white;
+}
+
+.round-border{
+    border-radius:10px
+}
+
+.overflow-hidden{
+    overflow:hidden;
+}
+
+.border-custom{
+    border:rgb(93, 93, 189) 1px solid;
+}
+
+ul {
+    list-style-type: none;
+=======
 
 input {
     outline:none;
@@ -113,3 +215,4 @@ input {
     font-weight: normal;
     src: local('Flama-Medium'), url('Flama-Medium.woff') format('woff');
 }
+>>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268

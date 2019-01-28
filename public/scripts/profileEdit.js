@@ -1,19 +1,23 @@
-$(document).ready(function () {
+$(function(){
+
     // retrieve role from url path
-    const role = "."+location.pathname.slice(8).toLowerCase();
-    console.log(role)
+    let role = parseInt($('#role_id').val());
     $('.student, .teacher, .mentor').hide();
-    $(role).show();
-    
+    console.log(role)
     // set req.params.role_id
-    if (role === '.teacher') {
-        $('#role_id').val(1)
-    }else if (role === '.student'){
-        $('#role_id').val(2)}
-    else {
-        $('#role_id').val(3)
+    if (role === 1) {
+        $('.teacher').show()
+    }else if (role === 2){
+        $('.student').show()
+    }else {
+        $('.mentor').show()
     }
     
+    // let gradeval = $('#grade').val()
+    // console.log(gradeval)
+    // $('.grade').find(`option:contains(${gradeval})`).attr("selected",true);
+
+    // $.getJSON('api')
     // avator setup
     var readURL = function (input) {
         if (input.files && input.files[0]) {
@@ -54,6 +58,37 @@ $(document).ready(function () {
         //         console.log(data)
         // );
     }
+
+    // delete
+    $("#delete").on("click", e => {
+        let doit = false;
+        $( "#dialog-confirm" ).dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+              "Yes, please delete.": function() {
+                $( this ).dialog( "close" );
+                doit = true;
+              },
+              Cancel: function() {
+                $( this ).dialog( "close" );
+              }
+            }
+          });
+
+            if (doit) {
+            $.ajax({
+                url: '/api/delete/'+id,
+                type: 'DELETE',
+                success: ''
+            });
+        }
+        e.stopPropagation();
+    }); // end of feedback
+
+
 });
 $(window).on("popstate", function() {
     var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
