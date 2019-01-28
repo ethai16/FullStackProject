@@ -20,7 +20,6 @@ app.use(require('./routes/profile'));
 app.use(require('./routes/dashboard'));
 app.use(require('./routes/chat'));
 app.use(require('./routes/search'));
-const fileUpload = require('express-fileupload');
 
 
 
@@ -45,6 +44,8 @@ io.on('connection', (socket)=> {
 // db.users.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
 // })
+
+
 
 
 http.listen(3000, ()=>{
