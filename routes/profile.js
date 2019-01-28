@@ -26,7 +26,9 @@ router.get('/:userRole/:username', (req,res)=>{
 
     if (req.user){
         if (req.user.username === username && roleNum === req.user.role_id) {
-            res.render('profile')
+            res.render('profile', {
+                publicProfile: '/'+ role + '/'+ req.user.username
+            })
         }else{
             res.redirect('/login')
         }

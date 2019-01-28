@@ -45,7 +45,6 @@ router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (re
     console.log(req.user)
     if(req.user){
         var role = ""
-        console.log(req.user.role)
         if (req.user.role === 1){
             role = 'teacher'
         }else if (req.user.role === 2){
@@ -54,7 +53,7 @@ router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (re
             role = 'mentor'
         }
         if (req.user.role){
-            res.redirect('/'+ role + '/'+ req.user.username);
+            res.redirect('/dashboard');
         }else{
             res.redirect('/login')
         }
