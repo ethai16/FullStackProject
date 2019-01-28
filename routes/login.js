@@ -42,27 +42,8 @@ router.get('/login', (req,res)=>{
 router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (req,res)=>{
     // passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login'})
     //used to check role of login user
-<<<<<<< HEAD
-    if(req.user){
-        if (req.user.role === "teacher"){
-            res.redirect('/users/teacher/' + req.user.username);
-        } else if (req.user.role === "student") {
-            res.redirect('/users/student/' + req.user.username);
-        }else{
-            res.redirect('/users/mentor/' + req.user.username);
-        }
-    }
-=======
     console.log(req.user)
     if(req.user){
-        var role = ""
-        if (req.user.role === 1){
-            role = 'teacher'
-        }else if (req.user.role === 2){
-            role = 'student' 
-        }else{
-            role = 'mentor'
-        }
         if (req.user.role){
             res.redirect('/dashboard');
         }else{
@@ -70,7 +51,6 @@ router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (re
         }
     }
 
->>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268
     //checking a password using pbkdf2 and crypto
     // var username = req.body.username;
     // var pwd = req.body.password;
@@ -88,16 +68,9 @@ passport.use(new LocalStrategy((username, password, done)=>{
         //if err occurs fix this vvv(was results != null)
         if(results.length != 0) {
             const data = results[0];
-<<<<<<< HEAD
             bcrypt.compare(password, data.password_hash, (err, res)=>{
                 if (res) {
                     done(null, {id: data.id, username: data.username, role: "mentor"})
-=======
-            console.log(data)
-            bcrypt.compare(password, data.password_hash, (err, res)=>{
-                if (res) {
-                    done(null, {id: data.id, username: data.username, role: data.role_id})
->>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268
                 }else{
                     done(null,false)
                 }
@@ -114,11 +87,7 @@ passport.serializeUser((user,done)=>{
 
 passport.deserializeUser((username, done)=>{
     //changed to find by username and not by id
-<<<<<<< HEAD
-    db.users.findOne({username: username}).then((data)=>{
-=======
     db.users.findOne({where: {username: username}}).then((data)=>{
->>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268
         done(null,data)
     })
 })

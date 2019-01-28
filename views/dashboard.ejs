@@ -8,9 +8,9 @@
 <body>
         <% include partials/navbarAfterAuth.ejs %>
         <main class="container-fluid d-flex">
-                <div class="col-4 d-flex flex-column" style="min-height:92vh">
+                <div class="col-4 d-flex flex-column mt-2" style="min-height:92vh">
                         <div class="container-fluid p-1 mb-2" style="height:40vh; min-height: 270px">
-                                <div class="shadow border mt-2">
+                                <div class="shadow border">
                                         <div class="bg-maincolor h-75 d-flex pl-3 d-flex justify-content-center align-items-center"
                                                 style="padding-top:8vh">
                                                 <div class="bg-light d-flex justify-content-center align-items-center pt-3"
@@ -22,20 +22,33 @@
                                 </div>
                         </div>
                         <div class="student shadow border m-1 mt-2" style="height:20vh">
-                                <div class="bg-maincolor font-white p-3">Mentor</div>
-                        </div>
-                        <div class="student shadow border m-1 mt-2" style="height:20vh">
-                                <div class="bg-maincolor font-white p-3">Mentor</div>
-                        </div>
-                        <div class="student shadow border m-1 mt-2" style="height:20vh">
-                                <div class="bg-maincolor font-white p-3">Mentor</div>
+                                <div class="bg-maincolor font-white p-3">Friends List</div>
+                                <ul>
+                                
+                                <% for (var i=friendsList.length-1; i>=0; i--) { %>
+                                        <% if (friendsList[i].username === mainUser) { %>
+                                                <% friendsList.splice(i, 1); %>
+                                        <%} %>
+                                <% } %>
+                                <% friendsList.forEach(item=>{ %>
+                                        <% var friendRole = '' %>
+                                        <% if (item.role_id === 1){ %>
+                                                <% friendRole = 'teacher' %>
+                                        <% }else if (item.role_id === 2){ %>
+                                                <% friendRole = 'student' %>
+                                        <% }else{ %>
+                                                <% friendRole = 'mentor' %>
+                                        <% } %>
+                                        <li><a href = "/public/<%=friendRole%>/<%= item.username%>"><%=item.fname %> <%=item.lname %></a></li>
+                                <% }) %>
+                                </ul>
                         </div>
                         <div class="student shadow border m-1 mt-2" style="height:20vh">
                                 <div class="bg-maincolor font-white p-3">Mentor</div>
                         </div>
                 </div>
-                <div class="col-8 d-flex flex-column">
-                        <div class="shadow border-custom m-1 mt-2 round-border overflow-hidden">
+                <div class="col-8 d-flex flex-column mt-2">
+                        <div class="shadow m-1 overflow-hidden">
                                 <div class="bg-maincolor font-white p-3">Submit Post</div>
                                 <form id="submitPost" method="POST">
                                         <div class="d-flex justify-content-end m-3">
