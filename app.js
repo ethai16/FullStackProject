@@ -20,6 +20,7 @@ app.use(require('./routes/profile'));
 app.use(require('./routes/dashboard'));
 app.use(require('./routes/chat'));
 app.use(require('./routes/search'));
+app.use(require('./routes/friends'))
 
 
 
