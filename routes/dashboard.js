@@ -32,15 +32,32 @@ router.get('/dashboard', (req,res)=>{
     }
 
     db.users.findAll({where:{teacher_code: req.user.teacher_code}})
-    .then((results)=>{
+    .then((teacherFriends)=>{
+        db.users.findAll({where:{mentor_code: req.user.mentor_code}})
+        .then((mentorFriends)=>{
+            var friendsList = teacherFriends.concat(mentorFriends);
+            var friendUsernames = [];
+            friendsList.forEach((e) =>{
+                console.log(e.username)
+                if (!friendUsernames.includes(e.username) ){
+                    friendUsernames.push(e)
+                };
+            });
+            // var filteredArray = friendsList.filter((item, pos) => {
+            //     return friendsList.username.indexOf(item)== pos; 
+            // });
 
-        res.render('dashboard', {
-            publicProfile: '/'+ masterRole + '/'+ req.user.username,
-            fname: req.user.fname,
-            lname: req.user.lname,
-            friendsList: results,
-            mainUser: req.user.username
+            res.render('dashboard', {
+                publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                fname: req.user.fname,
+                lname: req.user.lname,
+                friendsList: friendUsernames,
+                mainUser: req.user.username,
+                teacher_code: req.user.teacher_code,
+                mentor_code: req.user.mentor_code
+            })
         })
+
     })
 
 })

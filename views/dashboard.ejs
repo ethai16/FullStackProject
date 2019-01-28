@@ -21,26 +21,10 @@
                                                 </div>
                                 </div>
                         </div>
-                        <div class="student shadow border m-1 mt-2" style="height:20vh">
+                        <div class="student shadow border m-1 mt-2">
                                 <div class="bg-maincolor font-white p-3">Friends List</div>
                                 <ul>
-                                
-                                <% for (var i=friendsList.length-1; i>=0; i--) { %>
-                                        <% if (friendsList[i].username === mainUser) { %>
-                                                <% friendsList.splice(i, 1); %>
-                                        <%} %>
-                                <% } %>
-                                <% friendsList.forEach(item=>{ %>
-                                        <% var friendRole = '' %>
-                                        <% if (item.role_id === 1){ %>
-                                                <% friendRole = 'teacher' %>
-                                        <% }else if (item.role_id === 2){ %>
-                                                <% friendRole = 'student' %>
-                                        <% }else{ %>
-                                                <% friendRole = 'mentor' %>
-                                        <% } %>
-                                        <li><a href = "/public/<%=friendRole%>/<%= item.username%>"><%=item.fname %> <%=item.lname %></a></li>
-                                <% }) %>
+                                <% include partials/friendslist.ejs %>
                                 </ul>
                         </div>
                         <div class="student shadow border m-1 mt-2" style="height:20vh">

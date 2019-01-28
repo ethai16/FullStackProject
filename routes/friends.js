@@ -26,31 +26,33 @@ router.get('/public/:role/:username', (req,res)=>{
         res.redirect('/login')
     }
 
-    var masterRole = ""
-    if (req.user.role_id === 1){
-        masterRole = 'teacher'
-    }else if (req.user.role_id === 2){
-        masterRole = 'student' 
-    }else{
-        masterRole = 'mentor'
-    }
 
-    // db.users.findAll({where: {username: username}})
-    // .then((results)=>{
-    //     if (req.user){
-    //         if (req.user.teacher_code === results[0].code) {
-    //             res.render('profile', {
-    //                 publicProfile: '/'+ masterRole + '/'+ req.user.username,
-    //                 fName: results[0].fname,
-    //                 lName: results[0].lname
-    //             })
-    //         }else{
-    //             res.redirect('/login')
-    //         }
-    //     }else{
-    //         res.redirect('/login')
-    //     }
-    // })
+
+    db.users.findAll({where: {username: username}})
+    .then((results)=>{
+        if (req.user){
+            var masterRole = ""
+            if (req.user.role_id === 1){
+                masterRole = 'teacher'
+            }else if (req.user.role_id === 2){
+                masterRole = 'student' 
+            }else{
+                masterRole = 'mentor'
+            }
+            
+            if (req.user.teacher_code === results[0].teacher_code) {
+                res.render('profile', {
+                    publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                    fName: results[0].fname,
+                    lName: results[0].lname
+                })
+            }else{
+                res.redirect('/login')
+            }
+        }else{
+            res.redirect('/login')
+        }
+    })
 })
 
 module.exports = router

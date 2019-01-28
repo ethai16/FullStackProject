@@ -42,13 +42,6 @@ io.on('connection', (socket)=> {
 //     app.listen(3500)
 // })
 
-
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> fa54fa11e3b94483985a1e5fb0f03509838f5196
 http.listen(3000, ()=>{
     console.log('listening on port 3000')
 })

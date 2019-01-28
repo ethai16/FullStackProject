@@ -67,10 +67,7 @@ router.post('/api',(req, res)=>{
                 role_id,school_id,state_code,company_state_code
             })
             .then(results => {
-                res.render('dashboard',{
-                    topMsg:`Welcome, ${results.username}!`,
-                    secondMsg:``
-                })                      
+                res.redirect('login')                      
             })
             .catch(error => {
                 // req.flash("error",`Error Message: ${error}`)
