@@ -43,6 +43,7 @@ router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (re
     // passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login'})
     //used to check role of login user
     console.log(req.user)
+    console.log(req.user.role)
     if(req.user){
         if (req.user.role){
             res.redirect('/dashboard');
@@ -70,7 +71,7 @@ passport.use(new LocalStrategy((username, password, done)=>{
             const data = results[0];
             bcrypt.compare(password, data.password_hash, (err, res)=>{
                 if (res) {
-                    done(null, {id: data.id, username: data.username, role: "mentor"})
+                    done(null, {id: data.id, username: data.username, role: data.role_id})
                 }else{
                     done(null,false)
                 }

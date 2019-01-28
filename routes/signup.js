@@ -26,6 +26,7 @@ router.get('/signup/:roleID',(req,res)=>{
                 raw:true
             })
             .then(results_inds => {
+                console.log(results_schools.length)
                 if (results_states.length>0 && results_schools.length>0 && results_inds.length>0 ){
                     // console.log(results)
                     res.render('signup',{

@@ -31,7 +31,7 @@ router.get('/dashboard', (req,res)=>{
         masterRole = 'mentor'
     }
 
-    db.users.findAll({where:{code: req.user.code}})
+    db.users.findAll({where:{teacher_code: req.user.teacher_code}})
     .then((results)=>{
 
         res.render('dashboard', {
