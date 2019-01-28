@@ -102,7 +102,6 @@ ul {
 .hide{
     display: none;
 }
-<<<<<<< HEAD
 * The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */
@@ -203,16 +202,10 @@ a.forget:hover {
 
 ul {
     list-style-type: none;
-=======
-
-input {
-    outline:none;
 }
-
 @font-face {
     font-family: 'Flama-Medium';
     font-style: normal;
     font-weight: normal;
     src: local('Flama-Medium'), url('Flama-Medium.woff') format('woff');
 }
->>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268

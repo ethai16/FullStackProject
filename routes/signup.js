@@ -2,19 +2,14 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/');
 const Sequelize = require('sequelize');;
-// const LocalStrategy = require('passport-local').Strategy;
-// const passport = require('passport');
-// const bcrypt = require('bcryptjs');
-// const cookieParser = require('cookie-parser');
-// const bodyParser = require('body-parser');
-// const session = require('express-session');
 const crypto = require('crypto');
 
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 router.get('/signup',(req,res)=>{
     res.redirect('/');
 });
+
+// SELECT * FROM states; SELECT * FROM schools; SELECT * FROM industries;
 router.get('/signup/:roleID',(req,res)=>{
     let roleID = req.params.roleID;
     db.states.findAll({
@@ -52,6 +47,15 @@ router.get('/signup/:roleID/:userID',(req,res)=>{
     let roleID = req.params.roleID;
     let userID = req.params.userID;
 
+// SQL for below sequelize     
+//   SELECT username, 
+// 	(select industries from industries where industries.id = users.industry_id1) ind1_name,
+// 	(select industries from industries where industries.id = users.industry_id2) ind2_name,
+// 	(select industries from industries where industries.id = users.industry_id3) ind3_name
+// FROM
+// 	users
+// 	WHERE username = [the username of the user]
+
 
     db.users.findAll({
         raw:true
@@ -70,7 +74,7 @@ router.get('/signup/:roleID/:userID',(req,res)=>{
     }).then(results=>{
         // console.log(results)
         if (results){
-            res.render('profileEdit',{
+            res.render('signupEdit',{
                 data:results[0],
                 topMsg:"Edit Profile".toUpperCase(),
                 secondMsg:''
