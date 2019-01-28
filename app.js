@@ -16,11 +16,15 @@ app.use(require('./routes/login'));
 app.use(require('./routes/logout'));
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
+app.use(require('./routes/profile'));
+app.use(require('./routes/dashboard'));
+app.use(require('./routes/chat'));
+app.use(require('./routes/search'));
 
-app.get('/chat', (req, res)=>{
-    // res.sendFile(__dirname + '/views/index.ejs')
-    res.render('chat')
-});
+
+
+app.use(require('./routes/signup'));
+app.use(require('./routes/api'));
 
 
 
@@ -35,12 +39,14 @@ io.on('connection', (socket)=> {
     });
 });
 
-// http.listen(3000, ()=>{
 
 // need this only when creating database.
-// db.sequelize.sync({force:true}).then(()=>{
+// db.users.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
 // })
+
+
+
 
 http.listen(3000, ()=>{
     console.log('listening on port 3000')

@@ -3,7 +3,7 @@
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: 100; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
     background-color: #111; /* Black*/
@@ -48,6 +48,68 @@
     .sidenav a {font-size: 18px;}
   }
 
+  input.button3{
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:rgb(93, 93, 300);
+    text-align:center;
+    transition: all 0.2s;
+}
+    input.button3:hover{
+    background-color:rgb(93, 93, 189);
+    }
+    @media all and (max-width:30em){
+     input.button3{
+    display:block;
+    margin:0.2em auto;
+    }
+}
+
 a.forget:hover {
     text-decoration: underline;
+}
+
+.bg-maincolor{
+    background-color:rgb(93, 93, 189);
+}
+
+.font-white{
+    color:white;
+}
+
+.round-border{
+    border-radius:10px
+}
+
+.overflow-hidden{
+    overflow:hidden;
+}
+
+.border-custom{
+    border:rgb(93, 93, 189) 1px solid;
+}
+
+ul {
+    list-style-type: none;
+}
+.hide{
+    display: none;
+}
+
+input {
+    outline:none;
+}
+
+@font-face {
+    font-family: 'Flama-Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Flama-Medium'), url('Flama-Medium.woff') format('woff');
 }
