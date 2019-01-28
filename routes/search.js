@@ -20,6 +20,7 @@ router.get('/search', (req,res)=>{
     console.log('searchpage');
     db.industries.findAll()
     .then((results)=>{
+        console.log(results)
         res.render('search',{
             pageTitle: 'Search',
             data: results
