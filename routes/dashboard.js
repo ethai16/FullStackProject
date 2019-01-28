@@ -21,12 +21,28 @@ router.get('/dashboard', (req,res)=>{
     }else{
         res.redirect('/login')
     }
-    console.log(req.user.fname, req.user.lname)
-    res.render('dashboard', {
-        publicProfile: '/'+ role + '/'+ req.user.username,
-        fname: req.user.fname,
-        lname: req.user.lname
+
+    var masterRole = ""
+    if (req.user.role_id === 1){
+        masterRole = 'teacher'
+    }else if (req.user.role_id === 2){
+        masterRole = 'student' 
+    }else{
+        masterRole = 'mentor'
+    }
+
+    db.users.findAll({where:{teacher_code: req.user.teacher_code}})
+    .then((results)=>{
+
+        res.render('dashboard', {
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            fname: req.user.fname,
+            lname: req.user.lname,
+            friendsList: results,
+            mainUser: req.user.username
+        })
     })
+
 })
 
 module.exports = router;

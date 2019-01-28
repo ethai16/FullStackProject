@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey:'company_state_code'
     });
     states.hasMany(models.schools,{
-      as:'company_state',
       onDelete:'CASCADE',
       foreignKey:'state_code'
     });

@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     company_street: DataTypes.STRING,
     company_city: DataTypes.STRING,
     company_telephone: DataTypes.STRING,
-    code: {type:DataTypes.STRING,unique:true}
+    teacher_code: DataTypes.STRING,
+    mentor_code: DataTypes.STRING,
   }, {});
   users.associate = function(models) {
     // associations can be defined here
@@ -39,16 +40,18 @@ module.exports = (sequelize, DataTypes) => {
       onDelete:'CASCADE',
       foreignKey:'mentor_username'
     });
-    users.belongsTo(models.schools,{foreignKey:'school_id'})
-    users.belongsTo(models.roles,{foreignKey:'role_id'})
-    users.belongsTo(models.states,{foreignKey:'state_code'})
-    users.belongsTo(models.states,{as: 'company_state', foreignKey:'company_state_code'})
-    users.belongsTo(models.industries,{foreignKey:'industry_id1'})
-    users.belongsTo(models.industries,{foreignKey:'industry_id2'})
-    users.belongsTo(models.industries,{foreignKey:'industry_id3'})
-    // users.belongsTo(models.matching,{foreignKey:'matching_id1'})
-    // users.belongsTo(models.matching,{foreignKey:'matching_id2'})
-    // users.belongsTo(models.matching,{foreignKey:'matching_id3'})
+    users.hasMany(models.comments,{
+      onDelete:'CASCADE',
+      foreignKey:'username'
+    }); 
+    users.belongsTo(models.schools,{foreignKey:'school_id'});
+    users.belongsTo(models.roles,{foreignKey:'role_id'});
+    users.belongsTo(models.states,{foreignKey:'state_code'});
+    users.belongsTo(models.states,{as: 'company_state', foreignKey:'company_state_code'});
+    users.belongsTo(models.industries,{foreignKey:'industry_id1'});
+    users.belongsTo(models.industries,{foreignKey:'industry_id2'});
+    users.belongsTo(models.industries,{foreignKey:'industry_id3'});
+
   };
   return users;
 };

@@ -19,10 +19,8 @@ app.use(require('./routes/register'));
 app.use(require('./routes/profile'));
 app.use(require('./routes/dashboard'));
 app.use(require('./routes/chat'));
-
-
-
-app.use(require('./routes/signup'));
+app.use(require('./routes/search'));
+app.use(require('./routes/friends'))
 app.use(require('./routes/api'));
 
 
@@ -46,8 +44,11 @@ io.on('connection', (socket)=> {
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> fa54fa11e3b94483985a1e5fb0f03509838f5196
 http.listen(3000, ()=>{
     console.log('listening on port 3000')
 })

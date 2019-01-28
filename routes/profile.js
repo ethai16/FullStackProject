@@ -26,8 +26,19 @@ router.get('/:userRole/:username', (req,res)=>{
 
     if (req.user){
         if (req.user.username === username && roleNum === req.user.role_id) {
+            var masterRole = ""
+            if (req.user.role === 1){
+                masterRole = 'teacher'
+            }else if (req.user.role === 2){
+                masterRole = 'student' 
+            }else{
+                masterRole = 'mentor'
+            }
+
             res.render('profile', {
-                publicProfile: '/'+ role + '/'+ req.user.username
+                publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                fName: req.user.fname,
+                lName: req.user.lname
             })
         }else{
             res.redirect('/login')
