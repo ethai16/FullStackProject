@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background: url(../images/cate2.jpg) no-repeat center center fixed;
+	background-size: contain;
+	background-repeat: none;
+
+}
+.main-section{
+	margin:0 auto;
+	margin-top: 40%;
+	padding:0;
+}
+.modal-content{
+	background-color: #434e5a;
+	opacity: .8;
+	border-radius: 10px;
+    margin-bottom:100%; 
+}
+
+.form-group{
+	padding: 40px;
+}
+
+.search-btn{
+	border-radius: 5px;
+	margin-top: 5%;
+}
+button:hover{
+    background-color: gray;
+}

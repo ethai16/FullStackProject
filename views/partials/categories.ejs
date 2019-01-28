@@ -1,0 +1,6 @@
+<select name="category">
+    <option value="">Choose your Category</option>
+    <% data.forEach(item=>{ %>
+        <option value="<%=item.id %>"><%=item.industries %></option>
+    <% }) %>
+</select> 
