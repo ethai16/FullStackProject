@@ -42,6 +42,7 @@ router.get('/login', (req,res)=>{
 router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (req,res)=>{
     // passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login'})
     //used to check role of login user
+    console.log(req.user)
     console.log(req.user.role)
     if(req.user){
         if (req.user.role){

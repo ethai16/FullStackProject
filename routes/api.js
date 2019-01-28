@@ -84,19 +84,15 @@ router.post('/api',(req, res)=>{
 
 router.delete('/api/delete/:userID',(req,res)=>{
     let userID = req.params.userID;
-
+    console.log(req.params.userID)
     db.users.destroy({
         where: {
             username: {[Sequelize.Op.eq]: userID}
         }
     }).then(results=>{
-        res.render('/message',{
-            topMsg:`${userID} has been deleted successfully.`,
-            secondMsg:`Sad to see you go....`
-        });
-
+        res.render('home');
     }).catch(error=>{
-        res.render('/message',{
+        res.render('message',{
             topMsg:`Error: ${error}`,
             secondMsg:`Please try again.`,
         });

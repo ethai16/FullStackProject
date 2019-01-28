@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-const db = require('./models/')
-const session = require('express-session')
+const db = require('./models/');
+const session = require('express-session');
 const fileUpload = require('express-fileupload');
 
 app.set("view engine", "ejs");
@@ -41,6 +41,8 @@ io.on('connection', (socket)=> {
 // db.users.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
 // })
+
+
 
 http.listen(3000, ()=>{
     console.log('listening on port 3000')
