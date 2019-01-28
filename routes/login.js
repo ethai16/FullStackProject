@@ -24,11 +24,7 @@ router.use(session({
     proxy: true
 }))
 
-<<<<<<< HEAD
-// myStore.sync();
-=======
 myStore.sync();
->>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268
 
 router.use(passport.initialize());
 router.use(passport.session());
