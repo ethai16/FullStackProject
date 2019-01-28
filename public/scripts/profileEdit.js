@@ -1,19 +1,24 @@
-$(document).ready(function () {
+$(function(){
+
     // retrieve role from url path
-    const role = "."+location.pathname.slice(8).toLowerCase();
-    console.log(role)
+    let role = $('#role_id').val();
     $('.student, .teacher, .mentor').hide();
     $(role).show();
-    
+    console.log(role)
     // set req.params.role_id
-    if (role === '.teacher') {
-        $('#role_id').val(1)
-    }else if (role === '.student'){
-        $('#role_id').val(2)}
-    else {
-        $('#role_id').val(3)
+    if (role === "1") {
+        $('.teacher').show()
+    }else if (role === "2"){
+        $('.student').show()
+    }else {
+        $('.mentor').show()
     }
     
+    let gradeval = $('#grade').val()
+    console.log(gradeval)
+    $('.grade').find(`option:contains(${gradeval})`).attr("selected",true);
+
+
     // avator setup
     var readURL = function (input) {
         if (input.files && input.files[0]) {

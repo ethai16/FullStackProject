@@ -7,8 +7,21 @@ label{
 .form-group{
     margin:0;
 }
-.btn{
+.save, .reset{
     font-size: 14px;
     padding:0;
     width:140px
+}
+.pnote{
+    font-size:12px;
+    padding:0;
+    border:none;
+    color:#777;
+    margin: 0;
+}
+.delete{
+    height:30px;
+    font-size:10px!important;
+    border-radius: 10%!important;
+    padding:10px !important;
 }

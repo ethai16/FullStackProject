@@ -44,11 +44,9 @@ module.exports = (sequelize, DataTypes) => {
     users.belongsTo(models.states,{foreignKey:'state_code'})
     users.belongsTo(models.states,{as: 'company_state', foreignKey:'company_state_code'})
     users.belongsTo(models.industries,{foreignKey:'industry_id1'})
-    users.belongsTo(models.industries,{foreignKey:'industry_id2'})
-    users.belongsTo(models.industries,{foreignKey:'industry_id3'})
-    // users.belongsTo(models.matching,{foreignKey:'matching_id1'})
-    // users.belongsTo(models.matching,{foreignKey:'matching_id2'})
-    // users.belongsTo(models.matching,{foreignKey:'matching_id3'})
+    users.belongsTo(models.industries,{as: 'ind2', foreignKey:'industry_id2'})
+    users.belongsTo(models.industries,{as: 'ind3', foreignKey:'industry_id3'})
+
   };
   return users;
 };
