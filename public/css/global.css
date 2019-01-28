@@ -106,3 +106,10 @@ ul {
 input {
     outline:none;
 }
+
+@font-face {
+    font-family: 'Flama-Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Flama-Medium'), url('Flama-Medium.woff') format('woff');
+}

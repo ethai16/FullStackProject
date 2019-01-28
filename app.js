@@ -19,6 +19,8 @@ app.use(require('./routes/register'));
 app.use(require('./routes/profile'));
 app.use(require('./routes/dashboard'));
 app.use(require('./routes/chat'));
+app.use(require('./routes/search'));
+const fileUpload = require('express-fileupload');
 
 
 
