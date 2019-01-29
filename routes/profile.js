@@ -47,5 +47,16 @@ router.get('/:userRole/:username', (req,res)=>{
         res.redirect('/login')
     }
 })
+router.post("/:userRole/:username", (req, res) => {
+    var username = req.user.username;
+    var comment = req.body.post;
+
+    res.status(204).send();
+    db.comments.create({
+        username: username,
+        comment: comment
+    })
+
+})
 
 module.exports = router

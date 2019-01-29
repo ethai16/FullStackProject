@@ -39,14 +39,15 @@ router.get('/public/:role/:username', (req,res)=>{
             }else{
                 masterRole = 'mentor'
             }
-            
-            if (req.user.teacher_code === results[0].teacher_code) {
+
+            if (req.user.teacher_code === results[0].teacher_code || req.user.mentor_code === results[0].mentor_code) {
                 res.render('profile', {
                     publicProfile: '/'+ masterRole + '/'+ req.user.username,
                     fName: results[0].fname,
                     lName: results[0].lname
                 })
             }else{
+                console.log("COME ON MAN!!!!!!!!!")
                 res.redirect('/login')
             }
         }else{

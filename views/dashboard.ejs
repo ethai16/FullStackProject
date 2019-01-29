@@ -45,7 +45,14 @@
                                 </form>
                         </div>
                         <div id="post-box">
-
+                                        <% if (post.length > 0) { %>
+                                        <% for (var i = 0; i < post.length; i ++) { %>
+                                        <div class="shadow border m-1 h-25">
+                                                <div class="bg-maincolor font-white p-3"><%=post[i].fname%><%=post[i].lname%> </div>
+                                                <div><%=post[i].comment%></div>
+                                        </div>
+                                        <% } %>
+                                        <% } %>
                         </div>
 
                 </div>

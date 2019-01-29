@@ -1,6 +1,6 @@
 $(function () {
     $('#submitPost').submit((e) => {
-        e.preventDefault();
+        // e.preventDefault();
         if($("#postfield").val() != "" ){
 
         updateComments();
