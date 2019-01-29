@@ -1,42 +1,79 @@
 $(function () {
-    console.log('WE OUT HERE')
     $('#submitPost').submit((e) => {
         // e.preventDefault();
         if($("#postfield").val() != "" ){
 
         updateComments();
-        console.log("Called updateFeedback");
         setTimeout(()=>{
             $('#postfield').val("")
-            console.log('settime')
         },100)
         }
     })
 
 
-    // $('.feedback-messages').on('click', (e) => {
-    //     if (e.target.className == "glyphicon glyphicon-remove") {
-    //         $.ajax({
-    //             url: 'api/' + e.target.id,
-    //             type: DELETE,
-    //             success: updateFeedback
-    //         })
-    //         console.log("testing")
-    //     }
-    // })
+    $('.postmessages').on('click', (e) => {
+        if (e.target.className.baseVal === "svg-inline--fa fa-times-circle fa-w-16") {
+            var target = e.target
+            let id = target.parentNode.parentNode.parentNode;
+            let commentid = id.lastChild.previousSibling.textContent
+            $.ajax({
+                url: '/api/delete/comment/' + commentid,
+                type: 'DELETE',
+                success: $(e.target).closest('.forDelete').remove()
+            })
+        }
 
+    })
+
+    $('.postmessagesPublic').on('click', (e) => {
+        if (e.target.className.baseVal === "svg-inline--fa fa-times-circle fa-w-16") {
+            var target = e.target
+            let commentprofileid = target.parentNode.parentNode.lastChild.previousSibling.textContent
+            $.ajax({
+                url: '/api/delete/comment/' + commentprofileid,
+                type: 'DELETE',
+                success: $(e.target).closest('.forDelete').remove()
+            })
+        }
+
+    })
     function updateComments() {
         var name = document.getElementById('nameContainer').textContent
 
         $body = $("#postfield").val();
 
+
+        if (!location.pathname.includes('dashboard')){
+            console.log('hello!')
         $("#post-box").prepend(
             `
-            <div class = "shadow border m-1 h-25">
-                <div class = "bg-maincolor font-white p-3">${name}</div>
-                <div>${$body}</div>
+            <div class = "forDelete">
+            <div class = "border m-1 h-25 postmessagesPublic">
+                <div class = "p-3 font-weight-bold d-flex justify-content-between">
+                    <div>${name}</div>
+                    <div class = "x-button"><i class="fas fa-times-circle"></i></div>
+                </div>
+                <div class = "container-fluid">${$body}</div>
+            </div>
             </div>
             `
         );
+        }else{
+            var rolename = document.getElementById('roleReference').textContent.toLowerCase()
+            var username = document.getElementById('usernameReference').textContent
+            console.log('in dashboard')
+            $("#post-box").prepend(
+                `
+                <div class = "forDelete">
+                <div class = "border m-1 h-25 postmessages">
+                    <div class = "p-3 font-weight-bold d-flex justify-content-between">
+                        <a href = "/${rolename}/${username}">${name}</a>
+                        <div class = "x-button"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                    <div class = "container-fluid">${$body}</div>
+                </div>
+                </div>
+                `
+            )}
     }
 });

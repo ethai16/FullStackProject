@@ -54,6 +54,7 @@ router.get('/public/:role/:username', (req,res)=>{
                     fName: results[0].fname,
                     lName: results[0].lname,
                     mainUser: req.user.username,
+                    mainUserName:req.user.fname,
                     post: results_2[0]
                 })
             })

@@ -99,6 +99,22 @@ router.delete('/api/delete/:userID',(req,res)=>{
     })
 })
 
+router.delete('/api/delete/comment/:commentId',(req,res)=>{
+    let id = req.params.commentId;
+    db.comments.destroy({
+        where: {
+            id: id
+        }
+    }).then(results=>{
+        res.status(204).send();
+    }).catch(error=>{
+        res.render('message',{
+            topMsg:`Error: ${error}`,
+            secondMsg:`Please try again.`,
+        });
+    })
+})
+
 
 
 router.put('/api/edit/:userID',(req,res)=>{

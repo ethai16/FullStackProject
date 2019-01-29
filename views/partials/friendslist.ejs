@@ -13,7 +13,9 @@
             <% }else{ %>
                     <% friendRole = 'mentor' %>
             <% } %>
+            <% if (friendRole === 'student'){ %>
             <li><a href = "/public/<%=friendRole%>/<%= item.username%>"><%=item.fname %> <%=item.lname %></a></li>
+            <%}%>
     <% }) %>
     <%} else {%>
             <% console.log('nothing')%>
