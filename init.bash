@@ -10,7 +10,4 @@ sequelize model:generate --name matchings --attributes code:integer,active:boole
 
 sequelize model:generate --name industries --attributes industries:string
 sequelize model:generate --name states --attributes state:string
-<<<<<<< HEAD
 sequelize model:generate --name comments --attributes comment:string
-=======
->>>>>>> 718739f0f6bcbb36646a45aac61e4a294a92b268

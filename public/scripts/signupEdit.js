@@ -12,6 +12,12 @@ $(function(){
     }else {
         $('.mentor').show()
     }
+
+    const deleted = ()=>{
+        $('#wantDlt').modal('toggle');
+        $('#dltComp').modal('toggle');
+    };
+
     
     // let gradeval = $('#grade').val()
     // console.log(gradeval)
@@ -46,49 +52,21 @@ $(function(){
    // submit
     $('#submit').on('click'), e=>{
         e.preventDefault();
-
-        // if user name is null flash
-
-        // if password is not equal to verify password flash
-        // const username 
-        
         // $.post('api/',{
-        //     data},
-    
-        //         console.log(data)
-        // );
+        //     data});
     }
 
     // delete
     $("#delete").on("click", e => {
-        let doit = false;
-        $( "#dialog-confirm" ).dialog({
-            resizable: false,
-            height: "auto",
-            width: 400,
-            modal: true,
-            buttons: {
-              "Yes, please delete.": function() {
-                $( this ).dialog( "close" );
-                doit = true;
-              },
-              Cancel: function() {
-                $( this ).dialog( "close" );
-              }
-            }
-          });
-
-            if (doit) {
-            $.ajax({
-                url: '/api/delete/'+id,
-                type: 'DELETE',
-                success: ''
-            });
-        }
+        let id = $('#username').val();    
+        $.ajax({
+            url: '/api/delete/'+id,
+            type: 'DELETE',
+            success: deleted()
+        });
+            
         e.stopPropagation();
-    }); // end of feedback
-
-
+    }); // end of delete
 });
 $(window).on("popstate", function() {
     var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");

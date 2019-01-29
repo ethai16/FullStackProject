@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-const db = require('./models/')
-const session = require('express-session')
+const db = require('./models/');
+const session = require('express-session');
 const fileUpload = require('express-fileupload');
 
 app.set("view engine", "ejs");
@@ -44,11 +44,6 @@ io.on('connection', (socket)=> {
 
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> fa54fa11e3b94483985a1e5fb0f03509838f5196
 http.listen(3000, ()=>{
     console.log('listening on port 3000')
 })

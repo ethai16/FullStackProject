@@ -8,6 +8,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+    dialect: 'postgres'
+});
 
 router.get('/public/:role/:username', (req,res)=>{
 
@@ -26,31 +30,44 @@ router.get('/public/:role/:username', (req,res)=>{
         res.redirect('/login')
     }
 
-    var masterRole = ""
-    if (req.user.role_id === 1){
-        masterRole = 'teacher'
-    }else if (req.user.role_id === 2){
-        masterRole = 'student' 
-    }else{
-        masterRole = 'mentor'
-    }
 
-    // db.users.findAll({where: {username: username}})
-    // .then((results)=>{
-    //     if (req.user){
-    //         if (req.user.teacher_code === results[0].code) {
-    //             res.render('profile', {
-    //                 publicProfile: '/'+ masterRole + '/'+ req.user.username,
-    //                 fName: results[0].fname,
-    //                 lName: results[0].lname
-    //             })
-    //         }else{
-    //             res.redirect('/login')
-    //         }
-    //     }else{
-    //         res.redirect('/login')
-    //     }
-    // })
+
+    db.users.findAll({where: {username: username}})
+    .then((results)=>{
+        if (req.user){
+            var masterRole = ""
+            if (req.user.role_id === 1){
+                masterRole = 'teacher'
+            }else if (req.user.role_id === 2){
+                masterRole = 'student' 
+            }else{
+                masterRole = 'mentor'
+            }
+
+            if (req.user.teacher_code === results[0].teacher_code || req.user.mentor_code === results[0].mentor_code) {
+                sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
+                .then((results_2)=>{
+                    
+                    
+                res.render('profile', {
+                    publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                    fName: results[0].fname,
+                    lName: results[0].lname,
+                    mainUser: req.user.username,
+                    mainUserName:req.user.fname,
+                    post: results_2[0]
+                })
+            })
+                
+
+            }else{
+                console.log("COME ON MAN!!!!!!!!!")
+                res.redirect('/login')
+            }
+        }else{
+            res.redirect('/login')
+        }
+    })
 })
 
 module.exports = router
