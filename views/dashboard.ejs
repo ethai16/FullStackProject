@@ -74,10 +74,10 @@
                                                         <% commentlinkrole = "mentor"; %>
                                                 <% } %>
                                                 <%if (post[i].username != mainUser){%>
-                                                        <div class="p-3 font-weight-bold"><a href= "/public/<%= commentlinkrole%>/<%= post[i].username%>"><%=post[i].fname%><%=post[i].lname%></a></div>
+                                                        <div class="p-3 font-weight-bold"><a href= "/public/<%= commentlinkrole%>/<%= post[i].username%>"><%=post[i].fname%> <%=post[i].lname%></a></div>
                                                 <%}else{%>
                                                         <div class="p-3 font-weight-bold d-flex justify-content-between">
-                                                                <a class = "userComments" href= "/<%= commentlinkrole%>/<%= post[i].username%>"><%=post[i].fname%><%=post[i].lname%></a>
+                                                                <a class = "userComments" href= "/<%= commentlinkrole%>/<%= post[i].username%>"><%=post[i].fname%> <%=post[i].lname%></a>
                                                                 <div class = "x-button"><i class="fas fa-times-circle"></i></div>
                                                         </div>
 
