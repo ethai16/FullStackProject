@@ -1,4 +1,5 @@
 $(function () {
+    console.log('WE OUT HERE')
     $('#submitPost').submit((e) => {
         // e.preventDefault();
         if($("#postfield").val() != "" ){
@@ -25,13 +26,14 @@ $(function () {
     // })
 
     function updateComments() {
+        var name = document.getElementById('nameContainer').textContent
 
         $body = $("#postfield").val();
 
         $("#post-box").prepend(
             `
             <div class = "shadow border m-1 h-25">
-                <div class = "bg-maincolor font-white p-3">Student Name</div>
+                <div class = "bg-maincolor font-white p-3">${name}</div>
                 <div>${$body}</div>
             </div>
             `

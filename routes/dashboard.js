@@ -44,15 +44,10 @@ router.get('/dashboard', (req,res)=>{
         ]
     }})
     .then((results_1)=>{
-        sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username")
+        if((req.user.teacher_code && req.user.mentor_code)|| (!req.user.teacher_code && req.user.mentor_code)||(req.user.teacher_code && !req.user.mentor_code)){
+        sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.teacher_code = '" + req.user.teacher_code + "' OR users.mentor_code = '" + req.user.mentor_code + "' " )
         .then((results_2)=>{
-            
-            console.log(results_2[0])
-
-        // console.log(results_2[0].comments[0].comment + '1')
-        // console.log(results_2[0].comments[1].comment + '2')
-        // console.log(results_2[1].comments[0].comment + '3')
-        // console.log(results_2[0].comments[2].comment + '4')
+        console.log(results_1)
         res.render('dashboard', {
             publicProfile: '/'+ masterRole + '/'+ req.user.username,
             fname: req.user.fname,
@@ -64,6 +59,19 @@ router.get('/dashboard', (req,res)=>{
             post: results_2[0]
         })
     })
+    }else{
+        var empty = []
+        res.render('dashboard', {
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            fname: req.user.fname,
+            lname: req.user.lname,
+            friendsList: results_1,
+            mainUser: req.user.username,
+            teacher_code: req.user.teacher_code,
+            mentor_code: req.user.mentor_code,
+            post: empty
+        })
+    }
 
     })
 

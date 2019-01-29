@@ -8,6 +8,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+    dialect: 'postgres'
+});
 
 router.get('/public/:role/:username', (req,res)=>{
 
@@ -41,11 +45,20 @@ router.get('/public/:role/:username', (req,res)=>{
             }
 
             if (req.user.teacher_code === results[0].teacher_code || req.user.mentor_code === results[0].mentor_code) {
+                sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
+                .then((results_2)=>{
+                    
+                    
                 res.render('profile', {
                     publicProfile: '/'+ masterRole + '/'+ req.user.username,
                     fName: results[0].fname,
-                    lName: results[0].lname
+                    lName: results[0].lname,
+                    mainUser: req.user.username,
+                    post: results_2[0]
                 })
+            })
+                
+
             }else{
                 console.log("COME ON MAN!!!!!!!!!")
                 res.redirect('/login')

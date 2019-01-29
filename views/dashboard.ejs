@@ -17,7 +17,7 @@
                                                         style="width:25vh; height:25vh; border-radius:50%;border:white 7px solid"></div>
                                                 <div class="d-flex flex-column justify-content-end pl-3" style="color:white"></div>
                                         </div>
-                                        <div class="d-flex justify-content-center align-items-center p-2"><%=fname%> <%=lname%>
+                                        <div id = "nameContainer" class="d-flex justify-content-center align-items-center p-2"><%=fname%> <%=lname%>
                                                 </div>
                                 </div>
                         </div>
@@ -46,7 +46,7 @@
                         </div>
                         <div id="post-box">
                                         <% if (post.length > 0) { %>
-                                        <% for (var i = 0; i < post.length; i ++) { %>
+                                        <% for (var i = post.length -1; i >= 0; i--) { %>
                                         <div class="shadow border m-1 h-25">
                                                 <div class="bg-maincolor font-white p-3"><%=post[i].fname%><%=post[i].lname%> </div>
                                                 <div><%=post[i].comment%></div>
