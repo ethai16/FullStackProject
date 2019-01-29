@@ -38,7 +38,7 @@ router.get('/signup/:roleID',(req,res)=>{
                         topMsg:"New Profile".toUpperCase()
                     });
                 } else{
-                    res.send('error');        // if error, go back to all cards
+                    res.render('message',{topMsg:`Error: ${error}`,secondMsg:`Please Try Again`});        // if error, go back to all cards
                 }   
             })
         }) 
@@ -58,6 +58,36 @@ router.get('/signup/:roleID/:userID',(req,res)=>{
 // 	WHERE username = [the username of the user]
 
 
+    // db.users.findAll({
+    //     raw:true
+    //     ,attributes: {
+    //         include: [
+    //             [db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id1")'), 'ind1_name']
+    //             ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id2")'), 'ind2_name']
+    //             ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id3")'), 'ind3_name']  
+    //     ]}
+    //     ,include:[
+    //         {model:db.schools}
+    //     ]
+    //     ,where: {
+    //         username: {[Sequelize.Op.eq]: userID}
+    //     }
+    // }).then(results=>{
+    //     if (results.length > 0){
+    //         res.render('signupEdit',{
+    //             data:results[0],
+    //             topMsg:"Edit Profile".toUpperCase(),
+    //             secondMsg:''
+    //         });
+    //     } else{
+    //         res.render('message',{topMsg:`Error: Please double check username`,secondMsg:`${error}`});        // if error, go back to all cards
+    //     }   
+    // }).catch(error=>{
+    //     res.render('message',{
+    //         topMsg:`Error: ${error}`,
+    //         secondMsg:'Please try again'});
+    // });
+
     db.users.findAll({
         raw:true
         ,attributes: {
@@ -72,22 +102,44 @@ router.get('/signup/:roleID/:userID',(req,res)=>{
         ,where: {
             username: {[Sequelize.Op.eq]: userID}
         }
-    }).then(results=>{
-        // console.log(results)
-        if (results){
-            res.render('signupEdit',{
-                data:results[0],
-                topMsg:"Edit Profile".toUpperCase(),
-                secondMsg:''
-            });
-        } else{
-            res.render('message',{topMsg:`Error: ${error}`,secondMsg:''});        // if error, go back to all cards
-        }   
+    }).then(results_user =>{
+        db.states.findAll({
+        raw:true,
+        attributes: ['state'],
+        order: [['state']]
+        })
+        .then(results_states=>{
+            db.schools.findAll({
+                raw:true
+            })
+            .then(results_schools =>{
+                db.industries.findAll({
+                    raw:true
+                })
+                .then(results_inds => {
+                    console.log(results_user.length)
+                    if (results_user.length>0 && results_states.length>0 && results_schools.length>0 && results_inds.length>0 ){
+                        // console.log(results)
+                        res.render('signupEdit',{
+                            states: results_states,
+                            schools:results_schools,
+                            industries:results_inds,
+                            data:results_user[0],
+                            topMsg:"Edit Profile".toUpperCase(),
+                            secondMsg:''
+                        });
+                    } else{
+                        res.render('message',{topMsg:`Error: Please double check username`,secondMsg:`Please Try Again`});        // if error, go back to all cards
+                    }   
+                })
+            }) 
+        })
     }).catch(error=>{
         res.render('message',{
             topMsg:`Error: ${error}`,
             secondMsg:'Please try again'});
     })
-})
+
+});
 
 module.exports = router;

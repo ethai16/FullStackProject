@@ -47,17 +47,12 @@
                         <input type="file" name="image_url" class="text-center mx-auto file-upload" accept="image/*">
                     </div>
                     <!-- Button trigger modal -->
-                    <div class="card m-3" style="max-width: 18rem;">
-                        <div class="card-header"></div>
-                        <div class="card-body">
-                            <a href="/dashboard">Dashboard</a>
-                            <p>
-                                <a name='delete'data-toggle="modal" data-target="#wantDlt">
-                                Delete profile
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+                    <ul class="mt-5 ist-group" style='max-width:13rem'>
+                        <li class="list-group-item"><a href="/dashboard">Dashboard</a></li>
+                        <li class="list-group-item"><a href="/">Home</a></li>
+                        <li class="list-group-item"><a class='adelete' name='delete' data-toggle="modal" data-target="#wantDlt">Delete profile</a></li>
+
+                    </ul>
                     <div class="modal fade" id="wantDlt" tabindex="-1" role="dialog" aria-labelledby="wantDltLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -81,22 +76,20 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="dltCompLabel">Deleted Successfully</h5>
+                                <h5 class="modal-title" id="dltCompLabel">Success</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Please Login from Home Page.
+                                Your information has been deleted successfully.
                             </div>
                             <div class="modal-footer">
                                 <a type="btn btn-success" href='/' class="btn btn-secondary">Close</a>
                             </div>
                             </div>
                         </div>
-                        </div>
-
-
+                    </div>
                 </div>
                 <!--/col-3 end-->
                 <div class="col-12 col-lg-9">
@@ -176,10 +169,13 @@
                                 <label for='state_code'>
                                     <h5>State</h5>
                                 </label>
-                                <select class="form-control" name='state_code'>
-                                    <option name='state_code' value='<%=data.state_code%>'>
-                                            <%=data.state_code%>
+                                <div id='state_code_div' name='<%=data.state_code%>'></div>
+                                <select class="form-control" name='state_code' id='state_code' value='<%=data.state_code%>'>
+                                    <% states.forEach(ele=>{%>
+                                    <option name='state_code' value='<%=ele.state%>'>
+                                        <%=ele.state%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
                             <div class="col-sm-4">
@@ -222,17 +218,14 @@
                                 <label for='school'>
                                     <h5>School Name</h5>
                                 </label>
+                                <div id='teacher_school_div' name='<%=data.school_id%>''></div>
                                 <select class="form-control" name='teacher_school'>
-                                    <option name='teacher_school' value='<%=data.school_id%>'>
-                                            <%=data['school.name']%>
-                                    </option>
+                                    <% schools.forEach(ele=>{%>
+                                        <option name='teacher_school' value='<%=ele.id%>'>
+                                            <%=ele.name%>
+                                        </option>
+                                        <%});%>
                                 </select>
-                            </div>
-                            <div class="col-sm-3 teacher_code hide">
-                                <label for='teacher_code'>
-                                    <h5>Teacher Code:show only at edit </h5>
-                                </label>
-                                <input class="form-control" name='teacher_code' value ='<%=data.code%>' readonly>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -240,10 +233,13 @@
                                 <label for='teacher_industry'>
                                     <h5> Industry </h5>
                                 </label>
+                                <div id='teacher_industry_div'name='<%=data.industry_id1%>'></div>
                                 <select class="form-control" name='teacher_industry'>
-                                    <option name='teacher_industry'value='<%=data.industry_id1%>'>
-                                            <%=data.ind1_name%>
+                                <% industries.forEach(ele=>{%>
+                                    <option name='teacher_industry' value='<%=ele.id%>'>
+                                        <%=ele.industries%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
                         </div>
@@ -273,24 +269,26 @@
                                 <label for='student_school'>
                                     <h5>School Name</h5>
                                 </label>
+                                <div id='student_school_div' name='<%=data.school_id%>'></div>
                                 <select class="form-control" name='student_school'>
-                                    <option name='student_school' value='<%=data.school_id%>'>
-                                            <%=data['school.name']%>
+                                    <% industries.forEach(ele=>{%>
+                                    <option name='student_school' value='<%=ele.id%>'>
+                                        <%=ele.industries%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
                             <div class="col-sm-3">
-                                <label id ='grade' for='grade' value='<%=data.grade%>'>
+                                <label id ='grade' for='grade'>
                                     <h5>Grade</h5>
                                 </label>
-                                <input class="form-control" name='grade' value ='<%=data.grade%>' readonly>
-                                <!-- <select class="form-control" name='grade'>
+                                <div id='grade_div' name='<%=data.grade%>'></div>
+                                <select class="form-control" name='grade'>
                                     <option class='grade' name='student-grade' value="freshman">Freshman</option>
                                     <option class='grade' name='student-grade' value="sophomore">Sophomore</option>
                                     <option class='grade'  name='student-grade' value="junior">Junior</option>
                                     <option class='grade'  name='student-grade' value="senior">Senior</option>
-
-                                </select> -->
+                                </select>
                             </div>
                         </div>
                         <h4 class="mt-5">Which industries are you interested in?</h4>
@@ -299,30 +297,39 @@
                                 <label for='student_industries1'>
                                     <h5> First Choice </h5>
                                 </label>
+                                <div id='student_industries1_div' name='<%=data.industry_id1%>'></div>
                                 <select class="form-control" name='student_industries1'>
-                                    <option name='student_industries1'value='<%=data.industry_id1%>'>
-                                            <%=data.ind1_name%>
+                                    <% industries.forEach(ele=>{%>
+                                    <option name='student_industries1' value='<%=ele.id%>'>
+                                        <%=ele.industries%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <label for='student_industries2'>
                                     <h5>Second Choice </h5>
                                 </label>
+                                <div id='student_industries2_div' name='<%=data.industry_id2%>'></div>
                                 <select class="form-control" name='student_industries2'>
-                                    <option name='student_industries2'value='<%=data.industry_id2%>'>
-                                            <%=data.ind2_name%>
+                                    <% industries.forEach(ele=>{%>
+                                    <option name='student_industries2' value='<%=ele.id%>'>
+                                        <%=ele.industries%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <label for='student_industries3'>
                                     <h5>Third Choice </h5>
                                 </label>
+                                <div id='student_industries3_div' name='<%=data.industry_id3%>'></div>
                                 <select class="form-control" name='student_industries3'>
-                                    <option name='student_industries3'value='<%=data.industry_id3%>'>
-                                            <%=data.ind3_name%>
+                                    <% industries.forEach(ele=>{%>
+                                    <option name='student_industries3' value='<%=ele.id%>'>
+                                        <%=ele.industries%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
                         </div>
@@ -376,10 +383,13 @@
                                 <label for='state'>
                                     <h5>State</h5>
                                 </label>
+                                <div id='company_state_code_div' name='<%=data.company_state_code%>'></div>
                                 <select class="form-control" name='company_state'>
-                                    <option name='company_state'value='<%=data.company_state_code%>'>
-                                            <%=data.company_state_code%>
+                                    <% states.forEach(ele=>{%>
+                                    <option name='company_state' value="<%=ele.state%>">
+                                        <%=ele.state%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
                             <div class="col-sm-4">
@@ -399,24 +409,30 @@
                         </div>
                         <h4 class="mt-5">Which industries best describe your company / job?</h4>
                         <div class="row form-group">
-                            <div class="col-sm-4">
+                            <div class="col-sm-5">
                                 <label for='company_industries1'>
                                     <h5> First Choice </h5>
                                 </label>
+                                <div id='company_industries1_div' name='<%=data.industry_id1%>'></div>
                                 <select class="form-control" name='company_industries1'>
-                                    <option name='company_industries1'value='<%=data.industry_id1%>'>
-                                            <%=data.ind1_name%>
+                                    <% industries.forEach(ele=>{%>
+                                    <option name='company_industries1' value='<%=ele.id%>'>
+                                        <%=ele.industries%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-5">
                                 <label for='company_industries2'>
                                     <h5>Second Choice </h5>
                                 </label>
+                                <div id='company_industries2_div' name='<%=data.industry_id2%>'></div>
                                 <select class="form-control" name='company_industries2'>
-                                    <option name='company_industries2'value='<%=data.industry_id2%>'>
-                                            <%=data.ind2_name%>
+                                    <% industries.forEach(ele=>{%>
+                                    <option name='company_industries2' value='<%=ele.id%>'>
+                                        <%=ele.industries%>
                                     </option>
+                                    <%});%>
                                 </select>
                             </div>
                         </div>
@@ -425,10 +441,10 @@
                     <hr>
                     <div class="row form-group">
                         <div class="col-sm-12 p-0 mt-3">
-                            <button class="btn save btn-success" type='submit' id="submit"><i class="fas fa-check"></i>
-                                Save</button>
+                            <button class="btn save btn-primary" type='submit' id="update"><i class="fas fa-check"></i>
+                                Update</button>
                             <button class="btn reset btn-light" type="reset"><i class="m-1 fas fa-undo"></i>Reset</button>
-
+                            <a class="btn reset btn-light" href='/' ></i>Cancel</a>
                         </div>
                     </div>
                 </div>
@@ -436,6 +452,25 @@
             </div>
             <!-- div row end -->
         </form>
+        <div class="modal fade" id="updComp" tabindex="-1" role="dialog" aria-labelledby="updCompLbl" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updCompLabel">Updated Successfully</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Your information has been updated successfully. 
+                    </div>
+                    <div class="modal-footer">
+                        <a type="btn btn-success" href='/dashboard' class="btn btn-secondary">Close</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
         <!-- form end -->
     </div>
     <!--/CONTAINER END -->
