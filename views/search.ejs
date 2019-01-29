@@ -11,11 +11,11 @@
         <div class ="col-sm-9 main-section">
             <div class="modal-content">
                 <div class="col-12 form-input">
-                    <form method="POST">
+                    <form method="GET" action="cards">
                         <div class="form-group">
                             <% include partials/categories.ejs %>
                             <!-- <input type="text" class="form-control" placeholder="Seach category" name="category"> -->
-                            <button type="submit" class="search-btn">search</button> 
+                            <button type="submit" class="search-btn" value="<%=item.industries %>" >search</button> 
                         </div>
                     </form>
                 </div>

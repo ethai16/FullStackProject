@@ -2,7 +2,7 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	background: url(../images/cate2.jpg) no-repeat center center fixed;
+	background: url(../images/cate.jpg) no-repeat center center fixed;
 	background-size: contain;
 	background-repeat: none;
 
@@ -28,5 +28,5 @@ body {
 	margin-top: 5%;
 }
 button:hover{
-    background-color: gray;
+    background-color: rgb(101, 10, 247);
 }
