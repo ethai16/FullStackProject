@@ -17,49 +17,59 @@ router.use(bodyParser.urlencoded({extended: false}));
 //     db: db.sequelize
 // })
 
-// router.get('/cards', (req,res)=>{
-//     let ID = req.params.categoryID;
-//     // console.log('test', req.query);
-//     if(req.query.category==1){
-//         res.render('cards',{
-//             pageTitle: 'Cars'
-//         });
-//     } else {
-//         res.render('cards2',{
-//             pageTitle: 'その他'
-//         });       
-//     }
-// });
+router.get('/cards', (req,res)=>{
+    if(req.query.category==11){
+        res.render('Designcards',{
+            pageTitle: 'Design'
+        });
+    } else if(req.query.category==9) {
+        res.render('Consultantcards',{
+            pageTitle: 'Consultant'
+        });       
+    } else if(req.query.category==14) {
+        res.render('Engineercards',{
+            pageTitle: 'Engineer'
+        });
+    } else if(req.query.category==39) {
+        res.render('Sciencecards',{
+            pageTitle: 'Science'
+        });
+    } else {
+        res.render('cards',{
+            pageTitle: 'Cards'
+        });       
+    }
+});
 
 
 // ==== Each Cards Can check with number and name ====
-router.get('/cards/:cardsID',(req, res)=>{
+// router.get('/cards/:cardsID',(req, res)=>{
 
-    let cardsID = req.params.cardsID;
+//     let cardsID = req.params.cardsID;
  
-    //error handling
-    if (!parseInt(cardsID)) res.send('cards','URL Error: Please type in proper cards number.');
+//     //error handling
+//     if (!parseInt(cardsID)) res.send('cards','URL Error: Please type in proper cards number.');
  
-    db.users.findAll({
-        include: [
-            { model:db.industries, required:true
-        }]
-        ,where: {
-            id: {[Sequelize.Op.eq]: cardsID}, // category
-            role_id:{[Sequelize.Op.eq]: 3} // mentor
-          }
-    }).then(results => {
-        if (results.length>0){
-            res.render('cards',{
-                cards: results,
-                bodyClass:"cards",
-                param:false,
-                pageID: results[0].name.toUpperCase()
-            });
-        } else{
-            res.redirect('/cards');        // if error, go back to all cards
-        }
-    });
- });
+//     db.users.findAll({
+//         include: [
+//             { model:db.industries, required:true
+//         }]
+//         ,where: {
+//             id: {[Sequelize.Op.eq]: cardsID}, // category
+//             role_id:{[Sequelize.Op.eq]: 3} // mentor
+//           }
+//     }).then(results => {
+//         if (results.length>0){
+//             res.render('cards',{
+//                 cards: results,
+//                 bodyClass:"cards",
+//                 param:false,
+//                 pageID: results[0].name.toUpperCase()
+//             });
+//         } else{
+//             res.redirect('/cards');        // if error, go back to all cards
+//         }
+//     });
+//  });
 
 module.exports = router;

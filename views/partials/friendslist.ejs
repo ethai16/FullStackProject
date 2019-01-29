@@ -1,0 +1,20 @@
+<% if (teacher_code || mentor_code) { %>
+    <% for (var i=friendsList.length-1; i>=0; i--) { %>
+            <% if (friendsList[i].username === mainUser) { %>
+                    <% friendsList.splice(i, 1); %>
+            <%} %>
+    <% } %>
+    <% friendsList.forEach(item=>{ %>
+            <% var friendRole = '' %>
+            <% if (item.role_id === 1){ %>
+                    <% friendRole = 'teacher' %>
+            <% }else if (item.role_id === 2){ %>
+                    <% friendRole = 'student' %>
+            <% }else{ %>
+                    <% friendRole = 'mentor' %>
+            <% } %>
+            <li><a href = "/public/<%=friendRole%>/<%= item.username%>"><%=item.fname %> <%=item.lname %></a></li>
+    <% }) %>
+    <%} else {%>
+            <% console.log('nothing')%>
+    <%}%>

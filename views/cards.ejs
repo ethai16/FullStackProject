@@ -6,7 +6,7 @@
 </head>
 <body>
     <% include partials/navbar.ejs %>
-    <h1><%= pageTitle %></h1>
+    <!-- <h1><%= pageTitle %></h1> -->
     <div class="card-container">
         <section class="card">
             <img class="card-img" src="../images/consultant.jpg" alt="">
@@ -58,6 +58,10 @@
         </section>
     </div>
 
+    <form method="GET" action="search">
+        <a href="search">back</a>
+        <!-- <button type="submit" class="back-btn" >back</button> -->
+    </form>
 
     <% include partials/footer.ejs %>
     <% include partials/jsdefaults.ejs %>

@@ -1,75 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <% include partials/head.ejs %>
+        <% include partials/head.ejs %>
 </head>
+
 <body>
-    <% include partials/navbar.ejs %>
-    <main class = "container-fluid d-flex">
-        <div class = "col-3 d-flex flex-column" style = "height:92vh">
-            <div class = "border m-1 mt-2 h-25">
-                <div class = "bg-maincolor font-white p-3">Mentor</div>
-            </div>
-            <div class = "border m-1 h-25">
-                <div class = "bg-maincolor font-white p-3">Extracurricular</div>
-            </div>
-            <div class = "border m-1 flex-grow-1">
-                <div class = "bg-maincolor font-white p-3">Enrolled Classes</div>
-            </div>
-        </div>
-        <div class = "col-6 d-flex flex-column" style = "height:92vh">
-                <div class = "border-custom m-1 mt-2 round-border overflow-hidden">
-                        <div class = "bg-maincolor font-white p-3">Submit Post</div>
-                        <form  method = "POST"> 
-                            <div class = "d-flex justify-content-end m-3">
-                                <textarea type="text" placeholder="Enter your message and click submit" class="form-control col-10" name="post"
-                                rows="3"></textarea>
-                            </div>
-                            <div class = "d-flex justify-content-end m-3">                         
-                                <input class = "button3" type="submit">
-                            </div> 
-                        </form>
+        <% include partials/navbarAfterAuth.ejs %>
+        <main class="container-fluid d-flex">
+                <div class="col-4 d-flex flex-column mt-2" style="min-height:92vh">
+                        <div class="container-fluid p-1 mb-2" style="height:40vh; min-height: 270px">
+                                <div class="shadow border">
+                                        <div class="bg-maincolor h-75 d-flex pl-3 d-flex justify-content-center align-items-center"
+                                                style="padding-top:8vh">
+                                                <div class="bg-light d-flex justify-content-center align-items-center pt-3"
+                                                        style="width:25vh; height:25vh; border-radius:50%;border:white 7px solid"></div>
+                                                <div class="d-flex flex-column justify-content-end pl-3" style="color:white"></div>
+                                        </div>
+                                        <div id = "nameContainer" class="d-flex justify-content-center align-items-center p-2"><%=fname%> <%=lname%>
+                                                </div>
+                                </div>
+                        </div>
+                        <div class="student shadow border m-1 mt-2">
+                                <div class="bg-maincolor font-white p-3">Friends List</div>
+                                <ul>
+                                <% include partials/friendslist.ejs %>
+                                </ul>
+                        </div>
+                        <div class="student shadow border m-1 mt-2" style="height:20vh">
+                                <div class="bg-maincolor font-white p-3">Mentor</div>
+                        </div>
                 </div>
-        </div>
-        <div class = "col-3 d-flex flex-column" style = " min-width:200px">
-                <div class = "shadow d-flex flex-column border-custom m-1  order-2 round-border overflow-hidden " style = "height:35vh; width:30vh;min-width:300px; min-height:250px; position:relative">
-                        <div class = "bg-maincolor font-white p-3 d-flex justify-content-end">Intro</div>
-                        <ul class = "d-flex flex-column justify-content-between h-50 p-0 ml-1 mt-1">
-                            <li class = "font-weight-bold">
-                                Grade:
-                            </li>
-                            <li class = "font-weight-bold">
-                                School:
-                            </li>
-                            <li class = "font-weight-bold">
-                                Industry of Interest: 
-                            </li>
-                        </ul>
+                <div class="col-8 d-flex flex-column mt-2">
+                        <div class="shadow m-1 overflow-hidden">
+                                <div class="bg-maincolor font-white p-3">Submit Post</div>
+                                <form id="submitPost" method="POST">
+                                        <div class="d-flex justify-content-end m-3">
+                                                <textarea id="postfield" type="text" placeholder="Enter your message and click submit"
+                                                        class="form-control col-10" name="post" rows="3"></textarea>
+                                        </div>
+                                        <div class="d-flex justify-content-end m-3">
+                                                <input class="button3" type="submit">
+                                        </div>
+                                </form>
+                        </div>
+                        <div id="post-box">
+                                        <% if (post.length > 0) { %>
+                                        <% for (var i = post.length -1; i >= 0; i--) { %>
+                                        <div class="shadow border m-1 h-25">
+                                                <div class="bg-maincolor font-white p-3"><%=post[i].fname%><%=post[i].lname%> </div>
+                                                <div><%=post[i].comment%></div>
+                                        </div>
+                                        <% } %>
+                                        <% } %>
+                        </div>
+
                 </div>
-                    <div class = "shadow d-flex flex-column border-custom m-1 order-3 round-border overflow-hidden" style = "height:20vh; width:30vh;min-width:300px; min-height:200px; position:relative">
-                        
-                    </div>
-                    <div class = "shadow d-flex flex-column border-custom m-1 mt-2 order-1 round-border overflow-hidden" style = "height:40vh; width:30vh;min-width:300px; min-height:350px; position:relative">
-                        <div class = "bg-maincolor h-50">
+        </main>
+        <% include partials/footer.ejs %>
+        <% include partials/jsdefaults.ejs %>
+        <script src= "/../scripts/addpost.js"> </script>
 
-                        </div>
-                        <div class = "d-flex flex-column h-50">
-                            <ul class = "d-flex flex-column justify-content-end h-100">
-                                <li>
-                                    <h5 class = "font-weight-bold">First Name, Last Name</h2>
-                                </li>
-                                <li>
-                                    <h5>Username</h4>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class = "bg-light d-flex justify-content-center align-items-center" style = "width:50%; height:50%; min-height:150px; z-index: 1;  position: absolute; border-radius:50%; top:40%; margin:-25%; right:50%; border:white 7px solid; position: absolute;  position: absolute; min-width:150px">
-
-                        </div>
-                    </div>
-        </div>
-    </main>
-    <% include partials/footer.ejs %>
-    <% include partials/jsdefaults.ejs %>
 </body>
+
 </html>

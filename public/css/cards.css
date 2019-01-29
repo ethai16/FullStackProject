@@ -3,6 +3,8 @@
     flex-wrap: wrap;
     justify-content: center;
     overflow: auto;
+    margin-bottom: 10%;
+    margin-top: 10%;
 }
 .card{
     width: 300px;
@@ -26,6 +28,13 @@
     color: #777;
     line-height: 1.5;
     font-size: 14px;
+}
+.back-btn{
+    border-radius: 5px;
+    justify-content: center;
+}
+button:hover{
+    background-color:rgb(103, 103, 107);
 }
 /* .card-sponsor{
     

@@ -2,7 +2,7 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	background: url(../images/cate.jpg) no-repeat center center fixed;
+	background: url(../images/cate1.jpg) no-repeat center center fixed;
 	background-size: contain;
 	background-repeat: none;
 
@@ -14,7 +14,7 @@ body {
 }
 .modal-content{
 	background-color: #434e5a;
-	opacity: .8;
+	opacity: 0.85;
 	border-radius: 10px;
     margin-bottom:100%; 
 }
@@ -26,7 +26,8 @@ body {
 .search-btn{
 	border-radius: 5px;
 	margin-top: 5%;
+	
 }
 button:hover{
-    background-color: rgb(101, 10, 247);
+    background-color:rgb(93, 93, 189);
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/head.ejs %>
+    <link rel="stylesheet" href="../css/cards.css">
+    <style>
+    .card-container{
+        margin-bottom: 20%;
+    }
+    </style>
+</head>
+<body>
+    <% include partials/navbar.ejs %>
+    <!-- <h1><%= pageTitle %></h1> -->
+    <div class="card-container">
+        <!-- <section class="card">
+            <img class="card-img" src="../images/consultant.jpg" alt="">
+            <div class="card-content">
+                <h2 class="card-title">math</h2><hr>
+                <p class="card-text">What is consultant?<br>This lecture will explaine what it's about.</p><hr>
+                <h6 class="card-sponsor">Mentor Name: <i>name</i></h6>
+            </div>
+        </section> -->
+        <section class="card">
+            <img class="card-img" src="../images/science1.jpg" alt="">
+            <div class="card-content">
+                <h2 class="card-title">Chemistry</h2><hr>
+                <p class="card-text">What is Chemistry?<br>This lecture will explaine what it's about.</p><hr>
+                <h6 class="card-sponsor">Mentor Name: <i>name</i></h6>
+            </div>
+        </section>
+        <section class="card">
+            <img class="card-img" src="../images/science2.jpg" alt="">
+            <div class="card-content">
+                <h2 class="card-title">Biology</h2><hr>
+                <p class="card-text">What is Biology?<br>This lecture will explaine what it's about.</p><hr>
+                <h6 class="card-sponsor">Mentor Name: <i>name</i></h6>
+            </div>
+        </section>
+        <section class="card">
+            <img class="card-img" src="../images/science3.jpg" alt="">
+            <div class="card-content">
+                <h2 class="card-title">Physics</h2><hr>
+                <p class="card-text">What is Physics?<br>This lecture will explaine what it's about.</p><hr>
+                <h6 class="card-sponsor">Mentor Name: <i>name</i></h6>
+            </div>
+        <!-- </section>
+        <section class="card">
+            <img class="card-img" src="../images/design.jpg" alt="" >
+            <div class="card-content">
+                <h2 class="card-title">Design</h2><hr>
+                <p class="card-text">What is design?<br>This lecture will explaine what it's about.</p><hr>
+                <h6 class="card-sponsor">Mentor Name: <i>name</i></h6>
+            </div>
+        </section> -->
+        <!-- <section class="card">
+            <img class="card-img" src="../images/auto.jpg" alt="">
+            <div class="card-content">
+                <h2 class="card-title">Automotive</h2><hr>
+                <p class="card-text">What is automotive?<br>This lecture will explaine what it's about.</p><hr>
+                <h6 class="card-sponsor">Mentor Name: <i>name</i></h6>
+            </div>
+        </section> -->
+        
+    </div>
+    <form method="GET" action="search">
+            <a href="search">back</a>
+            <!-- <button type="submit" class="back-btn" >back</button> -->
+    </form>
+
+    <% include partials/footer.ejs %>
+    <% include partials/jsdefaults.ejs %>
+</body>
+</html>

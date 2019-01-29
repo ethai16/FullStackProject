@@ -27,20 +27,20 @@ router.get('/search', (req,res)=>{
     })
 });
  
-db.users.findAll({
-    raw:true
-    ,attributes: {
-        include: [
-            [db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id1")'), 'ind1_name']
-            ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id2")'), 'ind2_name']
-            ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id3")'), 'ind3_name']
-    ]}
-    ,include:[
-        {model:db.schools}
-]}).then((results)=>{
-    console.log(results);
+// db.users.findAll({
+//     raw:true
+//     ,attributes: {
+//         include: [
+//             [db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id1")'), 'ind1_name']
+//             ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id2")'), 'ind2_name']
+//             ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id3")'), 'ind3_name']
+//     ]}
+//     ,include:[
+//         {model:db.schools}
+// ]}).then((results)=>{
+//     console.log(results);
     
-})
+// })
 //     ,where: {
 //         username: {[Sequelize.Op.eq]: userID}
 // }

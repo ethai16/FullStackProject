@@ -1,7 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const states = sequelize.define('states', {
-    state: DataTypes.STRING
+    state: {type:DataTypes.STRING,unique:true, primaryKey:true},
+    name: DataTypes.STRING
   }, {});
   states.associate = function(models) {
     // associations can be defined here
@@ -9,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       onDelete:'CASCADE',
       foreignKey:'state_code'
     });
-    states.hasMany(models.companies,{
+    states.hasMany(models.users,{
       onDelete:'CASCADE',
-      foreignKey:'state_code'
+      foreignKey:'company_state_code'
     });
     states.hasMany(models.schools,{
       onDelete:'CASCADE',
