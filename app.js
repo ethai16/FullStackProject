@@ -6,6 +6,7 @@ const db = require('./models/')
 const session = require('express-session')
 const fileUpload = require('express-fileupload');
 
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -33,11 +34,19 @@ io.on('connection', (socket)=> {
     socket.on('chat message', (msg)=> {
         io.sockets.emit('chat message', msg);
         
-        socket.on('typing', data => {
-            socket.broadcast.emit('typing', data)
-        })
+    
     });
 });
+
+
+
+// io.on('chat message',(username)=>{
+//     socket.username = username;
+// })
+// io.sockets.on('connection', function (socket) {
+//     console.log('a client connected')
+//    });
+
 
 
 // need this only when creating database.

@@ -59,7 +59,7 @@
 								</div>
 								<div class="user_info">
 									<span>Group Chat</span>
-									<p id="typing"></p>
+									<p id='feedback'></p>
 								</div>
 							</div>
 						</div>
@@ -90,9 +90,15 @@
 			</div>
         </div>
         <!-- END RIGHT SIDE CHAT BOX -->
+
+
+
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
         <% include partials/jsdefaults.ejs %>
         <script>
+
                 $(function () {
                     var socket = io();
                     $('form').submit((e)=> {
@@ -111,7 +117,7 @@
                                                     <img src="<%=profilepic%>" class="rounded-circle user_img_msg">
                                                 </div>
                                                 <div class="msg_cotainer">
-                                                    ${msg}
+                                                    ${msg} 
                                                     <span class="msg_time"><%=fname%> <%=lname%></span>
                                                 </div>
                                             </div>`
@@ -126,12 +132,12 @@
                                                     <img src="<%=profilepic%>" class="rounded-circle user_img_msg">
                                                 </div>
                                             </div>`
-                                            console.log("recmessages", recmessages)
-
+                                            // console.log("recmessages", recmessages)
+                                            
                         $('#messages').append(usermessages);
                         $('#m').val('')
+                        
                             
-
                     });
                 });
             </script> 

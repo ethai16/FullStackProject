@@ -3,6 +3,7 @@ const router = express.Router();
 
 
 
+
 router.get('/chat', (req, res)=>{
     if (req.user){
         if (req.user.role_id === 1){
@@ -23,8 +24,8 @@ router.get('/chat', (req, res)=>{
         username: req.user.username,
 
     })
-});
 
+});
 
 
 
