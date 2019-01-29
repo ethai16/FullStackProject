@@ -9,9 +9,11 @@ router.get('/signup',(req,res)=>{
     res.redirect('/');
 });
 
-// SELECT * FROM states; SELECT * FROM schools; SELECT * FROM industries;
+// get for Create page
 router.get('/signup/:roleID',(req,res)=>{
     let roleID = req.params.roleID;
+    // SELECT * FROM states; SELECT * FROM schools; SELECT * FROM industries;
+
     db.states.findAll({
         raw:true,
         attributes: ['state'],
@@ -35,7 +37,8 @@ router.get('/signup/:roleID',(req,res)=>{
                         industries:results_inds,
                         teacher_code:crypto.randomBytes(3).toString('hex'),
                         mentor_code:crypto.randomBytes(3).toString('hex'),
-                        topMsg:"New Profile".toUpperCase()
+                        topMsg:"New Profile".toUpperCase(),
+                        secondMsg:""
                     });
                 } else{
                     res.render('message',{topMsg:`Error: ${error}`,secondMsg:`Please Try Again`});        // if error, go back to all cards
@@ -44,6 +47,8 @@ router.get('/signup/:roleID',(req,res)=>{
         }) 
     })         
 })
+
+// ==== get for EDIT page
 router.get('/signup/:roleID/:userID',(req,res)=>{
     let roleID = req.params.roleID;
     let userID = req.params.userID;
@@ -56,37 +61,6 @@ router.get('/signup/:roleID/:userID',(req,res)=>{
 // FROM
 // 	users
 // 	WHERE username = [the username of the user]
-
-
-    // db.users.findAll({
-    //     raw:true
-    //     ,attributes: {
-    //         include: [
-    //             [db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id1")'), 'ind1_name']
-    //             ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id2")'), 'ind2_name']
-    //             ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id3")'), 'ind3_name']  
-    //     ]}
-    //     ,include:[
-    //         {model:db.schools}
-    //     ]
-    //     ,where: {
-    //         username: {[Sequelize.Op.eq]: userID}
-    //     }
-    // }).then(results=>{
-    //     if (results.length > 0){
-    //         res.render('signupEdit',{
-    //             data:results[0],
-    //             topMsg:"Edit Profile".toUpperCase(),
-    //             secondMsg:''
-    //         });
-    //     } else{
-    //         res.render('message',{topMsg:`Error: Please double check username`,secondMsg:`${error}`});        // if error, go back to all cards
-    //     }   
-    // }).catch(error=>{
-    //     res.render('message',{
-    //         topMsg:`Error: ${error}`,
-    //         secondMsg:'Please try again'});
-    // });
 
     db.users.findAll({
         raw:true

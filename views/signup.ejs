@@ -1,450 +1,450 @@
 <head>
-    <title> a </title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-    <!-- Local CSS -->
-    <link rel="stylesheet" href="/css/global.css" type="text/css">
-    <link rel="stylesheet" href="/css/signup.css" type="text/css">
-
-    <!-- Scrollbar CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.min.css" rel="stylesheet">
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-        crossorigin="anonymous">
-</head>
-
-<body>
-    <% include partials/navbar.ejs %>
-
-    <div class="container">
-        <!-- Top row start (optional)-->
-
-        <div class="row mt-3 d-flex justify-content-center mb-3">
-                <h1 class='m-1 text-center'><%=topMsg%> </h1>
-
-            <!-- <div class="col-sm-6"><a href="/users" class="float-right"><img title="profile image" class="img-circle img-fluid"
-                    src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a>
-            </div> -->
-        </div>
-        <!-- Top row end (optional) -->
-        <!-- form start -->
-        <form class="form" action="/api" method="post" onsubmit="return checkForm(this);">
-            <!-- hidden input role_id-->
-            <input name="role_id" class='hide' id='role_id'>
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-3 col-sm-12">
-                    <div class="text-center">
-                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"
-                            alt="avatar" >
-                        <h6><small>Upload a different photo...</small></h6>
-                        <input type="file" name="image_url" class="text-center mx-auto file-upload" accept="image/*">
-                    </div>
-                </div>
-                <!--/col-3 end-->
-                <div class="col-12 col-lg-9">
-                    <!-- < class="form"> -->
-                    <div class='private'>
-                        <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="username">
-                                    <h5>Username<small>*</small></h5>
-                                </label>
-                                <input title="Enter username" type="text" class="form-control" name="username"
-                                    placeholder="username" id='username' required>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="email">
-                                    <h5>Email<small>*</small></h5>
-                                </label>
-                                <input type="email" class="form-control" name="email" 
-                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="you@email.com"
-                                required>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="password">
-                                    <h5>Password<small>*</small></h5>
-                                    <p class='pnote'>At least 6 characters, including UPPER/lowercase and numbers</p>
-                                </label>
-                                <input type="password" class="form-control" name="password" placeholder="password"
-                                    title="Password must contain at least 6 characters, including UPPER/lowercase and numbers"
-                                    required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
-                                    onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
-                                    if(this.checkValidity()) form.password2.pattern = RegExp.escape(this.value);">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="password2">
-                                    <h5>Confirm Password<small>*</small></h5>
-                                    <p class='pnote'>Same password as left</p>
-                                </label>
-                                <input type="password" class="form-control" title="Please enter the same password" name="password2"
-                                    placeholder="confirm password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-                                    onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
-                            </div>
-                        </div>
-                        <hr>
-                        <h4> Private Information</h4>
-                        <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="fname">
-                                    <h5>First name<small>*</small></h5>
-                                </label>
-                                <input type="text" class="form-control" name="fname" placeholder="first name" required>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="lname">
-                                    <h5>Last name<small>*</small></h5>
-                                </label>
-                                <input type="text" class="form-control" name="lname" placeholder="last name" required>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-12">
-                                <label for="street">
-                                    <h5>Address</h5>
-                                </label>
-                                <input type="text" class="form-control" name='street' placeholder="street address">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-4">
-                                <label for="city">
-                                    <h5>City</h5>
-                                </label>
-                                <input type="text" class="form-control" name='city' placeholder="city">
-                            </div>
-                            <div class="col-sm-2">
-                                <label for='state_code'>
-                                    <h5>State</h5>
-                                </label>
-                                <select class="form-control" name='state_code'>
-                                    <% states.forEach(ele=>{%>
-                                    <option name='state_code' value='<%=ele.state%>'>
-                                        <%=ele.state%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="zipcode">
-                                    <h5>Zipcode</h5>
-                                </label>
-                                <input type="text" class="form-control" name='zipcode' placeholder="zipcode">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="telephone">
-                                    <h5>Telephone</h5>
-                                </label>
-                                <input type="text" class="form-control" name="telephone" placeholder="phone number">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-12">
-                                <label for="bio">
-                                    <h5>Bio</h5>
-                                </label>
-                                <textarea type="text" class="form-control" name='bio' placeholder="Share about yourself"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- private end  -->
-                    <!-- teacher info start  -->
-                    <div class='teacher'>
-                        <hr>
-                        <div class="row form-group">
-                            <div class="col-sm-3">
-                                <label for="teacher_code">
-                                    <h5>Teacher code</h5>
-                                </label>
-                                <input type="text" class="form-control" name="teacher_code" value='<%=teacher_code%>' readonly>
-                            </div>    
-                        </div>
-
-                        <h4 class='mt-3'> School Information</h4>
-                        <div class="row form-group">
-                            <div class="col-sm-9">
-                                <label for='school'>
-                                    <h5>School Name</h5>
-                                </label>
-                                <select class="form-control" name='teacher_school'>
-                                    <% schools.forEach(ele=>{%>
-                                    <option name='teacher_school' value='<%=ele.id%>'>
-                                        <%=ele.name%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-4">
-                                <label for='teacher_industry'>
-                                    <h5> Industry </h5>
-                                </label>
-                                <select class="form-control" name='teacher_industry'>
-                                    <% industries.forEach(ele=>{%>
-                                    <option name='teacher_industry' value='<%=ele.id%>'>
-                                        <%=ele.industries%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Teacher end  -->
-
-                    <!-- Student info start  -->
-                    <div class='student'>
-                        <hr>
-                        <div class="row form-group">
-                            <div class="col-sm-3">
-                                <label for="teacher_code_student">
-                                    <h5>Teacher code</h5>
-                                </label>
-                                <input type="text" class="form-control" name="teacher_code_student">
-                            </div> 
-                            <div class="col-sm-3">
-                                <label for="mentor_code_student">
-                                    <h5>Mentor code</h5>
-                                </label>
-                                <input type="text" class="form-control" name="mentor_code_student">
-                            </div> 
-                        </div>
-                        <h4 class='mt-3'> School Information</h4>
-
-                        <div class="row form-group">
-                            <div class="col-sm-9">
-                                <label for='student_school'>
-                                    <h5>School Name</h5>
-                                </label>
-                                <select class="form-control" name='student_school'>
-                                    <% schools.forEach(ele=>{%>
-                                    <option name='student_school' value='<%=ele.id%>'>
-                                        <%=ele.name%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for='grade'>
-                                    <h5>Grades</h5>
-                                </label>
-                                <select class="form-control" name='grade'>
-                                    <option name='student-grade' value="freshman">Freshman</option>
-                                    <option name='student-grade' value="sophomore">Sophomore</option>
-                                    <option name='student-grade' value="junior">Junior</option>
-                                    <option name='student-grade' value="senior">Senior</option>
-                                </select>
-                            </div>
-                        </div>
-                        <h4 class="mt-5">Which industries are you interested in?</h4>
-                        <div class="row form-group">
-                            <div class="col-sm-4">
-                                <label for='student_industries1'>
-                                    <h5> First Choice </h5>
-                                </label>
-                                <select class="form-control" name='student_industries1'>
-                                    <% industries.forEach(ele=>{%>
-                                    <option name='student_industries1' value='<%=ele.id%>'>
-                                        <%=ele.industries%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for='student_industries2'>
-                                    <h5>Second Choice </h5>
-                                </label>
-                                <select class="form-control" name='student_industries2'>
-                                    <% industries.forEach(ele=>{%>
-                                    <option name='student_industries2' value='<%=ele.id%>'>
-                                        <%=ele.industries%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for='student_industries3'>
-                                    <h5>Third Choice </h5>
-                                </label>
-                                <select class="form-control" name='student_industries3'>
-                                    <% industries.forEach(ele=>{%>
-                                    <option name='student_industries3' value='<%=ele.id%>'>
-                                        <%=ele.industries%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Student end  -->
-                    <!-- Mentor info start  -->
-                    <div class="mentor">
-                        <hr>
-                        <div class="row form-group">
-                            <div class="col-sm-3">
-                                <label for='mentor_code'>
-                                    <h5>Mentor Code:</h5>
-                                </label>
-                                <input class="form-control" name='mentor_code' id='mentor_code'  value='<%=mentor_code%>' readonly>
-                            </div>
-                        </div>
-                        <h4 class='mt-3'> Company Information</h4>
-                        <div class="row form-group">
-                            <div class="col-sm-8">
-                                <label for="company_name">
-                                    <h5>Name</h5>
-                                </label>
-                                <input type="text" class="form-control" name="company_name" placeholder="Company Name">
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="position">
-                                    <h5>Position</h5>
-                                </label>
-                                <input type="text" class="form-control" name="position" placeholder="Position title">
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col-sm-12">
-                                <label for="company_street">
-                                    <h5>Address</h5>
-                                </label>
-                                <input type="text" class="form-control" name='company_street' placeholder="company address">
-                            </div>
-
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="city">
-                                    <h5>City</h5>
-                                </label>
-                                <input type="text" name='company_city' class="form-control" placeholder="company city">
-                            </div>
-                            <div class="col-sm-2">
-                                <label for='state'>
-                                    <h5>State</h5>
-                                </label>
-                                <select class="form-control" name='company_state'>
-                                    <% states.forEach(ele=>{%>
-                                    <option name='company_state' value="<%=ele.state%>">
-                                        <%=ele.state%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="company_zipcode">
-                                    <h5>Zipcode</h5>
-                                </label>
-                                <input type="text" name='company_zipcode' class="form-control" placeholder="company zip code">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-6">
-                                <label for="company_telephone">
-                                    <h5>Phone</h5>
-                                </label>
-                                <input type="text" class="form-control" name="company_telephone" placeholder="company phone number">
-                            </div>
-                        </div>
-                        <h4 class="mt-5">Which industries best describe your company / job?</h4>
-                        <div class="row form-group">
-                            <div class="col-sm-4">
-                                <label for='company_industries1'>
-                                    <h5> First Choice </h5>
-                                </label>
-                                <select class="form-control" name='company_industries1'>
-                                    <% industries.forEach(ele=>{%>
-                                    <option name='company_industries1' value='<%=ele.id%>'>
-                                        <%=ele.industries%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for='company_industries2'>
-                                    <h5>Second Choice </h5>
-                                </label>
-                                <select class="form-control" name='company_industries2'>
-                                    <% industries.forEach(ele=>{%>
-                                    <option name='company_industries2' value='<%=ele.id%>'>
-                                        <%=ele.industries%>
-                                    </option>
-                                    <%});%>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Mentor end  -->
-                    <hr>
-                    <div class="row form-group">
-                        <div class="col-sm-12 p-0 mt-3">
-                            <button class="btn save btn-success" type='submit' id="submit"><i class="fas fa-check"></i>
-                                Save</button>
-                            <button class="btn reset btn-light" type="reset"><i class="m-1 fas fa-undo"></i>Reset</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- div right side column end -->
+        <title> a </title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous">
+        <!-- Local CSS -->
+        <link rel="stylesheet" href="/css/global.css" type="text/css">
+        <link rel="stylesheet" href="/css/signup.css" type="text/css">
+    
+        <!-- Scrollbar CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+        <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.min.css" rel="stylesheet">
+        <!--Font Awesome-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+            crossorigin="anonymous">
+    </head>
+    
+    <body>
+        <% include partials/navbar.ejs %>
+    
+        <div class="container">
+            <!-- Top row start (optional)-->
+    
+            <div class="row mt-3 d-flex justify-content-center mb-3">
+                    <h1 class='m-1 text-center'><%=topMsg%> </h1>
+    
+                <!-- <div class="col-sm-6"><a href="/users" class="float-right"><img title="profile image" class="img-circle img-fluid"
+                        src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a>
+                </div> -->
             </div>
-            <!-- div row end -->
-        </form>
-        <!-- form end -->
-    </div>
-    <!--/CONTAINER END -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-    <% include partials/footer.ejs %>
-    <% include partials/jsdefaults.ejs %>
-    <script src='/scripts/signup.js'></script>
-    <script>
-        if (!RegExp.escape) {
-            RegExp.escape = function (s) {
-                return String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
-            };
-        }
-
-        function checkPassword(str) {
-            var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-            return re.test(str);
-        }
-
-        function checkForm(form) {
-            if (form.username.value == "") {
-                alert("Error: Username cannot be blank!");
-                form.username.focus();
-                return false;
+            <!-- Top row end (optional) -->
+            <!-- form start -->
+            <form class="form" action="/api" method="post" onsubmit="return checkForm(this);">
+                <!-- hidden input role_id-->
+                <input name="role_id" class='hide' id='role_id'>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="text-center">
+                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"
+                                alt="avatar" >
+                            <h6><small>Upload a different photo...</small></h6>
+                            <input type="file" name="image_url" class="text-center mx-auto file-upload" accept="image/*">
+                        </div>
+                    </div>
+                    <!--/col-3 end-->
+                    <div class="col-12 col-lg-9">
+                        <!-- < class="form"> -->
+                        <div class='private'>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label for="username">
+                                        <h5>Username<small>*</small></h5>
+                                    </label>
+                                    <input title="Enter username" type="text" class="form-control" name="username"
+                                        placeholder="username" id='username' required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="email">
+                                        <h5>Email<small>*</small></h5>
+                                    </label>
+                                    <input type="email" class="form-control" name="email" 
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="you@email.com"
+                                    required>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label for="password">
+                                        <h5>Password<small>*</small></h5>
+                                        <p class='pnote'>At least 6 characters, including UPPER/lowercase and numbers</p>
+                                    </label>
+                                    <input type="password" class="form-control" name="password" placeholder="password"
+                                        title="Password must contain at least 6 characters, including UPPER/lowercase and numbers"
+                                        required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
+                                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
+                                        if(this.checkValidity()) form.password2.pattern = RegExp.escape(this.value);">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="password2">
+                                        <h5>Confirm Password<small>*</small></h5>
+                                        <p class='pnote'>Same password as left</p>
+                                    </label>
+                                    <input type="password" class="form-control" title="Please enter the same password" name="password2"
+                                        placeholder="confirm password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                                        onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : '');">
+                                </div>
+                            </div>
+                            <hr>
+                            <h4> Private Information</h4>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label for="fname">
+                                        <h5>First name<small>*</small></h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="fname" placeholder="first name" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="lname">
+                                        <h5>Last name<small>*</small></h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="lname" placeholder="last name" required>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label for="street">
+                                        <h5>Address</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name='street' placeholder="street address">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for="city">
+                                        <h5>City</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name='city' placeholder="city">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for='state_code'>
+                                        <h5>State</h5>
+                                    </label>
+                                    <select class="form-control" name='state_code'>
+                                        <% states.forEach(ele=>{%>
+                                        <option name='state_code' value='<%=ele.state%>'>
+                                            <%=ele.state%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="zipcode">
+                                        <h5>Zipcode</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name='zipcode' placeholder="zipcode">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="telephone">
+                                        <h5>Telephone</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="telephone" placeholder="phone number">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label for="bio">
+                                        <h5>Bio</h5>
+                                    </label>
+                                    <textarea type="text" class="form-control" name='bio' placeholder="Share about yourself"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- private end  -->
+                        <!-- teacher info start  -->
+                        <div class='teacher'>
+                            <hr>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label for="teacher_code">
+                                        <h5>Teacher code</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="teacher_code" value='<%=teacher_code%>' readonly>
+                                </div>    
+                            </div>
+    
+                            <h4 class='mt-3'> School Information</h4>
+                            <div class="row form-group">
+                                <div class="col-sm-9">
+                                    <label for='school'>
+                                        <h5>School Name</h5>
+                                    </label>
+                                    <select class="form-control" name='teacher_school'>
+                                        <% schools.forEach(ele=>{%>
+                                        <option name='teacher_school' value='<%=ele.id%>'>
+                                            <%=ele.name%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for='teacher_industry'>
+                                        <h5> Industry </h5>
+                                    </label>
+                                    <select class="form-control" name='teacher_industry'>
+                                        <% industries.forEach(ele=>{%>
+                                        <option name='teacher_industry' value='<%=ele.id%>'>
+                                            <%=ele.industries%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Teacher end  -->
+    
+                        <!-- Student info start  -->
+                        <div class='student'>
+                            <hr>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label for="teacher_code_student">
+                                        <h5>Teacher code</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="teacher_code_student">
+                                </div> 
+                                <div class="col-sm-3">
+                                    <label for="mentor_code_student">
+                                        <h5>Mentor code</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="mentor_code_student">
+                                </div> 
+                            </div>
+                            <h4 class='mt-3'> School Information</h4>
+    
+                            <div class="row form-group">
+                                <div class="col-sm-9">
+                                    <label for='student_school'>
+                                        <h5>School Name</h5>
+                                    </label>
+                                    <select class="form-control" name='student_school'>
+                                        <% schools.forEach(ele=>{%>
+                                        <option name='student_school' value='<%=ele.id%>'>
+                                            <%=ele.name%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for='grade'>
+                                        <h5>Grades</h5>
+                                    </label>
+                                    <select class="form-control" name='grade'>
+                                        <option name='student-grade' value="freshman">Freshman</option>
+                                        <option name='student-grade' value="sophomore">Sophomore</option>
+                                        <option name='student-grade' value="junior">Junior</option>
+                                        <option name='student-grade' value="senior">Senior</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <h4 class="mt-5">Which industries are you interested in?</h4>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for='student_industries1'>
+                                        <h5> First Choice </h5>
+                                    </label>
+                                    <select class="form-control" name='student_industries1'>
+                                        <% industries.forEach(ele=>{%>
+                                        <option name='student_industries1' value='<%=ele.id%>'>
+                                            <%=ele.industries%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for='student_industries2'>
+                                        <h5>Second Choice </h5>
+                                    </label>
+                                    <select class="form-control" name='student_industries2'>
+                                        <% industries.forEach(ele=>{%>
+                                        <option name='student_industries2' value='<%=ele.id%>'>
+                                            <%=ele.industries%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for='student_industries3'>
+                                        <h5>Third Choice </h5>
+                                    </label>
+                                    <select class="form-control" name='student_industries3'>
+                                        <% industries.forEach(ele=>{%>
+                                        <option name='student_industries3' value='<%=ele.id%>'>
+                                            <%=ele.industries%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Student end  -->
+                        <!-- Mentor info start  -->
+                        <div class="mentor">
+                            <hr>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label for='mentor_code'>
+                                        <h5>Mentor Code:</h5>
+                                    </label>
+                                    <input class="form-control" name='mentor_code' id='mentor_code'  value='<%=mentor_code%>' readonly>
+                                </div>
+                            </div>
+                            <h4 class='mt-3'> Company Information</h4>
+                            <div class="row form-group">
+                                <div class="col-sm-8">
+                                    <label for="company_name">
+                                        <h5>Name</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="company_name" placeholder="Company Name">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="position">
+                                        <h5>Position</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="position" placeholder="Position title">
+                                </div>
+                            </div>
+    
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    <label for="company_street">
+                                        <h5>Address</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name='company_street' placeholder="company address">
+                                </div>
+    
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label for="city">
+                                        <h5>City</h5>
+                                    </label>
+                                    <input type="text" name='company_city' class="form-control" placeholder="company city">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for='state'>
+                                        <h5>State</h5>
+                                    </label>
+                                    <select class="form-control" name='company_state'>
+                                        <% states.forEach(ele=>{%>
+                                        <option name='company_state' value="<%=ele.state%>">
+                                            <%=ele.state%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="company_zipcode">
+                                        <h5>Zipcode</h5>
+                                    </label>
+                                    <input type="text" name='company_zipcode' class="form-control" placeholder="company zip code">
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label for="company_telephone">
+                                        <h5>Phone</h5>
+                                    </label>
+                                    <input type="text" class="form-control" name="company_telephone" placeholder="company phone number">
+                                </div>
+                            </div>
+                            <h4 class="mt-5">Which industries best describe your company / job?</h4>
+                            <div class="row form-group">
+                                <div class="col-sm-4">
+                                    <label for='company_industries1'>
+                                        <h5> First Choice </h5>
+                                    </label>
+                                    <select class="form-control" name='company_industries1'>
+                                        <% industries.forEach(ele=>{%>
+                                        <option name='company_industries1' value='<%=ele.id%>'>
+                                            <%=ele.industries%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for='company_industries2'>
+                                        <h5>Second Choice </h5>
+                                    </label>
+                                    <select class="form-control" name='company_industries2'>
+                                        <% industries.forEach(ele=>{%>
+                                        <option name='company_industries2' value='<%=ele.id%>'>
+                                            <%=ele.industries%>
+                                        </option>
+                                        <%});%>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mentor end  -->
+                        <hr>
+                        <div class="row form-group">
+                            <div class="col-sm-12 p-0 mt-3">
+                                <button class="btn save btn-success" type='submit' id="submit"><i class="fas fa-check"></i>
+                                    Save</button>
+                                <button class="btn reset btn-light" type="reset"><i class="m-1 fas fa-undo"></i>Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- div right side column end -->
+                </div>
+                <!-- div row end -->
+            </form>
+            <!-- form end -->
+        </div>
+        <!--/CONTAINER END -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+        <% include partials/footer.ejs %>
+        <% include partials/jsdefaults.ejs %>
+        <script src='/scripts/signup.js'></script>
+        <script>
+            if (!RegExp.escape) {
+                RegExp.escape = function (s) {
+                    return String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+                };
             }
-            re = /^\w+$/;
-            if (!re.test(form.username.value)) {
-                alert("Error: Username must contain only letters, numbers and underscores!");
-                form.username.focus();
-                return false;
+    
+            function checkPassword(str) {
+                var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+                return re.test(str);
             }
-            if (form.password.value != "" && form.password.value == form.password2.value) {
-                if (!checkPassword(form.password.value)) {
-                    alert("The password you have entered is not valid!");
+    
+            function checkForm(form) {
+                if (form.username.value == "") {
+                    alert("Error: Username cannot be blank!");
+                    form.username.focus();
+                    return false;
+                }
+                re = /^\w+$/;
+                if (!re.test(form.username.value)) {
+                    alert("Error: Username must contain only letters, numbers and underscores!");
+                    form.username.focus();
+                    return false;
+                }
+                if (form.password.value != "" && form.password.value == form.password2.value) {
+                    if (!checkPassword(form.password.value)) {
+                        alert("The password you have entered is not valid!");
+                        form.password.focus();
+                        return false;
+                    }
+                } else {
+                    alert("Error: Please check that you've entered and confirmed your password!");
                     form.password.focus();
                     return false;
                 }
-            } else {
-                alert("Error: Please check that you've entered and confirmed your password!");
-                form.password.focus();
-                return false;
+                return true;
             }
-            return true;
-        }
-    </script>
-
-</body>
-
-</html>
+        </script>
+    
+    </body>
+    
+    </html>
