@@ -50,8 +50,8 @@ router.get('/dashboard', (req,res)=>{
         console.log(results_1)
         res.render('dashboard', {
             publicProfile: '/'+ masterRole + '/'+ req.user.username,
-            fname: req.user.fname,
-            lname: req.user.lname,
+            fName: req.user.fname,
+            lName: req.user.lname,
             friendsList: results_1,
             mainUser: req.user.username,
             teacher_code: req.user.teacher_code,
