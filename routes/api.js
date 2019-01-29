@@ -67,10 +67,7 @@ router.post('/api',(req, res)=>{
                 role_id,school_id,state_code,company_state_code
             })
             .then(results => {
-                res.render('dashboard',{
-                    topMsg:`Welcome, ${results.username}!`,
-                    secondMsg:``
-                })                      
+                res.redirect('login')                      
             })
             .catch(error => {
                 // req.flash("error",`Error Message: ${error}`)
@@ -94,6 +91,22 @@ router.delete('/api/delete/:userID',(req,res)=>{
         }
     }).then(results=>{
         res.render('home');
+    }).catch(error=>{
+        res.render('message',{
+            topMsg:`Error: ${error}`,
+            secondMsg:`Please try again.`,
+        });
+    })
+})
+
+router.delete('/api/delete/comment/:commentId',(req,res)=>{
+    let id = req.params.commentId;
+    db.comments.destroy({
+        where: {
+            id: id
+        }
+    }).then(results=>{
+        res.status(204).send();
     }).catch(error=>{
         res.render('message',{
             topMsg:`Error: ${error}`,

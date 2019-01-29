@@ -70,6 +70,9 @@ passport.use(new LocalStrategy((username, password, done)=>{
         if(results.length != 0) {
             const data = results[0];
             bcrypt.compare(password, data.password_hash, (err, res)=>{
+                console.log("password input:", password)
+                console.log("password database:", data.password_hash)
+                console.log(res)
                 if (res) {
                     done(null, {id: data.id, username: data.username, role: data.role_id})
                 }else{
@@ -90,7 +93,9 @@ passport.deserializeUser((username, done)=>{
     //changed to find by username and not by id
     db.users.findOne({where: {username: username}}).then((data)=>{
         done(null,data)
+
     })
+
 })
 
 

@@ -9,7 +9,7 @@
         <% include partials/navbarAfterAuth.ejs %>
         <main class="container-fluid d-flex">
                 <div class="col-4 d-flex flex-column mt-2" style="min-height:92vh">
-                        <div class="container-fluid p-1 mb-2" style="height:40vh; min-height: 270px">
+                        <div class="container-fluid p-1" style="height:40vh; min-height: 270px">
                                 <div class="shadow border">
                                         <div class="bg-maincolor h-75 d-flex pl-3 d-flex justify-content-center align-items-center"
                                                 style="padding-top:8vh">
@@ -17,34 +17,34 @@
                                                         style="width:25vh; height:25vh; border-radius:50%;border:white 7px solid"></div>
                                                 <div class="d-flex flex-column justify-content-end pl-3" style="color:white"></div>
                                         </div>
-                                        <div class="d-flex justify-content-center align-items-center p-2"><%=fname%> <%=lname%>
-                                                </div>
+                                        <div id = "nameContainer" class="d-flex justify-content-center align-items-center p-2"><%=fName%> <%=lName%></div>
                                 </div>
                         </div>
-                        <div class="student shadow border m-1 mt-2" style="height:20vh">
+                        <% if (user.role_id === 1){ %>
+                                <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center">Teacher</div>
+                        <% }else if(user.role_id === 2){ %>
+                                <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Student</div>
+                        <% }else{ %>
+                                <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Mentor</div>
+                        <% } %>
+                        <div class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center usernameReference">
+                                <div>Username: <br></div>
+                                <div id = "usernameReference"><%= mainUser %></div>
+                        </div>
+                        <div class="student shadow border m-1 mt-2" style="height:20vh;display:flex; flex-direction: column">
+                                        <div class="bg-maincolor font-white p-3">Teacher</div>
+                                        <div class = "flex-fill d-flex justify-content-center align-items-center"><a class = "font-weight-bold" href = "/public/teacher/<%= teacherUsername%>"><%=teacher%></a></div>
+                        </div>
+                        <div class="student shadow border m-1 mt-2" style="height:20vh;display:flex; flex-direction: column">
+                                        <div class="bg-maincolor font-white p-3">Mentor</div>
+                                        <div class ="flex-fill d-flex justify-content-center align-items-center"><a class ="font-weight-bold" href = "/public/teacher/<%= mentorUsername%>"><%=mentor%></a></div>
+
+                        </div>
+                        <div class="shadow border m-1 mt-2">
                                 <div class="bg-maincolor font-white p-3">Friends List</div>
                                 <ul>
-                                
-                                <% for (var i=friendsList.length-1; i>=0; i--) { %>
-                                        <% if (friendsList[i].username === mainUser) { %>
-                                                <% friendsList.splice(i, 1); %>
-                                        <%} %>
-                                <% } %>
-                                <% friendsList.forEach(item=>{ %>
-                                        <% var friendRole = '' %>
-                                        <% if (item.role_id === 1){ %>
-                                                <% friendRole = 'teacher' %>
-                                        <% }else if (item.role_id === 2){ %>
-                                                <% friendRole = 'student' %>
-                                        <% }else{ %>
-                                                <% friendRole = 'mentor' %>
-                                        <% } %>
-                                        <li><a href = "/public/<%=friendRole%>/<%= item.username%>"><%=item.fname %> <%=item.lname %></a></li>
-                                <% }) %>
+                                <% include partials/friendslist.ejs %>
                                 </ul>
-                        </div>
-                        <div class="student shadow border m-1 mt-2" style="height:20vh">
-                                <div class="bg-maincolor font-white p-3">Mentor</div>
                         </div>
                 </div>
                 <div class="col-8 d-flex flex-column mt-2">
@@ -60,8 +60,35 @@
                                         </div>
                                 </form>
                         </div>
-                        <div id="post-box">
+                        <div id="post-box" class = "mb-4">
+                                        <% if (post.length > 0) { %>
+                                        <% for (var i = post.length -1; i >= 0; i--) { %>
+                                        <div class = "forDelete">
+                                        <div class="border m-1 h-25 postmessages">
+                                                <% var commentlinkrole = "" %>
+                                                <% if (post[i].role_id === 1){ %>
+                                                        <% commentlinkrole = "teacher"; %>
+                                                <% }else if (post[i].role_id === 2){ %>
+                                                        <% commentlinkrole = "student"; %>
+                                                <% }else{ %>
+                                                        <% commentlinkrole = "mentor"; %>
+                                                <% } %>
+                                                <%if (post[i].username != mainUser){%>
+                                                        <div class="p-3 font-weight-bold"><a href= "/public/<%= commentlinkrole%>/<%= post[i].username%>"><%=post[i].fname%> <%=post[i].lname%></a></div>
+                                                <%}else{%>
+                                                        <div class="p-3 font-weight-bold d-flex justify-content-between">
+                                                                <a class = "userComments" href= "/<%= commentlinkrole%>/<%= post[i].username%>"><%=post[i].fname%> <%=post[i].lname%></a>
+                                                                <div class = "x-button"><i class="fas fa-times-circle"></i></div>
+                                                        </div>
 
+                                                <%}%>
+                                                <div class= "container-fluid"><%=post[i].comment%></div>
+                                                <div id = "comment_id" class= "container-fluid hide"><%=post[i].id%></div>
+                                        </div>
+                                        </div>
+
+                                        <% } %>
+                                        <% } %>
                         </div>
 
                 </div>
@@ -69,6 +96,7 @@
         <% include partials/footer.ejs %>
         <% include partials/jsdefaults.ejs %>
         <script src= "/../scripts/addpost.js"> </script>
+        <script src ="/../scripts/dashboard.js"></script>
 
 </body>
 

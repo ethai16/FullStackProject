@@ -23,7 +23,6 @@
     "pbkdf2": "^3.0.17",
     "pg": "^7.8.0",
     "pg-hstore": "^2.3.2",
-    "pg-promise": "^8.5.5",
     "sequelize": "^4.42.0",
     "socket.io": "^2.2.0"
   }

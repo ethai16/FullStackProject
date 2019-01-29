@@ -4,6 +4,7 @@ const router = express.Router();
 
 
 router.get('/chat', (req, res)=>{
+    var role = ''
     if (req.user){
         if (req.user.role_id === 1){
             role = 'teacher'
@@ -12,13 +13,14 @@ router.get('/chat', (req, res)=>{
         }else{
             role = 'mentor'
         }
+        res.render('chat', {
+            publicProfile: '/'+ role + '/'+ req.user.username,
+            fName: req.user.fname,
+            mainUserName:req.user.fname
+        })
     }else{
         res.redirect('/login')
     }
-    res.render('chat', {
-        publicProfile: '/'+ role + '/'+ req.user.username
-
-    })
 });
 
 
