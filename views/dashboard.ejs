@@ -31,14 +31,20 @@
                                 <div>Username: <br></div>
                                 <div id = "usernameReference"><%= mainUser %></div>
                         </div>
+                        <div class="student shadow border m-1 mt-2" style="height:20vh;display:flex; flex-direction: column">
+                                        <div class="bg-maincolor font-white p-3">Teacher</div>
+                                        <div class = "flex-fill d-flex justify-content-center align-items-center"><a class = "font-weight-bold" href = "/public/teacher/<%= teacherUsername%>"><%=teacher%></a></div>
+                        </div>
+                        <div class="student shadow border m-1 mt-2" style="height:20vh;display:flex; flex-direction: column">
+                                        <div class="bg-maincolor font-white p-3">Mentor</div>
+                                        <div class ="flex-fill d-flex justify-content-center align-items-center"><a class ="font-weight-bold" href = "/public/teacher/<%= mentorUsername%>"><%=mentor%></a></div>
+
+                        </div>
                         <div class="shadow border m-1 mt-2">
                                 <div class="bg-maincolor font-white p-3">Friends List</div>
                                 <ul>
                                 <% include partials/friendslist.ejs %>
                                 </ul>
-                        </div>
-                        <div class="shadow border m-1 mt-2" style="height:20vh">
-                                <div class="bg-maincolor font-white p-3">Mentor</div>
                         </div>
                 </div>
                 <div class="col-8 d-flex flex-column mt-2">
@@ -90,6 +96,7 @@
         <% include partials/footer.ejs %>
         <% include partials/jsdefaults.ejs %>
         <script src= "/../scripts/addpost.js"> </script>
+        <script src ="/../scripts/dashboard.js"></script>
 
 </body>
 
