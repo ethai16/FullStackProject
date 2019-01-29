@@ -2,13 +2,13 @@
         <ul class="container-fluid navbar-nav d-flex flex-row justify-content-between p-0">
             <div id = "logo">
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Logo</a>
+                    <a class="nav-link p-0" href="/dashboard" style = "font-size:2em"><i class="fab fa-earlybirds" ></i></a>
                 </li>
             </div>  
             <div id = "tags" class = "d-flex flex-row justify-content-between">
                 <div class = "d-flex flex-row pr-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="<%= publicProfile %>">Name</a>
+                        <a class="nav-link" href="<%= publicProfile %>"><%= mainUserName %></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/dashboard">Home</a>
@@ -28,9 +28,9 @@
     
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
+        <a href="/signup/<%=user.role_id %>/<%=user.username%>">Settings</a>
         <a href="/logout">Log Out</a>
-        <a href="#">Clients</a>
+        <a href="#">About</a>
         <a href="#">Contact</a>
     </div>
     

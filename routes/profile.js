@@ -31,9 +31,9 @@ router.get('/:userRole/:username', (req,res)=>{
     if (req.user){
         if (req.user.username === username && roleNum === req.user.role_id) {
             var masterRole = ""
-            if (req.user.role === 1){
+            if (req.user.role_id === 1){
                 masterRole = 'teacher'
-            }else if (req.user.role === 2){
+            }else if (req.user.role_id === 2){
                 masterRole = 'student' 
             }else{
                 masterRole = 'mentor'
@@ -44,7 +44,9 @@ router.get('/:userRole/:username', (req,res)=>{
                 
             res.render('profile', {
                 publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                user:req.user,
                 fName: req.user.fname,
+                mainUserName:req.user.fname,
                 lName: req.user.lname,
                 mainUser: req.user.username,
                 post: results_2[0]
