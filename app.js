@@ -32,12 +32,11 @@ app.use(require('./routes/api'));
 io.on('connection', (socket)=> {
     console.log('someone connected')
     socket.on('chat message', (msg)=> {
-        io.sockets.emit('chat message', msg);
+        io.emit('chat message', msg);
         
     
     });
 });
-
 
 
 // io.on('chat message',(username)=>{
