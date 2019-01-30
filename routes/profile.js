@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('fullstack', 'hirokoross', '', {
+const sequelize = new Sequelize('fullstack', 'erickthai', '', {
     dialect: 'postgres'
     });
 
