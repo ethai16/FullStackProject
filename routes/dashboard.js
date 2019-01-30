@@ -85,7 +85,7 @@ router.get('/dashboard', (req,res)=>{
             mentor: mentorUser,
             teacher: teacherUser,
             mentorUsername: mentorUsername,
-            teacherUsername:teacherUsername 
+            teacherUsername:teacherUsername ,
         })
     })
     }else{
@@ -104,7 +104,7 @@ router.get('/dashboard', (req,res)=>{
             mentor: mentorUser,
             teacher: teacherUser,
             mentorUsername: mentorUsername,
-            teacherUsername:teacherUsername 
+            teacherUsername:teacherUsername,
         })
     }
 
