@@ -91,7 +91,7 @@ router.get('/signup/:roleID/:userID',(req,res)=>{
                     raw:true
                 })
                 .then(results_inds => {
-                    console.log(results_user.length)
+                    console.log(results_user[0].teacher_code)
                     if (results_user.length>0 && results_states.length>0 && results_schools.length>0 && results_inds.length>0 ){
                         // console.log(results)
                         res.render('signupEdit',{

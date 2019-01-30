@@ -10,7 +10,8 @@ label{
 .save, .reset{
     font-size: 14px;
     padding:0;
-    width:140px
+    width:140px;
+    height:50px;
 }
 .pnote{
     font-size:12px;
