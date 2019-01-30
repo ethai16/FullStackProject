@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+const sequelize = new Sequelize('fullstack', 'samsonblankenship', '', {
     dialect: 'postgres'
 });
 
@@ -51,6 +51,7 @@ router.get('/public/:role/:username', (req,res)=>{
                     
                 res.render('profile', {
                     publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                    user: req.user,
                     fName: results[0].fname,
                     lName: results[0].lname,
                     mainUser: req.user.username,
