@@ -14,8 +14,6 @@ const sequelize = new Sequelize('fullstack', 'erickthai', '', {
 });
 
 router.get('/public/:role/:username', (req,res)=>{
-
-    console.log('We are HEre!!!!')
     var role = req.params.role;
     var username = req.params.username;
     var roleNum = ''
@@ -30,10 +28,11 @@ router.get('/public/:role/:username', (req,res)=>{
         res.redirect('/login')
     }
 
-
-
     db.users.findAll({where: {username: username}})
     .then((results)=>{
+        console.log(role)
+        console.log(username)
+        console.log('HERE!!!!PLZ', results[0], " cnothing")
         if (req.user){
             var masterRole = ""
             if (req.user.role_id === 1){
@@ -43,8 +42,7 @@ router.get('/public/:role/:username', (req,res)=>{
             }else{
                 masterRole = 'mentor'
             }
-
-            if (req.user.teacher_code === results[0].teacher_code || req.user.mentor_code === results[0].mentor_code) {
+            if ((results[0] && req.user.teacher_code === results[0].teacher_code) ||(results[0] && req.user.mentor_code === results[0].mentor_code)) {
                 sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
                 .then((results_2)=>{
                     
