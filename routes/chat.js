@@ -1,5 +1,6 @@
-const express = require('express');
+const express =require('express');
 const router = express.Router();
+
 
 
 
@@ -17,12 +18,22 @@ router.get('/chat', (req, res)=>{
             publicProfile: '/'+ role + '/'+ req.user.username,
             user:req.user,
             fName: req.user.fname,
-            mainUserName:req.user.fname
+            mainUserName:req.user.fname,
+            fname: req.user.fname,
+            lname: req.user.lname,
+            profilepic: req.user.image_url,
+            username: req.user.username,
+            userid:req.user.id
+
         })
     }else{
         res.redirect('/login')
     }
+
 });
+
+
+
 
 
 module.exports = router

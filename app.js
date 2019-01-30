@@ -6,6 +6,7 @@ const db = require('./models/');
 const session = require('express-session');
 // const fileUpload = require('express-fileupload');
 
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -31,24 +32,42 @@ app.get('/chat', (req, res)=>{
 app.use(require('./routes/friends'))
 app.use(require('./routes/api'));
 
+users = [];
+connections = [];
+var userid = `<%=userid%>`
+io.on('connection', function (socket) {
 
+    connections.push(socket);
 
-io.on('connection', (socket)=> {
-    console.log('someone connected')
-    socket.on('chat message', (msg)=> {
-        io.sockets.emit('chat message', msg);
-        
-        socket.on('typing', data => {
-            socket.broadcast.emit('typing', data)
-        })
+    socket.on('chat message', (msg) => {
+        socket.broadcast.emit('chat message', msg)
     });
-});
+
+    socket.on('send-nickname', function(socket){
+        socket.nickname = nickanme;
+        userid.push(socket.nickname);
+        console.log(users)
+    })
+    console.log('Connected: %s sockets connected', connections.length);
+    io.sockets.emit('totalUsers', { count: connections.length });
+    //Disconnect
+    socket.on('disconnect', function (data) {
+        users.splice(users.indexOf(socket.username), 1);
+        connections.splice(connections.indexOf(socket), 1);
+        console.log('Disconnected: %s sockets connected', connections.length);
+        io.sockets.emit('totalUsers', { count: connections.length });
+
+    });
+})
+
 
 
 // need this only when creating database.
-// db.users.sequelize.sync({force:true}).then(()=>{
+// db.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
 // })
+
+
 
 
 
