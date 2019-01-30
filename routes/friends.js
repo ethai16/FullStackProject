@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('fullstack', 'samsonblankenship', '', {
+const sequelize = new Sequelize('fullstack', 'erickthai', '', {
     dialect: 'postgres'
 });
 
@@ -52,17 +52,17 @@ router.get('/public/:role/:username', (req,res)=>{
                 res.render('profile', {
                     publicProfile: '/'+ masterRole + '/'+ req.user.username,
                     user: req.user,
+                    friendInfo: results[0],
                     fName: results[0].fname,
                     lName: results[0].lname,
                     mainUser: req.user.username,
                     mainUserName:req.user.fname,
-                    post: results_2[0]
+                    post: results_2[0],
                 })
             })
                 
 
             }else{
-                console.log("COME ON MAN!!!!!!!!!")
                 res.redirect('/login')
             }
         }else{

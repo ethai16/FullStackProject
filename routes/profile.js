@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('fullstack', 'samsonblankenship', '', {
+const sequelize = new Sequelize('fullstack', 'erickthai', '', {
     dialect: 'postgres'
 });
 
@@ -39,7 +39,7 @@ router.get('/:userRole/:username', (req,res)=>{
                 masterRole = 'mentor'
             }
             sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
-            .then((results_2)=>{
+            .then((results)=>{
                 
                 
             res.render('profile', {
@@ -49,7 +49,8 @@ router.get('/:userRole/:username', (req,res)=>{
                 mainUserName:req.user.fname,
                 lName: req.user.lname,
                 mainUser: req.user.username,
-                post: results_2[0]
+                post: results[0],
+                friendInfo:'' 
             })
         })
         }else{

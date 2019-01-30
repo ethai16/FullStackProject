@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const sequelize = new Sequelize('fullstack', 'samsonblankenship', '', {
+const sequelize = new Sequelize('fullstack', 'erickthai', '', {
     dialect: 'postgres'
   });
 
@@ -83,7 +83,7 @@ router.get('/dashboard', (req,res)=>{
             mentor: mentorUser,
             teacher: teacherUser,
             mentorUsername: mentorUsername,
-            teacherUsername:teacherUsername 
+            teacherUsername:teacherUsername ,
         })
     })
     }else{
@@ -102,7 +102,7 @@ router.get('/dashboard', (req,res)=>{
             mentor: mentorUser,
             teacher: teacherUser,
             mentorUsername: mentorUsername,
-            teacherUsername:teacherUsername 
+            teacherUsername:teacherUsername,
         })
     }
 
