@@ -27,24 +27,34 @@ app.use(require('./routes/search'));
 app.use(require('./routes/signup'));
 app.use(require('./routes/api'));
 
+users = [];
+connections = [];
+var userid = `<%=userid%>`
+io.sockets.on('connection', function (socket) {
 
+    connections.push(socket);
+    console.log(`Socket ${socket.id} connected.`);
 
-io.on('connection', (socket)=> {
-    console.log('someone connected')
-    socket.on('chat message', (msg)=> {
-        io.emit('chat message', msg);
-        
-    
+    socket.on('chat message', (msg) => {
+        // console.log(msg)
+
+        socket.broadcast.emit('chat message', msg)
     });
-});
+    console.log('Connected: %s sockets connected', connections.length);
+
+    //added this below
+    io.sockets.emit('totalUsers', { count: connections.length });
 
 
-// io.on('chat message',(username)=>{
-//     socket.username = username;
-// })
-// io.sockets.on('connection', function (socket) {
-//     console.log('a client connected')
-//    });
+    //Disconnect
+    socket.on('disconnect', function (data) {
+        users.splice(users.indexOf(socket.username), 1);
+        connections.splice(connections.indexOf(socket), 1);
+        console.log('Disconnected: %s sockets connected', connections.length);
+        io.sockets.emit('totalUsers', { count: connections.length });
+
+    });
+})
 
 
 
@@ -55,9 +65,9 @@ io.on('connection', (socket)=> {
 
 
 
-    
 
 
-http.listen(3000, ()=>{
+
+http.listen(3000, () => {
     console.log('listening on port 3000')
 })

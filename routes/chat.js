@@ -1,4 +1,4 @@
-const express = require('express');
+const express =require('express');
 const router = express.Router();
 
 
@@ -16,13 +16,15 @@ router.get('/chat', (req, res)=>{
     }else{
         res.redirect('/login')
     }
+    
     res.render('chat', {
         publicProfile: '/'+ role + '/'+ req.user.username,
         fname: req.user.fname,
         lname: req.user.lname,
         profilepic: req.user.image_url,
         username: req.user.username,
-
+        userid:req.user.id,
+        
     })
 
 });

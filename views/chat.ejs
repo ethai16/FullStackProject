@@ -36,9 +36,9 @@
 									<img src="<%=profilepic%>" class="rounded-circle user_img">
 									<span class="online_icon"></span>
 								</div>
-								<div class="user_info">
-									<span><%=username%></span>
-									<p>User is online</p>
+								<div class="user_info" id = "name">
+									<span id = 'username'><%=username%></span>
+									<p>User is online </p>
 								</div>
 							</div>
 						</li>
@@ -59,7 +59,7 @@
 								</div>
 								<div class="user_info">
 									<span>Group Chat</span>
-									<p id='feedback'></p>
+									<p id='users'></p>
 								</div>
 							</div>
 						</div>
@@ -94,26 +94,28 @@
 
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<% include partials/jsdefaults.ejs %>
+<script>
+    var socket = io();
+    socket.on('totalUsers', function (data) {
+        // console.log(data.count);
+        $(users).html('Total connected users: ' + data.count);
+    });
+</script>
+<script>
+    var userid = `<%=userid%>`
+    var socketid = userid
+    $(function () {
+        var socket = io();
+        $('form').submit((e) => {
+            e.preventDefault();
+            socket.emit('chat message', $('#m').val());
+            return false;
+        });
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-        <% include partials/jsdefaults.ejs %>
-        <script>
-
-                $(function () {
-                    var socket = io();
-                    $('form').submit((e)=> {
-                        e.preventDefault();
-                        socket.emit('chat message', $('#m').val());
-                        return false;
-                    });
-                    
-
-
-                    socket.on('chat message', (msg)=> {
-                        var input = $('#m').val()
-                        
-                        console.log(input) 
-                        var usermessages = `<div class="d-flex justify-content-start mb-4" >
+        socket.on('chat message', (msg) => {
+            var usermessages = `<div class="d-flex justify-content-start mb-4" >
                                                 <div class="img_cont_msg">
                                                     <img src="<%=profilepic%>" class="rounded-circle user_img_msg">
                                                 </div>
@@ -122,9 +124,7 @@
                                                     <span class="msg_time"><%=fname%> <%=lname%></span>
                                                 </div>
                                             </div>`
-                            console.log("usermessages", usermessages)
-
-                        var recmessages = `<div class="d-flex justify-content-end mb-4">
+            var recmessages = `<div class="d-flex justify-content-end mb-4">
                                                 <div class="msg_cotainer_send">
                                                         ${msg}
                                                     <span class="msg_time_send"><%=fname%> <%=lname%></span>
@@ -133,15 +133,21 @@
                                                     <img src="<%=profilepic%>" class="rounded-circle user_img_msg">
                                                 </div>
                                             </div>`
-                                            // console.log("recmessages", recmessages)
-                                            
-                        $('#messages').append(usermessages);
-                        $('#m').val('')
-                        
-                            
-                    });
-                });
-            </script> 
+$('#m').val('')
+            if (socketid == 2) {
+                
+                $('#messages').append(recmessages);
+            } else if (socketid > 2) {
+            console.log(socketid+" this is the id")
+                $('#messages').append(usermessages);
+
+            }
+
+            
+            $('#m').val('')
+        });
+    });
+</script>
 	</body>
 </html>
 
