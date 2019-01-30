@@ -85,7 +85,12 @@ body {
     font-size: 40px !important;
     z-index: 2;
 }
-
+.top{
+    color: rgb(93, 93, 189) !important;
+    text-align: center;
+    font-family:'Roboto',sans-serif;
+    font-weight:bold  !important;
+}
 
 /* QUOTE BOX END  */
 header{

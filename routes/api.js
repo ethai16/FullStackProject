@@ -139,8 +139,9 @@ router.put('/api/edit/:userID',(req,res)=>{
                     username: {[Sequelize.Op.eq]: userID}
                 }
             })
-            .then(results => 
-                {if (results.length >0){
+            .then(results => {
+                console.log(results.length)
+                if (results.length >0){
                     res.render('home');
                 }else{
                     res.render('message',{
