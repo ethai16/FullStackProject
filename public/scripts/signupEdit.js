@@ -64,6 +64,7 @@ $(function(){
             oldData[name] =val;
         });
     });    
+    console.log("hello!!!")
     
    // edit
     $('#update').on('click', e=>{

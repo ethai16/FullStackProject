@@ -44,6 +44,7 @@ router.get('/:userRole/:username', (req,res)=>{
                 
             res.render('profile', {
                 publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                user:req.user,
                 fName: req.user.fname,
                 mainUserName:req.user.fname,
                 lName: req.user.lname,
