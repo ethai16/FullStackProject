@@ -18,26 +18,57 @@ router.use(bodyParser.urlencoded({extended: false}));
 // })
 
 router.get('/cards', (req,res)=>{
+    var masterRole = ""
+    if (req.user.role_id === 1){
+        masterRole = 'teacher'
+    }else if (req.user.role_id === 2){
+        masterRole = 'student' 
+    }else{
+        masterRole = 'mentor'
+    }
+    if(req.user){
     if(req.query.category==11){
         res.render('Designcards',{
-            pageTitle: 'Design'
+            pageTitle: 'Design',
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            mainUserName:req.user.fname,
+            user: req.user
         });
     } else if(req.query.category==9) {
         res.render('Consultantcards',{
-            pageTitle: 'Consultant'
+            pageTitle: 'Consultant',
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            mainUserName:req.user.fname,
+            user: req.user
+
         });       
     } else if(req.query.category==14) {
         res.render('Engineercards',{
-            pageTitle: 'Engineer'
+            pageTitle: 'Engineer',
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            mainUserName:req.user.fname,
+            user: req.user
+
         });
     } else if(req.query.category==39) {
         res.render('Sciencecards',{
-            pageTitle: 'Science'
+            pageTitle: 'Science',
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            mainUserName:req.user.fname,
+            user: req.user
+
         });
     } else {
         res.render('cards',{
-            pageTitle: 'Cards'
+            pageTitle: 'Cards',
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            mainUserName:req.user.fname,
+            user: req.user
+
         });       
+    }
+    }else{
+        res.redirect('/login')
     }
 });
 

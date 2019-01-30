@@ -17,16 +17,31 @@ var myStore = new SequelizeStore({
 
 
 router.get('/search', (req,res)=>{
+    var masterRole = ""
+    if (req.user.role_id === 1){
+        masterRole = 'teacher'
+    }else if (req.user.role_id === 2){
+        masterRole = 'student' 
+    }else{
+        masterRole = 'mentor'
+    }
     // console.log('searchpage');
     db.industries.findAll()
     .then((results)=>{
+        if(req.user){
         res.render('search',{
             pageTitle: 'Search',
-            data: results
+            data: results,
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            mainUserName:req.user.fname,
+            user: req.user
+
         }) 
+    }else{
+        res.redirect('/login')
+    }
     })
 });
- 
 // db.users.findAll({
 //     raw:true
 //     ,attributes: {
