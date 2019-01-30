@@ -13,11 +13,11 @@ const sequelize = new Sequelize('fullstack', 'rigohernandez', '', {
     dialect: 'postgres'
 });
 
-
-router.get('/:userRole/:username', (req,res)=>{
-    var role = req.params.userRole;
+router.get('/public/:role/:username', (req,res)=>{
+    var role = req.params.role;
     var username = req.params.username;
     var roleNum = ''
+
     if (role === 'teacher'){
         roleNum = 1
     } else if(role === 'student') {
@@ -28,8 +28,12 @@ router.get('/:userRole/:username', (req,res)=>{
         res.redirect('/login')
     }
 
-    if (req.user){
-        if (req.user.username === username && roleNum === req.user.role_id) {
+    db.users.findAll({where: {username: username}})
+    .then((results)=>{
+        console.log(role)
+        console.log(username)
+        console.log('HERE!!!!PLZ', results[0], " cnothing")
+        if (req.user){
             var masterRole = ""
             if (req.user.role_id === 1){
                 masterRole = 'teacher'
@@ -38,38 +42,31 @@ router.get('/:userRole/:username', (req,res)=>{
             }else{
                 masterRole = 'mentor'
             }
-            sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
-            .then((results)=>{
-                
-                
-            res.render('profile', {
-                publicProfile: '/'+ masterRole + '/'+ req.user.username,
-                user:req.user,
-                fName: req.user.fname,
-                mainUserName:req.user.fname,
-                lName: req.user.lname,
-                mainUser: req.user.username,
-                post: results[0],
-                friendInfo:'' 
+            if ((results[0] && req.user.teacher_code === results[0].teacher_code) ||(results[0] && req.user.mentor_code === results[0].mentor_code)) {
+                sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
+                .then((results_2)=>{
+                    
+                    
+                res.render('profile', {
+                    publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                    user: req.user,
+                    friendInfo: results[0],
+                    fName: results[0].fname,
+                    lName: results[0].lname,
+                    mainUser: req.user.username,
+                    mainUserName:req.user.fname,
+                    post: results_2[0],
+                })
             })
-        })
+                
+
+            }else{
+                res.redirect('/login')
+            }
         }else{
             res.redirect('/login')
         }
-    }else{
-        res.redirect('/login')
-    }
-})
-router.post("/:userRole/:username", (req, res) => {
-    var username = req.user.username;
-    var comment = req.body.post;
-
-    res.status(204).send();
-    db.comments.create({
-        username: username,
-        comment: comment
     })
-
 })
 
 module.exports = router

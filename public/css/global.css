@@ -76,6 +76,10 @@ a.forget:hover {
     text-decoration: underline;
 }
 
+.fa-times-circle:hover{
+    color:red
+}
+
 .bg-maincolor{
     background-color:rgb(93, 93, 189);
 }
@@ -106,7 +110,6 @@ ul {
 input {
     outline:none;
 }
-
 @font-face {
     font-family: 'Flama-Medium';
     font-style: normal;

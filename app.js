@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-const db = require('./models/')
-const session = require('express-session')
-const fileUpload = require('express-fileupload');
+const db = require('./models/');
+const session = require('express-session');
+// const fileUpload = require('express-fileupload');
 
 
 app.set("view engine", "ejs");
@@ -21,10 +21,15 @@ app.use(require('./routes/profile'));
 app.use(require('./routes/dashboard'));
 app.use(require('./routes/chat'));
 app.use(require('./routes/search'));
+app.use(require('./routes/cards'));
+const fileUpload = require('express-fileupload');
 
 
-
-app.use(require('./routes/signup'));
+app.get('/chat', (req, res)=>{
+    // res.sendFile(__dirname + '/views/index.ejs')
+    res.render('chat')
+});
+app.use(require('./routes/friends'))
 app.use(require('./routes/api'));
 
 users = [];
@@ -66,7 +71,6 @@ io.on('connection', function (socket) {
 
 
 
-
-http.listen(3000, () => {
+http.listen(3000, ()=>{
     console.log('listening on port 3000')
 })

@@ -43,15 +43,8 @@ router.post('/login',passport.authenticate('local', {failureRedirect: '/'}), (re
     // passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/login'})
     //used to check role of login user
     console.log(req.user)
+    console.log(req.user.role)
     if(req.user){
-        var role = ""
-        if (req.user.role === 1){
-            role = 'teacher'
-        }else if (req.user.role === 2){
-            role = 'student' 
-        }else{
-            role = 'mentor'
-        }
         if (req.user.role){
             res.redirect('/dashboard');
         }else{
@@ -76,8 +69,10 @@ passport.use(new LocalStrategy((username, password, done)=>{
         //if err occurs fix this vvv(was results != null)
         if(results.length != 0) {
             const data = results[0];
-            console.log(data)
             bcrypt.compare(password, data.password_hash, (err, res)=>{
+                console.log("password input:", password)
+                console.log("password database:", data.password_hash)
+                console.log(res)
                 if (res) {
                     done(null, {id: data.id, username: data.username, role: data.role_id})
                 }else{
@@ -98,7 +93,9 @@ passport.deserializeUser((username, done)=>{
     //changed to find by username and not by id
     db.users.findOne({where: {username: username}}).then((data)=>{
         done(null,data)
+
     })
+
 })
 
 
