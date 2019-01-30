@@ -106,11 +106,14 @@
 <script>
     var userid = `<%=userid%>`
     var socketid = userid
+    // var nickname = document.getElementByID('nickname').textContent
     $(function () {
         var socket = io();
         $('form').submit((e) => {
             e.preventDefault();
             socket.emit('chat message', $('#m').val());
+            // socket.emit('send-nickname', nickname);
+            
             return false;
         });
 
@@ -133,19 +136,23 @@
                                                     <img src="<%=profilepic%>" class="rounded-circle user_img_msg">
                                                 </div>
                                             </div>`
-$('#m').val('')
+                                            $('#m').val('')
             if (socketid == 2) {
+                console.log(socketid+" this is the id")
+                $('#messages').append(usermessages);
                 
-                $('#messages').append(recmessages);
             } else if (socketid > 2) {
             console.log(socketid+" this is the id")
-                $('#messages').append(usermessages);
+                $('#messages').append(recmessages);
 
             }
-
             
             $('#m').val('')
         });
+        // socket.on('send-nickname', (msg)=>{
+        //     $('#messages').append(msg);
+        //     console.log("we are in here")
+        // })
     });
 </script>
 	</body>

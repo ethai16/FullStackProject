@@ -24,7 +24,6 @@ router.get('/chat', (req, res)=>{
         profilepic: req.user.image_url,
         username: req.user.username,
         userid:req.user.id,
-        
     })
 
 });

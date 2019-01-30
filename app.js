@@ -30,22 +30,21 @@ app.use(require('./routes/api'));
 users = [];
 connections = [];
 var userid = `<%=userid%>`
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
 
     connections.push(socket);
-    console.log(`Socket ${socket.id} connected.`);
 
     socket.on('chat message', (msg) => {
-        // console.log(msg)
-
         socket.broadcast.emit('chat message', msg)
     });
+
+    socket.on('send-nickname', function(socket){
+        socket.nickname = nickanme;
+        userid.push(socket.nickname);
+        console.log(users)
+    })
     console.log('Connected: %s sockets connected', connections.length);
-
-    //added this below
     io.sockets.emit('totalUsers', { count: connections.length });
-
-
     //Disconnect
     socket.on('disconnect', function (data) {
         users.splice(users.indexOf(socket.username), 1);
