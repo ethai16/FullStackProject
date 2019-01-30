@@ -82,9 +82,9 @@ router.post('/api',(req, res)=>{
 });
 
 
+
 router.delete('/api/delete/:userID',(req,res)=>{
     let userID = req.params.userID;
-    console.log(req.params.userID)
     db.users.destroy({
         where: {
             username: {[Sequelize.Op.eq]: userID}
@@ -119,39 +119,47 @@ router.delete('/api/delete/comment/:commentId',(req,res)=>{
 
 router.put('/api/edit/:userID',(req,res)=>{
     let userID = req.params.userID;
+    let pwd = req.body.password;
+    //utilizing bcrypt
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(pwd, salt, (err, hash) => {
+            let updatedObj = {};
+            Object.keys(req.body).forEach(function(item) {
+                if (item === 'password'){
+                    updatedObj['password_hash']= hash,
+                    updatedObj['password_salt']= salt
+                } else{
+                    updatedObj[item] = req.body[item];
+                }
+            });
+            db.users.update(
+                updatedObj
+                ,{where: {
+                    username: {[Sequelize.Op.eq]: userID}
+                }
+            })
+            .then(results => 
+                {if (results.length >0){
+                    res.render('home');
+                }else{
+                    res.render('message',{
+                        topMsg:`ERROR, No data has been updated.`,
+                        secondMsg:`Please try Update again.`
+                    });
+                }                      
+            })
+            .catch(error => {
+                res.render('message',{
+                    topMsg:`ERROR, ${error}.`,
+                    secondMsg:`Please try Update again.`
+                })                
+            })
+        });
+    });
+});
+
     
-    db.users.findOne({
-        where: {
-            username: {[Sequelize.Op.eq]: userID}
-        }
-    }).then(results=>{
-        console.log(results)
-        // res.render('signup',{
-        //     states: results.state_code,
-        //     schools:results.school.name,
-        //     industries:results.industries.name,
-        //     topMsg:"edit Profile".toUpperCase()
-        // });
-    }).catch(error=>{
-        console.log(error)
-    })
-})
-// // // edit
-// router.put('/api/edit/userId',(req, res)=>{
-//     let paramId = parseInt(req.params.id);
-//     let fdbk = req.body.feedback;
-// // way 2
-//     db.users.update(
-//         {feedback: fdbk}
-//         ,{where:{username: {[Sequelize.Op.eq]: paramId}}
-//     })
-//     .then(results => {
-//         // console.log(data.get({plain: true}))
-//         console.log('updated successfully)
-//     })
-//     .catch(error => {
-//         console.error(`Error Message: ${error}`)
-//     })
-// })
+
 
 module.exports = router;

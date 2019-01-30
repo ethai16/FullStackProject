@@ -16,6 +16,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/chat">Chat</a>
                     </li>
+                    <% if(user.role_id===1){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/search">Search</a>
+                        </li> 
+                    <% } %>
                 </div>
                 <div class = "d-flex align-items-center">
                     <li class = "nav-item d-flex align-items-center justify-content-center px-4" onclick="openNav()" style = "border-left:darkgrey 1px solid">
@@ -28,9 +33,9 @@
     
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
+        <a href="/signup/<%=user.role_id %>/<%=user.username%>">Settings</a>
         <a href="/logout">Log Out</a>
-        <a href="#">Clients</a>
+        <a href="#">About</a>
         <a href="#">Contact</a>
     </div>
     

@@ -1,30 +1,16 @@
 $(function(){
-
-    // retrieve role from url path
-    let role = parseInt($('#role_id').val());
-    $('.student, .teacher, .mentor').hide();
-    console.log(role)
-    // set req.params.role_id
+    const role = parseInt($('#role_id').val());
+    let role_name ='';
     if (role === 1) {
-        $('.teacher').show()
+        role_name = 'teacher'
     }else if (role === 2){
-        $('.student').show()
+        role_name ='student'
     }else {
-        $('.mentor').show()
+        role_name = 'mentor'
     }
+    const userId = $('#username').val();    
 
-    const deleted = ()=>{
-        $('#wantDlt').modal('toggle');
-        $('#dltComp').modal('toggle');
-    };
-
-    
-    // let gradeval = $('#grade').val()
-    // console.log(gradeval)
-    // $('.grade').find(`option:contains(${gradeval})`).attr("selected",true);
-
-    // $.getJSON('api')
-    // avator setup
+    // === file upload
     var readURL = function (input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -39,32 +25,106 @@ $(function(){
         readURL(this);
     });
 
+    // === initial set up. Option selections, show area    
+    let teaArr = ['grade','school_id', 'industry_id1', 'industry_id2', 'industry_id3'];
+    teaArr.forEach(ele=>{     // dropdown selection
+        let valtea = $(`#${ele}-${role}_div`).attr('name');
+        $(`select[name^="${ele}-${role}"] option[value="${valtea}"]`).attr("selected","selected");                
+    })
 
-    // to show tabs correctly
-    if (location.hash) {
-        $("a[href='" + location.hash + "']").tab("show");
-    }
-    $(document.body).on("click", "a[data-toggle]", function(event) {
-        location.hash = this.getAttribute("href");
-    });
+    let stateCode = ['state_code', 'company_state_code']
+    stateCode.forEach(ele =>{
+        let valState = $(`#${ele}_div`).attr('name');
+        $(`select[name^="${ele}"] option[value="${valState}"]`).attr("selected","selected");
+    })
 
+    $('.student, .teacher, .mentor').hide();
+    $(`.${role_name}`).show();
+
+// === check data before update 
+    let oldData ={};
+    let atr = ['input', 'textarea', 'select'];
+
+    // create obj that holds current data
+    atr.forEach(item =>{
+        $(`.generic ${item}`).each(function(){
+            let name = $(this).attr('name');
+            let val = $(this).val();
+            oldData[name] =val;
+        });
+        $(`.private ${item}`).each(function(){
+            let name = $(this).attr('name');
+            let val = $(this).val();
+            oldData[name] =val;
+        });
+        $(`.${role_name} ${item}`).each(function(){
+            let name = $(this).attr('name');
+            name= name.includes("-") ? name.split("-")[0] : name;
+            let val = $(this).val();
+            oldData[name] =val;
+        });
+    });    
+
+    console.log(oldData)
     
-   // submit
-    $('#submit').on('click'), e=>{
+   // edit
+    $('#update').on('click', e=>{
+        let updatedData ={};
+        // crete obj that holds updated data
+        atr.forEach(item =>{
+            $(`.generic ${item}`).each(function(){
+                let name = $(this).attr('name');
+                let val = $(this).val();
+                updatedData[name] =val;
+            });
+            $(`.private ${item}`).each(function(){
+                let name = $(this).attr('name');
+                let val = $(this).val();
+                updatedData[name] =val;
+            });
+            $(`.${role_name} ${item}`).each(function(){
+                let name = $(this).attr('name');
+                name= name.includes("-") ? name.split("-")[0] : name;
+                let val = $(this).val();
+                updatedData[name] =val;
+            });
+        })
+        console.log(updatedData)
+        // compare old data() and new data
+        let hasObj = false;
+        let newObj ={};
+        $.each(updatedData, function(key2, val2){
+            hasObj = false;
+            if (key2 in oldData){
+                if (val2 !== oldData[key2]){
+                    newObj[key2]= val2
+                }
+            } else{
+                alert("error! Please double check on the page")
+            }
+        })
+        
+        $.ajax({
+            url: '/api/edit/'+ userId,
+            data:newObj,
+            type: 'PUT',
+            success(){
+                $('#updComp').modal('toggle');
+            }        
+        });  
         e.preventDefault();
-        // $.post('api/',{
-        //     data});
-    }
+    })
 
     // delete
     $("#delete").on("click", e => {
-        let id = $('#username').val();    
         $.ajax({
-            url: '/api/delete/'+id,
+            url: '/api/delete/'+userId,
             type: 'DELETE',
-            success: deleted()
+            success(){
+                $('#wantDlt').modal('toggle');
+                $('#dltComp').modal('toggle');
+            }
         });
-            
         e.stopPropagation();
     }); // end of delete
 });
