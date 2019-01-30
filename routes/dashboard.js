@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+const sequelize = new Sequelize('fullstack', 'hiro', '', {
     dialect: 'postgres'
   });
 
@@ -68,7 +68,9 @@ router.get('/dashboard', (req,res)=>{
                 }
             }
 
-
+            console.log(mentorUser)
+            console.log(teacherUser)
+            console.log('result2', results_2)
         res.render('dashboard', {
             publicProfile: '/'+ masterRole + '/'+ req.user.username,
             user:req.user,

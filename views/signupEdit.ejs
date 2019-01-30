@@ -1,26 +1,12 @@
 <head>
-    <title> a </title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <% include partials/head.ejs %>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
     <!-- Local CSS -->
-    <link rel="stylesheet" href="/css/global.css" type="text/css">
     <link rel="stylesheet" href="/css/signup.css" type="text/css">
-
-    <!-- Scrollbar CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.1/css/mdb.min.css" rel="stylesheet">
-    <!--Font Awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-        crossorigin="anonymous">
 </head>
 
 <body>
+    <% include partials/navbar.ejs %>
 
     <div class="container">
         <!-- Top row start (optional)-->
@@ -252,7 +238,7 @@
                                 <label for="teacher_code-2">
                                     <h5>Teacher code</h5>
                                 </label>
-                                <input type="text" class="form-control" name="teacher_code-2" value='<%data.teacher_code%>'>
+                                <input type="text" class="form-control" name="teacher_code-2" value='<%=data.teacher_code%>'>
                             </div> 
                             <div class="col-sm-3">
                                 <label for="mentor_code-2">
@@ -442,7 +428,7 @@
                             <button class="btn save btn-primary" type='button' id="update">
                                 Update</button>
                             <button class="btn reset btn-light" type="reset"><i class="m-1 fas fa-undo"></i>Reset</button>
-                            <a class="btn reset btn-light" href='/dashboard' ></i>Cancel</a>
+                            <a class="btn reset pt-3 btn-light" href='/dashboard' ></i>Cancel</a>
                         </div>
                     </div>
                 </div>
@@ -472,12 +458,8 @@
     <!--/CONTAINER END -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS, then MDB -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <% include partials/footer.ejs %>
+    <% include partials/jsdefaults.ejs %>
     <script src='/scripts/signupEdit.js'></script>
     <script>
         if (!RegExp.escape) {
