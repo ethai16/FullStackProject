@@ -33,7 +33,7 @@
                         <% } %>
                         <div class="shadow bg-maincolor pt-3 font-white font-weight-bold border m-1 d-flex justify-content-center usernameReference" style="height:56px">
                                 <div>Username: <br></div>
-                                <div id="usernameReference">
+                                <div id="usernameReference" style='color:white'>
                                 <% if (user.role_id === 1){ %>
                                 <a href='signup/teacher/<%= mainUser %>'><%= mainUser %></a>
                                 <% }else if(user.role_id === 2){ %>
