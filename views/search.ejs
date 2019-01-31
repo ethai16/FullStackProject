@@ -11,10 +11,15 @@
         <div class ="col-sm-9 main-section">
             <div class="modal-content">
                 <div class="col-12 form-input">
-                    <form method="GET" action="cards">
+                    <form method="GET" action="/mentorlists">
                         <div class="form-group">
-                            <% include partials/categories.ejs %>
-                            <!-- <input type="text" class="form-control" placeholder="Seach category" name="category"> -->
+                            <select name="category">
+                                <option value="">Choose your Category</option>
+                                <% data.forEach(item=>{ %>
+                                    <option value="<%=item.id %>"><%=item.industries %></option>
+                                <% }) %>
+                            </select> 
+                                                        <!-- <input type="text" class="form-control" placeholder="Seach category" name="category"> -->
                             <button type="submit" class="search-btn" >search</button> 
                         </div>
                     </form>

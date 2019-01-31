@@ -82,7 +82,7 @@ router.post('/api',(req, res)=>{
 });
 
 
-
+// delete account
 router.delete('/api/delete/:userID',(req,res)=>{
     let userID = req.params.userID;
     db.users.destroy({
@@ -116,7 +116,7 @@ router.delete('/api/delete/comment/:commentId',(req,res)=>{
 })
 
 
-
+// edit account detail
 router.put('/api/edit/:userID',(req,res)=>{
     let userID = req.params.userID;
     let pwd = req.body.password;
@@ -140,7 +140,7 @@ router.put('/api/edit/:userID',(req,res)=>{
                 }
             })
             .then(results => {
-                console.log(results.length)
+                // console.log(results.length)
                 if (results.length >0){
                     res.render('home');
                 }else{
