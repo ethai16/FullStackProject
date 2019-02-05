@@ -17,6 +17,13 @@
     </head>
     <main class = "container-fluid d-flex" >
         <div class = "col-3 d-flex flex-column" style = "height:92vh">
+            <% if (user.role_id === 1 || fRole === 1){ %>
+                    <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center">Teacher</div>
+            <% }else if(user.role_id === 2 || fRole === 2){ %>
+                    <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Student</div>
+            <% }else{ %>
+                    <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Mentor</div>
+            <% } %>
             <!-- student -->
             <div class = "shadow m-1 mt-2 h-25 student" style = "display:flex;flex-direction: column">
                     <div class = "bg-maincolor font-white p-3">Extracurricular</div>
@@ -48,7 +55,7 @@
             </div>
         </div>
         <div class = "col-6 d-flex flex-column">
-                <div id = "post-box-public" class = "shadow  m-1 mt-2 overflow-hidden">
+                <div id = "post-box-public" class = "shadow  m-1 mt-1 overflow-hidden">
                         <div class = "bg-maincolor font-white p-3">Submit Post</div>
                         <form id="submitPost" method = "POST"> 
                             <div class = "d-flex justify-content-end m-3">

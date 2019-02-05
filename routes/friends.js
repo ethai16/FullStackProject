@@ -53,6 +53,7 @@ router.get('/public/:role/:username', (req,res)=>{
                     friendInfo: results[0],
                     fName: results[0].fname,
                     lName: results[0].lname,
+                    fRole: results[0].role_id,
                     mainUser: req.user.username,
                     mainUserName:req.user.fname,
                     post: results_2[0],

@@ -50,7 +50,8 @@ router.get('/:userRole/:username', (req,res)=>{
                 lName: req.user.lname,
                 mainUser: req.user.username,
                 post: results[0],
-                friendInfo:'' 
+                friendInfo:'',
+                fRole:''
             })
         })
         }else{
