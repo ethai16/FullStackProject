@@ -15,18 +15,21 @@ const sequelize = new Sequelize('fullstack', 'erickthai', '', {
 
 
 router.get('/:userRole/:username', (req,res)=>{
-//     var role = req.params.userRole;
-//     var username = req.params.username;
-//     var roleNum = ''
-//     if (role === 'teacher'){
-//         roleNum = 1
-//     } else if(role === 'student') {
-//         roleNum = 2
-//     } else if (role === 'mentor'){
-//         roleNum = 3
-//     }else{
-//         res.redirect('/login')
-//     }
+    var role = req.params.userRole;
+    var username = req.params.username;
+    var roleNum = ''
+    if (role === 'teacher'){
+        roleNum = 1
+        res.send(roleNum)
+    } else if(role === 'student') {
+        roleNum = 2
+        res.send(roleNum)
+    } else if (role === 'mentor'){
+        roleNum = 3
+        res.send(roleNum)
+    }else{
+        res.redirect('/login')
+    }
 
 //     if (req.user){
 //         if (req.user.username === username && roleNum === req.user.role_id) {
@@ -70,7 +73,6 @@ router.get('/:userRole/:username', (req,res)=>{
 //         username: username,
 //         comment: comment
 //     })
-    res.send('This is a test')
 })
 
 module.exports = router
