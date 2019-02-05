@@ -42,7 +42,7 @@ router.get('/:userRole/:username', (req,res)=>{
             .then((results)=>{
                 
                 
-            res.render('profile', {
+            res.render('home', {
                 publicProfile: '/'+ masterRole + '/'+ req.user.username,
                 user:req.user,
                 fName: req.user.fname,
