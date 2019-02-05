@@ -41,18 +41,17 @@ router.get('/:userRole/:username', (req,res)=>{
 
             sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
             .then((results)=>{
-                res.send(results)
-            // res.render('profile', {
-            //     publicProfile: '/'+ masterRole + '/'+ req.user.username,
-            //     user:req.user,
-            //     fName: req.user.fname,
-            //     mainUserName:req.user.fname,
-            //     lName: req.user.lname,
-            //     mainUser: req.user.username,
-            //     post: results[0],
-            //     friendInfo:'',
-            //     fRole:''
-            // })
+            res.render('profile', {
+                publicProfile: '/'+ masterRole + '/'+ req.user.username,
+                user:req.user,
+                fName: req.user.fname,
+                mainUserName:req.user.fname,
+                lName: req.user.lname,
+                mainUser: req.user.username,
+                post: results[0],
+                friendInfo:'',
+                fRole:''
+            })
         })
         }else{
             res.redirect('/login')

@@ -21,6 +21,7 @@
     "express": "^4.16.4",
     "express-fileupload": "^1.1.1-alpha.1",
     "express-session": "^1.15.6",
+    "mysql": "^2.16.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pbkdf2": "^3.0.17",

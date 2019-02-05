@@ -5,10 +5,14 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
       },
       state: {
+        type: Sequelize.STRING,
+        primaryKey: true
+
+      },
+      name: {
         type: Sequelize.STRING
       },
       createdAt: {
