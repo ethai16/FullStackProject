@@ -19,11 +19,11 @@ router.get('/:userRole/:username', (req,res)=>{
     var username = req.params.username;
     var roleNum = ''
     if (role === 'teacher'){
-        roleNum = '1'
+        roleNum = 1
     } else if(role === 'student') {
-        roleNum = '2'
+        roleNum = 2
     } else if (role === 'mentor'){
-        roleNum = '3'
+        roleNum = 3
     }else{
         res.redirect('/login')
     }
