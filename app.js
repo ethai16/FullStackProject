@@ -4,7 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const db = require('./models/');
 const session = require('express-session');
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -20,6 +20,14 @@ app.use(require('./routes/profile'));
 app.use(require('./routes/dashboard'));
 app.use(require('./routes/chat'));
 app.use(require('./routes/search'));
+app.use(require('./routes/cards'));
+const fileUpload = require('express-fileupload');
+
+
+app.get('/chat', (req, res)=>{
+    // res.sendFile(__dirname + '/views/index.ejs')
+    res.render('chat')
+});
 app.use(require('./routes/friends'))
 app.use(require('./routes/api'));
 

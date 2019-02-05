@@ -15,6 +15,7 @@ router.get('/chat', (req, res)=>{
         }
         res.render('chat', {
             publicProfile: '/'+ role + '/'+ req.user.username,
+            user:req.user,
             fName: req.user.fname,
             mainUserName:req.user.fname
         })

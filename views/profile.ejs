@@ -9,7 +9,7 @@
         <div class = "container-fluid">
             <div class="shadow border m-3 mt-2"style = "height:40vh">
                 <div class = "bg-maincolor h-75 d-flex pl-3" style = "padding-top:10vh">
-                        <div class = "bg-light d-flex justify-content-center align-items-center pt-3" style = "width:25vh; height:25vh; border-radius:50%;border:white 7px solid"></div>
+                        <div class = "bg-light d-flex justify-content-center align-items-center pt-3" style = "width:25vh; height:25vh; border-radius:50%;border:white 7px solid;overflow: hidden"><img style ="height:35vh" src = "/images/face.png"></div>
                         <div id = "nameContainer" class = "d-flex flex-column justify-content-end pl-3" style = "color:white"><%=fName%> <%=lName%></div>
                 </div>
             </div>
@@ -19,16 +19,12 @@
         <div class = "col-3 d-flex flex-column" style = "height:92vh">
             <!-- student -->
             <div class = "shadow m-1 mt-2 h-25 student" style = "display:flex;flex-direction: column">
-                <div class = "bg-maincolor font-white p-3">Mentor</div>
-                <div class = "bg-white flex-fill">Hello World</div>
-            </div>
-            <div class = "shadow m-1 mt-2 h-25 student" style = "display:flex;flex-direction: column">
                     <div class = "bg-maincolor font-white p-3">Extracurricular</div>
-                    <div class = "bg-white flex-fill">Hello World</div>
+                    <div class = "bg-white flex-fill">TBD</div>
             </div>
             <div class = "shadow m-1 mt-2 h-25 student" style = "display:flex;flex-direction: column">
                     <div class = "bg-maincolor font-white p-3">Enrolled Classes</div>
-                    <div class = "bg-white flex-fill">Hello World</div>
+                    <div class = "bg-white flex-fill">TBD</div>
             </div>
             <!-- teacher -->
             <div class = "shadow m-1 mt-2 h-25 teacher" style = "display:flex;flex-direction: column">
@@ -70,7 +66,7 @@
                             <div class = "forDelete">
                             <div class="border m-1 h-25 postmessagesPublic">
                                     <div class="p-3 d-flex justify-content-between font-weight-bold">
-                                        <%=post[i].fname%><%=post[i].lname%>
+                                        <%=post[i].fname%> <%=post[i].lname%>
                                         <% if (post[i].username===mainUser){ %>
                                             <i class="fas fa-times-circle"></i>
                                         <% } %>
@@ -90,6 +86,11 @@
                         <ul class = "d-flex flex-column justify-content-between h-50 p-0 ml-1 mt-1">
                             <li class = "font-weight-bold">
                                 Grade:
+                                    <% if(friendInfo.username){ %>
+                                        <%=friendInfo.grade%>
+                                    <% }else{ %>
+                                        <%=user.grade %>
+                                    <% } %>
                             </li>
                             <li class = "font-weight-bold">
                                 School:
@@ -100,7 +101,12 @@
                         </ul>
                 </div>
                     <div class = "shadow d-flex flex-column m-1 order-3 overflow-hidden" style = "height:20vh; width:auto;min-width:200px; min-height:200px">
-                        
+                            <div class = "bg-maincolor font-white p-3 d-flex justify-content-end">Bio</div>
+                            <% if(friendInfo.username){ %>
+                                <%=friendInfo.bio%>
+                            <% }else{ %>
+                                <%=user.bio %>
+                            <% } %>
                     </div>
                     <!-- <div class = "shadow d-flex flex-column m-1 mt-2 order-1 overflow-hidden" style = "height:40vh; width:auto;min-width:200px; max-height:350px">
                         <div class = "bg-maincolor font-white p-3 d-flex justify-content-end">Intro</div>

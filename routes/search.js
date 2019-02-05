@@ -17,15 +17,48 @@ var myStore = new SequelizeStore({
 
 
 router.get('/search', (req,res)=>{
-    console.log('searchpage');
+    var masterRole = ""
+    if (req.user.role_id === 1){
+        masterRole = 'teacher'
+    }else if (req.user.role_id === 2){
+        masterRole = 'student' 
+    }else{
+        masterRole = 'mentor'
+    }
+    // console.log('searchpage');
     db.industries.findAll()
     .then((results)=>{
+        if(req.user){
         res.render('search',{
             pageTitle: 'Search',
-            data: results
+            data: results,
+            publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            mainUserName:req.user.fname,
+            user: req.user
+
         }) 
+    }else{
+        res.redirect('/login')
+    }
     })
 });
+// db.users.findAll({
+//     raw:true
+//     ,attributes: {
+//         include: [
+//             [db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id1")'), 'ind1_name']
+//             ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id2")'), 'ind2_name']
+//             ,[db.sequelize.literal('(SELECT "industries" FROM "industries" WHERE "industries"."id" = "users"."industry_id3")'), 'ind3_name']
+//     ]}
+//     ,include:[
+//         {model:db.schools}
+// ]}).then((results)=>{
+//     console.log(results);
+    
+// })
+//     ,where: {
+//         username: {[Sequelize.Op.eq]: userID}
+// }
 
 
 
