@@ -105,7 +105,7 @@ db.states.bulkCreate([
     ,{state:'SC', name:'South Carolina, US'}
     ,{state:'SD', name:'South Dakota, US'}
     ,{state:'TN', name:'Tennessee, US'}
-    ,{state:47, name:'Texas, US'}
+    ,{state:'TX', name:'Texas, US'}
     ,{state:'UT', name:'Utah, US'}
     ,{state:'VT', name:'Vermont, US'}
     ,{state:'VA', name:'Virginia, US'}
