@@ -41,40 +41,38 @@ router.get('/:userRole/:username', (req,res)=>{
                 masterRole = 'mentor'
                 res.send(masterRole)
             }
-        }
-    }
-//             sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
-//             .then((results)=>{
-                
-                
-//             res.render('profile', {
-//                 publicProfile: '/'+ masterRole + '/'+ req.user.username,
-//                 user:req.user,
-//                 fName: req.user.fname,
-//                 mainUserName:req.user.fname,
-//                 lName: req.user.lname,
-//                 mainUser: req.user.username,
-//                 post: results[0],
-//                 friendInfo:'',
-//                 fRole:''
-//             })
-//         })
-//         }else{
-//             res.redirect('/login')
-//         }
-//     }else{
-//         res.redirect('/login')
-//     }
-// })
-// router.post("/:userRole/:username", (req, res) => {
-//     var username = req.user.username;
-//     var comment = req.body.post;
 
-//     res.status(204).send();
-//     db.comments.create({
-//         username: username,
-//         comment: comment
-//     })
+            sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
+            .then((results)=>{
+                res.send(results)
+            // res.render('profile', {
+            //     publicProfile: '/'+ masterRole + '/'+ req.user.username,
+            //     user:req.user,
+            //     fName: req.user.fname,
+            //     mainUserName:req.user.fname,
+            //     lName: req.user.lname,
+            //     mainUser: req.user.username,
+            //     post: results[0],
+            //     friendInfo:'',
+            //     fRole:''
+            // })
+        })
+        }else{
+            res.redirect('/login')
+        }
+    }else{
+        res.redirect('/login')
+    }
+})
+router.post("/:userRole/:username", (req, res) => {
+    var username = req.user.username;
+    var comment = req.body.post;
+
+    res.status(204).send();
+    db.comments.create({
+        username: username,
+        comment: comment
+    })
 })
 
 module.exports = router
