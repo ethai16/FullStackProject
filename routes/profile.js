@@ -20,27 +20,29 @@ router.get('/:userRole/:username', (req,res)=>{
     var roleNum = ''
     if (role === 'teacher'){
         roleNum = '1'
-        res.send(roleNum)
     } else if(role === 'student') {
         roleNum = '2'
-        res.send(roleNum)
     } else if (role === 'mentor'){
         roleNum = '3'
-        res.send(roleNum)
     }else{
         res.redirect('/login')
     }
 
-//     if (req.user){
-//         if (req.user.username === username && roleNum === req.user.role_id) {
-//             var masterRole = ""
-//             if (req.user.role_id === 1){
-//                 masterRole = 'teacher'
-//             }else if (req.user.role_id === 2){
-//                 masterRole = 'student' 
-//             }else{
-//                 masterRole = 'mentor'
-//             }
+    if (req.user){
+        if (req.user.username === username && roleNum === req.user.role_id) {
+            var masterRole = ""
+            if (req.user.role_id === 1){
+                masterRole = 'teacher'
+                res.send(masterRole)
+            }else if (req.user.role_id === 2){
+                masterRole = 'student'
+                res.send(masterRole)
+            }else{
+                masterRole = 'mentor'
+                res.send(masterRole)
+            }
+        }
+    }
 //             sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
 //             .then((results)=>{
                 
