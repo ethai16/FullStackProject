@@ -9,9 +9,18 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const sequelize = new Sequelize('fullstack', 'erickthai', '', {
-    dialect: 'postgres'
-  });
+
+if (process.env.DATABASE_URL) {
+    // the application is executed on Heroku ... use the postgres database
+    const sequelize = new Sequelize(process.env.DATABASE_URL, {
+        dialect: 'postgres',
+        protocol: 'postgres'
+    })
+} else {
+    const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+        dialect: 'postgres'
+    });
+}
 
 router.get('/dashboard', (req,res)=>{
     console.log("hello world")
