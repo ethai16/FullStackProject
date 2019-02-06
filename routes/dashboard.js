@@ -9,14 +9,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-// the application is executed on Heroku ... use the postgres database
-// const sequelize = new Sequelize(process.env.DATABASE_URL, {
-//     dialect: 'postgres',
-//     protocol: 'postgres'
-// })
-    const sequelize = new Sequelize('fullstack', 'erickthai', '', {
-        dialect: 'postgres'
-    });
+const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+    dialect: 'postgres'
+  });
+
 router.get('/dashboard', (req,res)=>{
     console.log("hello world")
     if (req.user){
@@ -65,13 +61,16 @@ router.get('/dashboard', (req,res)=>{
             }
             for(var i = 0; i <results_1.length; i++){
                 if(results_1[i].teacher_code === req.user.teacher_code && results_1[i].role_id === 1){
-
                     teacherUser = results_1[i].fname + " " + results_1[i].lname
                     teacherUsername = results_1[i].username
 
                     break
                 }
             }
+
+            console.log(mentorUser)
+            console.log(teacherUser)
+            console.log('result2', results_2)
         res.render('dashboard', {
             publicProfile: '/'+ masterRole + '/'+ req.user.username,
             user:req.user,
@@ -86,10 +85,11 @@ router.get('/dashboard', (req,res)=>{
             mentor: mentorUser,
             teacher: teacherUser,
             mentorUsername: mentorUsername,
-            teacherUsername:teacherUsername
+            teacherUsername:teacherUsername ,
         })
     })
     }else{
+        var empty = []
         res.render('dashboard', {
             publicProfile: '/'+ masterRole + '/'+ req.user.username,
             mainUserName:req.user.fname,
@@ -100,11 +100,11 @@ router.get('/dashboard', (req,res)=>{
             mainUser: req.user.username,
             teacher_code: req.user.teacher_code,
             mentor_code: req.user.mentor_code,
+            post: empty,
             mentor: mentorUser,
             teacher: teacherUser,
             mentorUsername: mentorUsername,
             teacherUsername:teacherUsername,
-            post: []
         })
     }
 
