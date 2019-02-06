@@ -9,13 +9,13 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
-// const sequelize = new Sequelize('fullstack', 'erickthai', '', {
-//     dialect: 'postgres'
-// });
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
-    protocol: 'postgres'
+const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+    dialect: 'postgres'
 });
+// const sequelize = new Sequelize(process.env.DATABASE_URL, {
+//     dialect: 'postgres',
+//     protocol: 'postgres'
+// });
 
 
 router.get('/:userRole/:username', (req,res)=>{

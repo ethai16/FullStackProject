@@ -10,13 +10,13 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 // the application is executed on Heroku ... use the postgres database
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
-    protocol: 'postgres'
-})
-    // var sequelize = new Sequelize('fullstack', 'erickthai', '', {
-    //     dialect: 'postgres'
-    // });
+// const sequelize = new Sequelize(process.env.DATABASE_URL, {
+//     dialect: 'postgres',
+//     protocol: 'postgres'
+// })
+    const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+        dialect: 'postgres'
+    });
 router.get('/dashboard', (req,res)=>{
     console.log("hello world")
     if (req.user){
@@ -86,12 +86,10 @@ router.get('/dashboard', (req,res)=>{
             mentor: mentorUser,
             teacher: teacherUser,
             mentorUsername: mentorUsername,
-            teacherUsername:teacherUsername ,
+            teacherUsername:teacherUsername
         })
     })
     }else{
-        sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = joe ")
-        .then((results_3)=>{
         res.render('dashboard', {
             publicProfile: '/'+ masterRole + '/'+ req.user.username,
             mainUserName:req.user.fname,
@@ -106,9 +104,8 @@ router.get('/dashboard', (req,res)=>{
             teacher: teacherUser,
             mentorUsername: mentorUsername,
             teacherUsername:teacherUsername,
-            post: results_3[0]
+            post: []
         })
-    })
     }
 
     })
