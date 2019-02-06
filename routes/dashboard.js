@@ -11,7 +11,7 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sequelize = new Sequelize('fullstack', 'erickthai', '', {
     dialect: 'postgres'
-  });
+});
 
 router.get('/dashboard', (req,res)=>{
     console.log("hello world")
