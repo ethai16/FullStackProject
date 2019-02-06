@@ -9,13 +9,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const sequelize = new Sequelize('fullstack', 'erickthai', '', {
-    dialect: 'postgres'
-});
-// const sequelize = new Sequelize(process.env.DATABASE_URL, {
-//     dialect: 'postgres',
-//     protocol: 'postgres'
-// })
+// const sequelize = new Sequelize('fullstack', 'erickthai', '', {
+//     dialect: 'postgres'
+// });
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres'
+})
 
 router.get('/dashboard', (req,res)=>{
     console.log("hello world")
@@ -90,7 +90,8 @@ router.get('/dashboard', (req,res)=>{
         })
     })
     }else{
-        var empty = []
+        sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + req.user.username + "' " )
+        .then((results_3)=>{
         res.render('dashboard', {
             publicProfile: '/'+ masterRole + '/'+ req.user.username,
             mainUserName:req.user.fname,
@@ -101,12 +102,13 @@ router.get('/dashboard', (req,res)=>{
             mainUser: req.user.username,
             teacher_code: req.user.teacher_code,
             mentor_code: req.user.mentor_code,
-            post: empty,
             mentor: mentorUser,
             teacher: teacherUser,
             mentorUsername: mentorUsername,
             teacherUsername:teacherUsername,
+            post: results_3[0]
         })
+    })
     }
 
     })

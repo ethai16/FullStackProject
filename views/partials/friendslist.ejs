@@ -13,7 +13,7 @@
             <% }else{ %>
                     <% friendRole = 'mentor' %>
             <% } %>
-            <% if (friendRole === 'student' && (req.user.teacher_code){ %>
+            <% if (friendRole === 'student'){ %>
             <li><a href = "/public/<%=friendRole%>/<%= item.username%>"><%=item.fname %> <%=item.lname %></a></li>
             <%}%>
     <% }) %>
