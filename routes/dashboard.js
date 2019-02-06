@@ -90,7 +90,7 @@ router.get('/dashboard', (req,res)=>{
         })
     })
     }else{
-        sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + req.user.username)
+        sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + req.user.username + "' ")
         .then((results_3)=>{
         res.render('dashboard', {
             publicProfile: '/'+ masterRole + '/'+ req.user.username,
