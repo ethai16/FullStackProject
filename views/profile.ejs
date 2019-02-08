@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include partials/head.ejs %>
 </head>
+
 <body>
     <% include partials/navbarAfterAuth.ejs %>
+
     <head>
-        <div class = "container-fluid">
-            <div class="shadow border m-3 mt-2"style = "height:40vh">
-                <div class = "bg-maincolor h-75 d-flex pl-3" style = "padding-top:10vh">
-                        <div class = "bg-light d-flex justify-content-center align-items-center pt-3" style = "width:25vh; height:25vh; border-radius:50%;border:white 7px solid;overflow: hidden"><img style ="height:35vh" src = "/images/face.png"></div>
-                        <div id = "nameContainer" class = "d-flex flex-column justify-content-end pl-3" style = "color:white"><%=fName%> <%=lName%></div>
+        <div class="container-fluid">
+            <div class="shadow border m-3 mt-2" style="height:40vh">
+                <div class="bg-maincolor h-75 d-flex pl-3" style="padding-top:10vh">
+                    <div class="bg-light d-flex justify-content-center align-items-center pt-3" style="width:25vh; height:25vh; border-radius:50%;border:white 7px solid;overflow: hidden">
+                        <img style="height:35vh" src="/images/face.png">
+                    </div>
+                    <div id="nameContainer" class="d-flex flex-column justify-content-end pl-3" style="color:white">
+                        <%=fName%>
+                        <%=lName%>
+                    </div>
                 </div>
             </div>
         </div>
     </head>
-    <main class = "container-fluid d-flex" >
-        <div class = "col-3 d-flex flex-column" style = "height:92vh">
+    <main class = "container-fluid d-flex flex-wrap" >
+        <div class = "col-12 col-md-3 d-flex flex-column" style = "height:92vh">
             <% if (user.role_id === 1 || fRole === 1){ %>
                     <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center">Teacher</div>
             <% }else if(user.role_id === 2 || fRole === 2){ %>
@@ -25,36 +33,36 @@
                     <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Mentor</div>
             <% } %>
             <!-- student -->
-            <div class = "shadow m-1 mt-2 h-25 student" style = "display:flex;flex-direction: column">
-                    <div class = "bg-maincolor font-white p-3">Extracurricular</div>
-                    <div class = "bg-white flex-fill">TBD</div>
+            <div class="shadow m-1 mt-2 h-md-25 student" style="display:flex;flex-direction: column">
+                <div class="bg-maincolor font-white p-3">Extracurricular</div>
+                <div class="bg-white p-2 flex-fill">TBD</div>
             </div>
-            <div class = "shadow m-1 mt-2 h-25 student" style = "display:flex;flex-direction: column">
-                    <div class = "bg-maincolor font-white p-3">Enrolled Classes</div>
-                    <div class = "bg-white flex-fill">TBD</div>
+            <div class="shadow m-1 mt-2 h-md-25 student" style="display:flex;flex-direction: column">
+                <div class="bg-maincolor font-white p-3">Enrolled Classes</div>
+                <div class="bg-white p-2 flex-fill">TBD</div>
             </div>
             <!-- teacher -->
-            <div class = "shadow m-1 mt-2 h-25 teacher" style = "display:flex;flex-direction: column">
-                    <div class = "bg-maincolor font-white p-3">Taught Subjects</div>
-                </div>
-                <div class = "shadow m-1 mt-2 h-25 teacher" style = "display:flex;flex-direction: column">
-                        <div class = "bg-maincolor font-white p-3">Interests</div>
-                </div>
-                <div class = "shadow m-1 mt-2 h-25 teacher" style = "display:flex;flex-direction: column">
-                        <div class = "bg-maincolor font-white p-3">Students</div>
+            <div class="shadow m-1 mt-2 h-md-25 teacher" style="display:flex;flex-direction: column">
+                <div class="bg-maincolor p-2 font-white p-3">Taught Subjects</div>
+            </div>
+            <div class="shadow m-1 mt-2 h-md-25 teacher" style="display:flex;flex-direction: column">
+                <div class="bg-maincolor p-2 font-white p-3">Interests</div>
+            </div>
+            <div class="shadow m-1 mt-2 h-md-25 teacher" style="display:flex;flex-direction: column">
+                <div class="bg-maincolor p-2 font-white p-3">Students</div>
             </div>
             <!-- mentor -->
-            <div class = "shadow m-1 mt-2 h-25 mentor" style = "display:flex;flex-direction: column">
-                    <div class = "bg-maincolor font-white p-3">Past Work Experience</div>
-                </div>
-                <div class = "shadow m-1 mt-2 h-25 mentor" style = "display:flex;flex-direction: column">
-                        <div class = "bg-maincolor font-white p-3">Education</div>
-                </div>
-                <div class = "shadow m-1 mt-2 h-25 mentor" style = "display:flex;flex-direction: column">
-                        <div class = "bg-maincolor font-white p-3">Students</div>
+            <div class="shadow m-1 mt-2 h-md-25 mentor" style="display:flex;flex-direction: column">
+                <div class="bg-maincolor p-2 font-white p-3">Past Work Experience</div>
+            </div>
+            <div class="shadow m-1 mt-2 h-md-25 mentor" style="display:flex;flex-direction: column">
+                <div class="bg-maincolor p-2 font-white p-3">Education</div>
+            </div>
+            <div class="shadow m-1 mt-2 h-md-25 mentor" style="display:flex;flex-direction: column">
+                <div class="bg-maincolor p-2 font-white p-3">Students</div>
             </div>
         </div>
-        <div class = "col-6 d-flex flex-column">
+        <div class = "col-12 col-md-6 d-flex flex-column">
                 <div id = "post-box-public" class = "shadow  m-1 mt-1 overflow-hidden">
                         <div class = "bg-maincolor font-white p-3">Submit Post</div>
                         <form id="submitPost" method = "POST"> 
@@ -84,38 +92,49 @@
                             </div>
                             <% } %>
                             <% } %>
+                        </div>
+                        <div class="container-fluid">
+                            <%=post[i].comment%>
+                        </div>
+                        <div id="comment_id" class="container-fluid hide">
+                            <%=post[i].id%>
+                        </div>
+                    </div>
                 </div>
+                <% } %>
+                <% } %>
+            </div>
 
         </div>
-        <div class = "col-3 d-flex flex-column" style = "min-width:200px">
-                <div class = "shadow d-flex flex-column m-1  order-2 overflow-hidden " style = "height:35vh; width:auto;min-width:200px; min-height:250px; position:relative">
-                        <div class = "bg-maincolor font-white p-3 d-flex justify-content-end">Intro</div>
-                        <ul class = "d-flex flex-column justify-content-between h-50 p-0 ml-1 mt-1">
-                            <li class = "font-weight-bold">
-                                Grade:
-                                    <% if(friendInfo.username){ %>
-                                        <%=friendInfo.grade%>
-                                    <% }else{ %>
-                                        <%=user.grade %>
-                                    <% } %>
-                            </li>
-                            <li class = "font-weight-bold">
-                                School:
-                            </li>
-                            <li class = "font-weight-bold">
-                                Industry of Interest: 
-                            </li>
-                        </ul>
-                </div>
-                    <div class = "shadow d-flex flex-column m-1 order-3 overflow-hidden" style = "height:20vh; width:auto;min-width:200px; min-height:200px">
-                            <div class = "bg-maincolor font-white p-3 d-flex justify-content-end">Bio</div>
-                            <% if(friendInfo.username){ %>
-                                <%=friendInfo.bio%>
-                            <% }else{ %>
-                                <%=user.bio %>
-                            <% } %>
-                    </div>
-                    <!-- <div class = "shadow d-flex flex-column m-1 mt-2 order-1 overflow-hidden" style = "height:40vh; width:auto;min-width:200px; max-height:350px">
+        <div class="col-12 col-md-3 d-flex flex-column" style="min-width:200px">
+            <div class="shadow d-flex flex-column m-1  order-2 overflow-hidden " style="height:35vh; width:auto;min-width:200px; min-height:250px; position:relative">
+                <div class="bg-maincolor font-white p-3 d-flex justify-content-end">Intro</div>
+                <ul class="d-flex flex-column justify-content-between h-50 p-0 ml-1 mt-1">
+                    <li class="font-weight-bold">
+                        Grade:
+                        <% if(friendInfo.username){ %>
+                        <%=friendInfo.grade%>
+                        <% }else{ %>
+                        <%=user.grade %>
+                        <% } %>
+                    </li>
+                    <li class="font-weight-bold">
+                        School:
+                    </li>
+                    <li class="font-weight-bold">
+                        Industry of Interest:
+                    </li>
+                </ul>
+            </div>
+            <div class="shadow d-flex flex-column m-1 order-3 overflow-hidden" style="height:20vh; width:auto;min-width:200px; min-height:200px">
+                <div class="bg-maincolor font-white p-3 d-flex justify-content-end">Bio</div>
+                <% if(friendInfo.username){ %>
+                <%=friendInfo.bio%>
+                <% }else{ %>
+                <%=user.bio %>
+                <% } %>
+            </div>
+            <!-- <div class = "shadow d-flex flex-column m-1 mt-2 order-1 overflow-hidden" style = "height:40vh; width:auto;min-width:200px; max-height:350px">
                         <div class = "bg-maincolor font-white p-3 d-flex justify-content-end">Intro</div>
                         <div class = "d-flex flex-column h-50">
                             <ul class = "d-flex flex-column justify-content-end h-100">
@@ -133,8 +152,9 @@
     <% include partials/footer.ejs %>
 
     <% include partials/jsdefaults.ejs %>
-    <script src= "/../scripts/addpost.js"></script>
-    <script src= "/../scripts/profile.js"></script>
+    <script src="/../scripts/addpost.js"></script>
+    <script src="/../scripts/profile.js"></script>
 
 </body>
+
 </html>

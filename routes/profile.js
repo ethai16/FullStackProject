@@ -11,7 +11,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
 // const sequelize = new Sequelize('fullstack', 'erickthai', '', {
 //     dialect: 'postgres'
-// });
+//     });
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     protocol: 'postgres'

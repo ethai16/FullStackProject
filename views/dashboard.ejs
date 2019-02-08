@@ -7,47 +7,63 @@
 
 <body>
         <% include partials/navbarAfterAuth.ejs %>
-        <main class="container-fluid d-flex">
-                <div class="col-4 d-flex flex-column mt-2" style="min-height:92vh">
+        <main class="container-fluid d-flex flex-wrap ">
+                <div class="col-12 col-md-4 d-flex flex-column mt-2" style="min-height:92vh">
                         <div class="container-fluid p-1" style="height:40vh; min-height: 270px">
                                 <div class="shadow border">
                                         <div class="bg-maincolor h-75 d-flex pl-3 d-flex justify-content-center align-items-center"
                                                 style="padding-top:8vh">
                                                 <div class="bg-light d-flex justify-content-center align-items-center pt-3"
-                                                        style="width:25vh; height:25vh; border-radius:50%;border:white 7px solid; overflow:hidden"><img style ="height:35vh" src = "../images/face.png"></div>
+                                                        style="width:25vh; height:25vh; border-radius:50%;border:white 7px solid; overflow:hidden"><img
+                                                                style="height:35vh" src="../images/face.png"></div>
                                                 <div class="d-flex flex-column justify-content-end pl-3" style="color:white"></div>
                                         </div>
-                                        <div id = "nameContainer" class="d-flex justify-content-center align-items-center p-2"><%=fName%> <%=lName%></div>
+                                        <div id="nameContainer" class="d-flex justify-content-center align-items-center p-2">
+                                                <%=fName%>
+                                                <%=lName%>
+                                        </div>
                                 </div>
                         </div>
                         <% if (user.role_id === 1){ %>
-                                <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center">Teacher</div>
+                        <div id="roleReference" class="shadow bg-maincolor pt-3 font-white font-weight-bold border m-1 d-flex justify-content-center" style="height:56px">Teacher</div>
                         <% }else if(user.role_id === 2){ %>
-                                <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Student</div>
+                        <div id="roleReference" class="shadow bg-maincolor pt-3 font-white font-weight-bold border m-1 d-flex justify-content-center roleReference" style="height:56px">Student</div>
                         <% }else{ %>
-                                <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Mentor</div>
+                        <div id="roleReference" class="shadow bg-maincolor pt-3 font-white font-weight-bold border m-1 d-flex justify-content-center roleReference" style="height:56px">Mentor</div>
                         <% } %>
-                        <div class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center usernameReference">
+                        <div class="shadow bg-maincolor pt-3 font-white font-weight-bold border m-1 d-flex justify-content-center usernameReference" style="height:56px">
                                 <div>Username: <br></div>
-                                <div id = "usernameReference"><%= mainUser %></div>
+                                <div id="usernameReference" style='color:white'>
+                                <% if (user.role_id === 1){ %>
+                                <a href='signup/teacher/<%= mainUser %>'><%= mainUser %></a>
+                                <% }else if(user.role_id === 2){ %>
+                                <a href='signup/student/<%= mainUser %>'><%= mainUser %></a>
+                                <% }else{ %>
+                                <a href='signup/mentor/<%= mainUser %>'><%= mainUser %></a>
+                                <% } %>
+                                </div>
                         </div>
                         <div class="student shadow border m-1 mt-2" style="height:20vh;display:flex; flex-direction: column">
-                                        <div class="bg-maincolor font-white p-3">Teacher</div>
-                                        <div class = "flex-fill d-flex justify-content-center align-items-center"><a class = "font-weight-bold" href = "/public/teacher/<%= teacherUsername%>"><%=teacher%></a></div>
+                                <div class="bg-maincolor font-white p-3">Teacher</div>
+                                <div class="flex-fill d-flex justify-content-center align-items-center"><a class="font-weight-bold"
+                                                href="/public/teacher/<%= teacherUsername%>">
+                                                <%=teacher%></a></div>
                         </div>
                         <div class="student shadow border m-1 mt-2" style="height:20vh;display:flex; flex-direction: column">
-                                        <div class="bg-maincolor font-white p-3">Mentor</div>
-                                        <div class ="flex-fill d-flex justify-content-center align-items-center"><a class ="font-weight-bold" href = "/public/teacher/<%= mentorUsername%>"><%=mentor%></a></div>
+                                <div class="bg-maincolor font-white p-3">Mentor</div>
+                                <div class="flex-fill d-flex justify-content-center align-items-center"><a class="font-weight-bold"
+                                                href="/public/teacher/<%= mentorUsername%>">
+                                                <%=mentor%></a></div>
 
                         </div>
                         <div class="shadow border m-1 mt-2">
                                 <div class="bg-maincolor font-white p-3">Friends List</div>
-                                <ul class = "p-0 pt-2 px-3 container-fluid">
-                                <% include partials/friendslist.ejs %>
+                                <ul class="p-0 pt-2 px-3 container-fluid">
+                                        <% include partials/friendslist.ejs %>
                                 </ul>
                         </div>
                 </div>
-                <div class="col-8 d-flex flex-column mt-2">
+                <div class="col-12 col-md-8 d-flex flex-column mt-2">
                         <div class="shadow m-1 overflow-hidden">
                                 <div class="bg-maincolor font-white p-3">Submit Post</div>
                                 <form id="submitPost" method="POST">
@@ -60,43 +76,51 @@
                                         </div>
                                 </form>
                         </div>
-                        <div id="post-box" class = "mb-4">
-                                        <% if (post.length > 0) { %>
-                                        <% for (var i = post.length -1; i >= 0; i--) { %>
-                                        <div class = "forDelete">
+                        <div id="post-box" class="mb-4">
+                                <% if (post.length > 0) { %>
+                                <% for (var i = post.length -1; i >= 0; i--) { %>
+                                <div class="forDelete">
                                         <div class="border m-1 h-25 postmessages">
                                                 <% var commentlinkrole = "" %>
                                                 <% if (post[i].role_id === 1){ %>
-                                                        <% commentlinkrole = "teacher"; %>
+                                                <% commentlinkrole = "teacher"; %>
                                                 <% }else if (post[i].role_id === 2){ %>
-                                                        <% commentlinkrole = "student"; %>
+                                                <% commentlinkrole = "student"; %>
                                                 <% }else{ %>
-                                                        <% commentlinkrole = "mentor"; %>
+                                                <% commentlinkrole = "mentor"; %>
                                                 <% } %>
                                                 <%if (post[i].username != mainUser){%>
-                                                        <div class="p-3 font-weight-bold"><a href= "/public/<%= commentlinkrole%>/<%= post[i].username%>"><%=post[i].fname%> <%=post[i].lname%></a></div>
+                                                <div class="p-3 font-weight-bold"><a href="/public/<%= commentlinkrole%>/<%= post[i].username%>">
+                                                                <%=post[i].fname%>
+                                                                <%=post[i].lname%></a></div>
                                                 <%}else{%>
-                                                        <div class="p-3 font-weight-bold d-flex justify-content-between">
-                                                                <a class = "userComments" href= "/<%= commentlinkrole%>/<%= post[i].username%>"><%=post[i].fname%> <%=post[i].lname%></a>
-                                                                <div class = "x-button"><i class="fas fa-times-circle"></i></div>
-                                                        </div>
+                                                <div class="p-3 font-weight-bold d-flex justify-content-between">
+                                                        <a class="userComments" href="/<%= commentlinkrole%>/<%= post[i].username%>">
+                                                                <%=post[i].fname%>
+                                                                <%=post[i].lname%></a>
+                                                        <div class="x-button"><i class="fas fa-times-circle"></i></div>
+                                                </div>
 
                                                 <%}%>
-                                                <div class= "container-fluid"><%=post[i].comment%></div>
-                                                <div id = "comment_id" class= "container-fluid hide"><%=post[i].id%></div>
+                                                <div class="container-fluid">
+                                                        <%=post[i].comment%>
+                                                </div>
+                                                <div id="comment_id" class="container-fluid hide">
+                                                        <%=post[i].id%>
+                                                </div>
                                         </div>
-                                        </div>
+                                </div>
 
-                                        <% } %>
-                                        <% } %>
+                                <% } %>
+                                <% } %>
                         </div>
 
                 </div>
         </main>
         <% include partials/footer.ejs %>
         <% include partials/jsdefaults.ejs %>
-        <script src= "/../scripts/addpost.js"> </script>
-        <script src ="/../scripts/dashboard.js"></script>
+        <script src="/../scripts/addpost.js"> </script>
+        <script src="/../scripts/dashboard.js"></script>
 
 </body>
 
