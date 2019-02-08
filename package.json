@@ -1,7 +1,7 @@
 {
   "name": "wementor",
   "version": "1.0.0",
-  "description": "",
+  "description": "<h2>General</h2>",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -34,5 +34,13 @@
   "engines": {
     "node": "*",
     "npm": "*"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethai16/FullStackProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ethai16/FullStackProject/issues"
+  },
+  "homepage": "https://github.com/ethai16/FullStackProject#readme"
 }
