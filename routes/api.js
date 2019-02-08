@@ -28,15 +28,28 @@ router.post('/api',(req, res)=>{
         , school_id = parseInt(req.body.teacher_school)
         , mentor_code = null
         //student
-    } else if (role_id === 2){   
+    } else if (role_id === 2){
+        let mentorCode = '';
+        let teacherCode = '';
+        if (req.body.mentor_code_student === ''){
+            mentorCode = null
+        }else{
+            mentorCode = req.body.mentor_code_student
+        }
+        if (req.body.teacher_code_student === ''){
+            teacherCode = null
+        }else{
+            teacherCode = req.body.teacher_code_student
+        }
+
         industry_id1 = parseInt(req.body.student_industries1)
         , industry_id2 = parseInt(req.body.student_industries2)
         , industry_id3 = parseInt(req.body.student_industries3)
         , company_state_code = null
         , grade = req.body.grade
         , school_id = parseInt(req.body.student_school)
-        , mentor_code = req.body.mentor_code_student
-        , teacher_code = req.body.teacher_code_student
+        , mentor_code = mentorCode
+        , teacher_code = teacherCode
     //mentor
     }else{  
         industry_id1 = parseInt(req.body.company_industries1)

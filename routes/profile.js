@@ -12,6 +12,10 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('fullstack', 'erickthai', '', {
     dialect: 'postgres'
     });
+// const sequelize = new Sequelize(process.env.DATABASE_URL, {
+//     dialect: 'postgres',
+//     protocol: 'postgres'
+// });
 
 
 router.get('/:userRole/:username', (req,res)=>{
@@ -34,14 +38,13 @@ router.get('/:userRole/:username', (req,res)=>{
             if (req.user.role_id === 1){
                 masterRole = 'teacher'
             }else if (req.user.role_id === 2){
-                masterRole = 'student' 
+                masterRole = 'student'
             }else{
                 masterRole = 'mentor'
             }
+
             sequelize.query("SELECT * FROM users INNER JOIN comments ON comments.username = users.username WHERE users.username = '" + username + "' ")
             .then((results)=>{
-                
-                
             res.render('profile', {
                 publicProfile: '/'+ masterRole + '/'+ req.user.username,
                 user:req.user,
@@ -50,7 +53,8 @@ router.get('/:userRole/:username', (req,res)=>{
                 lName: req.user.lname,
                 mainUser: req.user.username,
                 post: results[0],
-                friendInfo:'' 
+                friendInfo:'',
+                fRole:''
             })
         })
         }else{
@@ -69,7 +73,6 @@ router.post("/:userRole/:username", (req, res) => {
         username: username,
         comment: comment
     })
-
 })
 
 module.exports = router

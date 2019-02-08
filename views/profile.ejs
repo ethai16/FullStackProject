@@ -23,8 +23,15 @@
             </div>
         </div>
     </head>
-    <main class="container-fluid d-flex flex-wrap">
-        <div class="col-12 col-md-3 d-flex flex-column">
+    <main class = "container-fluid d-flex flex-wrap" >
+        <div class = "col-12 col-md-3 d-flex flex-column" style = "height:92vh">
+            <% if (user.role_id === 1 || fRole === 1){ %>
+                    <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center">Teacher</div>
+            <% }else if(user.role_id === 2 || fRole === 2){ %>
+                    <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Student</div>
+            <% }else{ %>
+                    <div id = "roleReference" class="shadow bg-maincolor font-white font-weight-bold border m-1 d-flex justify-content-center roleReference">Mentor</div>
+            <% } %>
             <!-- student -->
             <div class="shadow m-1 mt-2 h-md-25 student" style="display:flex;flex-direction: column">
                 <div class="bg-maincolor font-white p-3">Extracurricular</div>
@@ -55,29 +62,35 @@
                 <div class="bg-maincolor p-2 font-white p-3">Students</div>
             </div>
         </div>
-        <div class="col-12 col-md-6 d-flex flex-column">
-            <div id="post-box-public" class="shadow  m-1 mt-2 overflow-hidden">
-                <div class="bg-maincolor font-white p-3">Submit Post</div>
-                <form id="submitPost" method="POST">
-                    <div class="d-flex justify-content-end m-3">
-                        <textarea id="postfield" type="text" placeholder="Enter your message and click submit" class="form-control col-10"
-                            name="post" rows="3"></textarea>
-                    </div>
-                    <div class="d-flex justify-content-end m-3">
-                        <input class="button3" type="submit">
-                    </div>
-                </form>
-            </div>
-            <div id="post-box">
-                <% if (post.length > 0) { %>
-                <% for (var i = post.length -1; i >= 0; i--) { %>
-                <div class="forDelete">
-                    <div class="border m-1 h-25 postmessagesPublic">
-                        <div class="p-3 d-flex justify-content-between font-weight-bold">
-                            <%=post[i].fname%>
-                            <%=post[i].lname%>
-                            <% if (post[i].username===mainUser){ %>
-                            <i class="fas fa-times-circle"></i>
+        <div class = "col-12 col-md-6 d-flex flex-column">
+                <div id = "post-box-public" class = "shadow  m-1 mt-1 overflow-hidden">
+                        <div class = "bg-maincolor font-white p-3">Submit Post</div>
+                        <form id="submitPost" method = "POST"> 
+                            <div class = "d-flex justify-content-end m-3">
+                                <textarea id ="postfield" type="text" placeholder="Enter your message and click submit" class="form-control col-10" name="post"
+                                rows="3"></textarea>
+                            </div>
+                            <div class = "d-flex justify-content-end m-3">                         
+                                <input class = "button3" type="submit">
+                            </div> 
+                        </form>
+                </div>
+                <div id = "post-box">
+                        <% if (post.length > 0) { %>
+                            <% for (var i = post.length -1; i >= 0; i--) { %>
+                            <div class = "forDelete">
+                            <div class="border m-1 h-25 postmessagesPublic">
+                                    <div class="p-3 d-flex justify-content-between font-weight-bold">
+                                        <%=post[i].fname%> <%=post[i].lname%>
+                                        <% if (post[i].username===mainUser){ %>
+                                            <i class="fas fa-times-circle"></i>
+                                        <% } %>
+                                    </div>
+                                    <div class = "container-fluid"><%=post[i].comment%></div>
+                                    <div id = "comment_id" class= "container-fluid hide"><%=post[i].id%></div>
+                            </div>
+                            </div>
+                            <% } %>
                             <% } %>
                         </div>
                         <div class="container-fluid">

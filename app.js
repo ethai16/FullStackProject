@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const db = require('./models/');
 const session = require('express-session');
+
 // const fileUpload = require('express-fileupload');
 
 
@@ -11,7 +12,6 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(express.static('public'));
-
 app.use(require('./routes/signup'));
 app.use(require('./routes/login'));
 app.use(require('./routes/logout'));
@@ -61,7 +61,6 @@ io.on('connection', function (socket) {
 })
 
 
-
 // need this only when creating database.
 // db.sequelize.sync({force:true}).then(()=>{
 //     app.listen(3500)
@@ -69,13 +68,11 @@ io.on('connection', function (socket) {
 
 
 
-
-
 // http.listen(3000, ()=>{
 //     console.log('listening on port 3000')
 // })
 
+
 http.listen(process.env.PORT || 3000, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
-  

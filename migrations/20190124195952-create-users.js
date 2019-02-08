@@ -5,11 +5,15 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique: true
+      },
+      role_id:{
+        type:Sequelize.INTEGER
       },
       username: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        primaryKey: true
       },
       password_salt: {
         type: Sequelize.STRING
@@ -51,15 +55,27 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       grade: {
+        type: Sequelize.STRING
+      },
+      teacher_code: {
+        type: Sequelize.STRING
+      },
+      mentor_code: {
+        type: Sequelize.STRING
+      },
+      school_id:{
         type: Sequelize.INTEGER
       },
       company_name: {
         type: Sequelize.STRING
       },
-      company_phone: {
+      company_telephone: {
         type: Sequelize.STRING
       },
       company_street: {
+        type: Sequelize.STRING
+      },
+      company_zipcode: {
         type: Sequelize.STRING
       },
       company_city: {
@@ -71,8 +87,20 @@ module.exports = {
       position: {
         type: Sequelize.STRING
       },
+      industry_id1:{
+        type: Sequelize.INTEGER
+      },
+      industry_id2:{
+        type: Sequelize.INTEGER
+      },
+      industry_id3:{
+        type: Sequelize.INTEGER
+      },
       backgroundcheck: {
         type: Sequelize.BOOLEAN
+      },
+      state_code:{
+        type:Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

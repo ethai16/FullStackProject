@@ -20,7 +20,7 @@ module.exports = {
       city: {
         type: Sequelize.STRING
       },
-      state: {
+      state_code: {
         type: Sequelize.STRING
       },
       type: {

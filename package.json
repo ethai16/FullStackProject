@@ -1,10 +1,12 @@
 {
-  "name": "fullstackproject",
+  "name": "wementor",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,17 +15,24 @@
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "connect-session-sequelize": "^6.0.0",
+    "connect-timeout": "^1.9.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-fileupload": "^1.1.1-alpha.1",
     "express-session": "^1.15.6",
+    "mysql": "^2.16.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pbkdf2": "^3.0.17",
     "pg": "^7.8.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.42.0",
+    "sequelize-cli": "^4.0.0",
     "socket.io": "^2.2.0"
+  },
+  "engines": {
+    "node": "*",
+    "npm": "*"
   }
 }

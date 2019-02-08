@@ -9,6 +9,10 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
+// const sequelize = new Sequelize(process.env.DATABASE_URL, {
+//     dialect: 'postgres',
+//     protocol: 'postgres'
+// })
 const sequelize = new Sequelize('fullstack', 'erickthai', '', {
     dialect: 'postgres'
     });
@@ -53,6 +57,7 @@ router.get('/public/:role/:username', (req,res)=>{
                     friendInfo: results[0],
                     fName: results[0].fname,
                     lName: results[0].lname,
+                    fRole: results[0].role_id,
                     mainUser: req.user.username,
                     mainUserName:req.user.fname,
                     post: results_2[0],
