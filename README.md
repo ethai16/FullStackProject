@@ -9,13 +9,18 @@ WeMentor is a full stack application built to help teachers connect their studen
 
 
 <h2>Account Types and Their Limitations</h2>
-There are three types of accounts that could be made, teacher, mentor and student. 
+There are three types of accounts that could be made, teacher, mentor and student. <br>
 
 Both teacher and mentor accounts will be provided a code to be given to their students. This code is what connects each user together. 
 
 Teachers are the only accounts that could use the search functionality for mentors. This could be found on the navigation bar. 
 
 Settings and Logout functionality is found in the side navigation. 
+
+<h2>Work in Progress</h2>
+<li>Search function - Currently static and the goal is to create it dynamically similar to how each profile is created where it grabs information from the database.</li>
+<li>Chat engine - Currently not displaying your own message, but shows the other user's comments. Does not display the user who messaged.</li>
+
 
 <h2>Built With: </h2>
 <li>Node.js</li>
