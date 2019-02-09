@@ -9,7 +9,8 @@ WeMentor is a full stack application built to help teachers connect their studen
 
 
 <h2>Account Types and Their Limitations</h2>
-There are three types of accounts that could be made: teacher, mentor and student. </br>
+
+There are three types of accounts that could be made: teacher, mentor, and student. </br>
 
 Both teacher and mentor accounts will be provided a code to be given to their students. This code is what connects each user together. 
 
