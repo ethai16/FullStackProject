@@ -1,10 +1,9 @@
 
-# Full-Stack-Project
 # WeMentor: Bridging the Path of Students and their Future 
 
 <h2>General</h2>
 
-<li><a href="https://wementor.herokuapp.com">Live Site</a></li>
+<a href="https://wementor.herokuapp.com">Live Site</a>
 
 WeMentor is a full stack application built to help teachers connect their students with mentors. The goal was to create a plaform where we could assist student's reach their profressional goals. This application is designed similarily to other social media pages such as Facebook and Twitter where each user has a public profile as well as a dashboard where they will be able to see their connection's post. 
 
