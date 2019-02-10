@@ -17,6 +17,13 @@
     </head>
     <main class = "container-fluid d-flex flex-wrap" >
         <div class = "col-12 col-md-3 d-flex flex-column" style = "height:92vh">
+            <% if (fRole === 1){ %>
+                <div id="roleReference" class="shadow bg-maincolor pt-3 font-white font-weight-bold border m-1 d-flex justify-content-center" style="height:56px">Teacher</div>
+                <% }else if(fRole === 2){ %>
+                <div id="roleReference" class="shadow bg-maincolor pt-3 font-white font-weight-bold border m-1 d-flex justify-content-center roleReference" style="height:56px">Student</div>
+                <% }else{ %>
+                <div id="roleReference" class="shadow bg-maincolor pt-3 font-white font-weight-bold border m-1 d-flex justify-content-center roleReference" style="height:56px">Mentor</div>
+            <% } %>
             <!-- student -->
             <div class = "shadow m-1 mt-2 h-25 student" style = "display:flex;flex-direction: column">
                     <div class = "bg-maincolor font-white p-3">Extracurricular</div>
