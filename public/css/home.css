@@ -1,96 +1,3 @@
-/* ----------------------------------------------------
-    QUOTE BOX
-------------------------------------------------------*/
-body {
-	margin: 0;
-	padding: 0;
-}
-.box {
-	position: absolute;
-	top: 50%;
-	left: 30%;
-	transform: translate(-50%,-50%);
-	width: 500px;
-	height: 400px;
-	cursor: pointer;
-	transform-style: preserve-3d;
-	perspective: 2000px;
-    transition: 0.5s;
-    opacity: .8;
-}
-
-.box:before {
-	content:'';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: transparent;
-	border-top: 20px solid rgb(93, 93, 189);
-	border-left: 20px solid rgb(93, 93, 189);
-	box-sizing: border-box;
-}
-.box:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: transparent;
-	border-bottom: 20px solid rgb(93, 93, 189);
-	border-right: 20px solid rgb(93, 93, 189);
-	box-sizing: border-box;
-}
-.box .text {
-	position: absolute;
-	top: 30px;
-	left: -30px;
-	background: #262626;
-	width: calc(100% + 60px);
-	height: calc(100% - 60px);
-	
-}
-
-.text div {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	width: 100%;
-	transform:translateY(-50%);
-	padding: 40px 80px;
-	box-sizing: border-box;
-	text-align: center;
-}
-.text div h1 {
-	margin: 0 0 20px;
-	padding: 0;
-    color: #fff;
-
-}
-.text div p {
-	margin: 0 0 20px;
-	padding: 0;
-	color: #fff;
-	font-size: 22px;
-}
-.fa {
-	width: 80px;
-	height: 80px;
-	background: #fff;
-	color: #262626;
-	text-align: center;
-	line-height: 80px !important;
-    font-size: 40px !important;
-    z-index: 2;
-}
-.top{
-    color: rgb(93, 93, 189) !important;
-    text-align: center;
-    font-family:'Roboto',sans-serif;
-    font-weight:bold  !important;
-}
 
 /* QUOTE BOX END  */
 header{
@@ -191,4 +98,97 @@ a.button1{
         height:350px;
         width:350px;
     }
+    /* ----------------------------------------------------
+    QUOTE BOX
+------------------------------------------------------*/
+body {
+	margin: 0;
+	padding: 0;
+}
+.box {
+	position: absolute;
+	top: 50%;
+	left: 30%;
+	transform: translate(-50%,-50%);
+	width: 500px;
+	height: 400px;
+	cursor: pointer;
+	transform-style: preserve-3d;
+	perspective: 2000px;
+    transition: 0.5s;
+    opacity: .8;
+}
+
+.box:before {
+	content:'';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border-top: 20px solid rgb(93, 93, 189);
+	border-left: 20px solid rgb(93, 93, 189);
+	box-sizing: border-box;
+}
+.box:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border-bottom: 20px solid rgb(93, 93, 189);
+	border-right: 20px solid rgb(93, 93, 189);
+	box-sizing: border-box;
+}
+.box .text {
+	position: absolute;
+	top: 30px;
+	left: -30px;
+	background: #262626;
+	width: calc(100% + 60px);
+	height: calc(100% - 60px);
+	
+}
+
+.text div {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	transform:translateY(-50%);
+	padding: 40px 80px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.text div h1 {
+	margin: 0 0 20px;
+	padding: 0;
+    color: #fff;
+
+}
+.text div p {
+	margin: 0 0 20px;
+	padding: 0;
+	color: #fff;
+	font-size: 22px;
+}
+.fa {
+	width: 80px;
+	height: 80px;
+	background: #fff;
+	color: #262626;
+	text-align: center;
+	line-height: 80px !important;
+    font-size: 40px !important;
+    z-index: 2;
+}
+.top{
+    color: rgb(93, 93, 189) !important;
+    text-align: center;
+    font-family:'Roboto',sans-serif;
+    font-weight:bold  !important;
+}
 }
